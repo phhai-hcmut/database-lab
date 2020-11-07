@@ -5,13 +5,13 @@ CREATE TABLE artist(
 CREATE TABLE album(
 	id INTEGER NOT NULL PRIMARY KEY,
 	name TEXT NOT NULL,
-	release_date INT,
-	album_type INT
+	release_date DATE,
+	album_type ALBUM_TYPE
 );
 CREATE TABLE ownership(
 	album_id NOT NULL REFERENCES album(id) ON DELETE CASCADE,
-	owner_id NOT NULL REFERENCES artist(id) ON DELETE CASCADE,
-	PRIMARY KEY (album_id, owner_id)
+	artist_id NOT NULL REFERENCES artist(id) ON DELETE CASCADE,
+	PRIMARY KEY (album_id, artist_id)
 );
 CREATE TABLE track(
 	album_id NOT NULL REFERENCES album(id) ON DELETE CASCADE,
@@ -24,7 +24,7 @@ CREATE TABLE credit(
 	album_id INT NOT NULL,
 	track_number INT NOT NULL,
 	artist_id INT NOT NULL REFERENCES artist(id) ON DELETE CASCADE,
-	role INT NOT NULL,
+	role CREDIT_ROLE NOT NULL,
 	FOREIGN KEY (album_id, track_number) REFERENCES track(album_id, track_number)
 	ON DELETE CASCADE,
 	PRIMARY KEY (album_id, track_number, artist_id, role)
@@ -32,8 +32,8 @@ CREATE TABLE credit(
 CREATE TABLE playlist(
 	user_id INT NOT NULL REFERENCES user(id) ON DELETE CASCADE,
 	name TEXT NOT NULL,
-	decription TEXT,
-	time_created INT NOT NULL,
+	description TEXT,
+	time_created TIMESTAMP NOT NULL,
 	is_public INT NOT NULL,
 	PRIMARY KEY (user_id, name)
 );
@@ -42,7 +42,7 @@ CREATE TABLE playlist_content(
 	name TEXT NOT NULL,
 	album_id INT NOT NULL,
 	track_number INT NOT NULL,
-	time_added INT NOT NULL,
+	time_added TIMESTAMP NOT NULL,
 	FOREIGN KEY (user_id, name) REFERENCES playlist(user_id, name)
 	ON DELETE CASCADE ON UPDATE CASCADE,
 	FOREIGN KEY (album_id, track_number) REFERENCES track(album_id, track_number)
@@ -51,15 +51,15 @@ CREATE TABLE playlist_content(
 );
 CREATE TABLE user(
 	id INTEGER NOT NULL PRIMARY KEY,
-	online INT NOT NULL,
+	online BOOL NOT NULL,
 	display_name TEXT NOT NULL UNIQUE,
-	repeat_state INT,
-	is_playing INT,
+	repeat_state REPEAT_STATE,
+	is_playing BOOL,
 	cur_queue_idx INT CHECK (cur_queue_idx >= 0),
 	cur_progress INT CHECK (cur_progress >= 0)
 );
 CREATE TABLE queue_track(
-	user_id INT NOT NULL REFERENCES user(user_id) ON DELETE CASCADE,
+	user_id INT NOT NULL REFERENCES user(id) ON DELETE CASCADE,
 	album_id INT NOT NULL,
 	track_number INT NOT NULL,
 	queue_index INT NOT NULL CHECK (queue_index >= 0),
