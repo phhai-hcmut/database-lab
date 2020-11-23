@@ -5,8 +5,8 @@ CREATE TABLE artist(
 CREATE TABLE album(
 	id INTEGER NOT NULL PRIMARY KEY,
 	name TEXT NOT NULL,
-	release_date DATE,
-	album_type ALBUM_TYPE
+	release_date DATE NOT NULL,
+	album_type ALBUM_TYPE NOT NULL
 );
 CREATE TABLE ownership(
 	album_id NOT NULL REFERENCES album(id) ON DELETE CASCADE,
@@ -32,7 +32,7 @@ CREATE TABLE credit(
 CREATE TABLE playlist(
 	user_id INT NOT NULL REFERENCES user(id) ON DELETE CASCADE,
 	name TEXT NOT NULL,
-	description TEXT,
+	description TEXT NOT NULL,
 	time_created TIMESTAMP NOT NULL,
 	is_public INT NOT NULL,
 	PRIMARY KEY (user_id, name)
@@ -53,10 +53,6 @@ CREATE TABLE user(
 	id INTEGER NOT NULL PRIMARY KEY,
 	online BOOL NOT NULL,
 	display_name TEXT NOT NULL UNIQUE,
-	repeat_state REPEAT_STATE,
-	is_playing BOOL,
-	cur_queue_idx INT CHECK (cur_queue_idx >= 0),
-	cur_progress INT CHECK (cur_progress >= 0)
 );
 CREATE TABLE queue_track(
 	user_id INT NOT NULL REFERENCES user(id) ON DELETE CASCADE,
@@ -67,3 +63,13 @@ CREATE TABLE queue_track(
 	ON DELETE CASCADE,
 	PRIMARY KEY (user_id, queue_index)
 );
+CREATE TABLE currently_listening(
+	user_id INT NOT NULL PRIMARY KEY,
+	queue_index INT NOT NULL CHECK (queue_index >= 0),
+	repeat_state REPEAT_STATE NOT NULL,
+	is_playing BOOL NOT NULL,
+	cur_queue_idx INT NOT NULL CHECK (cur_queue_idx >= 0),
+	cur_progress INT  NOT NULL CHECK (cur_progress >= 0),
+	FOREIGN KEY (user_id, queue_index) REFERENCES queue_track(user_id, queue_index)
+	ON DELETE CASCADE
+)
