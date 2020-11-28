@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/login_style.css' %}">
+</head>
+<body>
+
+<div id="id01">
+  
+	<form class="modal-content animate" action="/index.html" method="post">
+		<div class="imgcontainer">
+		  	<img src="./images/kitty.png" alt="Avatar" class="avatar">
+		</div>
+
+		<div class="container">
+			<label for="mailadr"><b>Email</b></label>
+			<input type="text" placeholder="Enter Email Adress" name="mailadr" required>
+
+			<label for="uname"><b>Username</b></label>
+			<input type="text" placeholder="Enter Username" name="uname" required>
+
+			<label for="psw"><b>Password</b></label>
+			<input type="password" placeholder="Enter Password" name="psw" required>
+
+			<button type="submit">Register</button>
+		</div>
+
+		<div class="container" style="background-color:#f1f1f1">
+			<button type="button" onclick="" class="cancelbtn">Cancel</button>
+			<span class="psw">If you alread have an account <a href="">Login</a></span>
+		</div>
+	</form>
+</div>
+
+</body>
+</html>

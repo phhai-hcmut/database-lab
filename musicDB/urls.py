@@ -1,4 +1,4 @@
-"""locrian URL Configuration
+"""musicDB URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -14,12 +14,11 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
-from django.urls import include, path
+from django.urls import path, include
+
 
 urlpatterns = [
-    #TODO: add the /<your_destination> in the web's url to visit the correct site
-    #NOTE: example: "http://127.0.0.1:8000/music/" to visit music
-    # path('', admin.site.urls), #default site 
     path('admin/', admin.site.urls),
-    path('music/', include('music.urls')),
+    path('', include('music.urls')),
+    path('', include('user.urls')),
 ]
