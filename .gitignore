@@ -1,5 +1,7 @@
 # Python byte-compiled / optimized files
 __pycache__/
 *.py[cdo]
-# *.sqlite3
-# .gitignore
+
+# Database file
+db.sqlite3
+db.sqlite3-journal
