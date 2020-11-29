@@ -21,4 +21,5 @@ urlpatterns = [
     # Example: "http://127.0.0.1:8000/music/" to visit music
     path('admin/', admin.site.urls),
     path('music/', include('music.urls')),
+    path('playlist/', include('playlist.urls')),
 ]
