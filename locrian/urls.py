@@ -17,9 +17,8 @@ from django.contrib import admin
 from django.urls import include, path
 
 urlpatterns = [
-    #TODO: add the /<your_destination> in the web's url to visit the correct site
-    #NOTE: example: "http://127.0.0.1:8000/music/" to visit music
-    # path('', admin.site.urls), #default site 
+    # NOTE: add the /<your_destination> in the web's url to visit the correct site
+    # Example: "http://127.0.0.1:8000/music/" to visit music
     path('admin/', admin.site.urls),
     path('music/', include('music.urls')),
 ]
