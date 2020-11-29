@@ -25,14 +25,26 @@
 		<div id="right">
 			<div id="album">
 				<h2>Latest album</h2>
-				<ul>
-					<li>album 1</li>
-					<li>album 2</li>
-					<li>album 3</li>
-					<li>album 4</li>
-					<li>album 5</li>
-					<li>album 5</li>
-				</ul>
+				<div class="album-list">
+					{% if all_album_list %}
+						<ul>
+                            <li><strong>ID Name</strong></li>
+                            <li><strong>Release Date</strong></li> 
+                            <li><strong>Artist</strong></li> 
+                            <li><strong>Type</strong></li>
+                        </ul>
+	                    {% for album in all_album_list %}
+                        <ul><a href="/music/{{album.id}}/">
+                            <li> {{ album.id }}. {{ album.name }}</li>
+                            <li> {{ album.release_date }}</li> 
+                            <li> {{ album.artist.name }}</li> 
+                            <li> {{ album.album_type }}</li>
+                        </a></ul>
+	                    {% endfor %}
+	                {% else %}
+	                    <p>No albums are available.</p>
+	                {% endif %}
+				</div>
 			</div>
 			<div id="trend">
 				<h2>Trending</h2>
@@ -46,13 +58,13 @@
 			</div>
 		</div>
 	</div>
-	
+
 	<div id="player">
 		<div class="info">
 			<div class="progress-bar">
 				<div class="time--current">1:25</div>
 				<div class="time--total">
-					<span id="total" onload="myFunction()"></span>
+					<span id="total" onload=""></span>
 				</div>
 				<div class="fill"></div>
 			</div>
@@ -74,6 +86,7 @@
 	</div>
 
 	<div id="footer"></div>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script><script  src="{% static 'js/player_script.js' %}"></script>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+	<script src="{% static 'js/player.js' %}"></script>
 </body>
 </html>

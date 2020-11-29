@@ -100,34 +100,42 @@ body{
 	text-decoration: underline;
 }
 
-#main #right #album h2 {
-	margin-top: 2%;
+#main #right #album .album-list{
+	background: #212121;
+	width: 85%;
+	margin-left: 8%;
 }
 
 #main #right #album ul {
-	display: flex;
+	column-count: 4;
+	column-gap: 170px;
 	list-style-type: none;
-	justify-content: center;
+	padding: 12px 0px 12px 15px;
+	border-bottom: 1px solid white;
+	margin: 0;
 }
 
-#main #right #album ul li {
-	width: 170px;
-	height: 200px;
-	text-align: center;
-	margin: 0px 10px 0px 10px;
-	float: left;
-	cursor: pointer;
+#main #right #album ul:hover {
 	background: grey;
-	color: white;
 }
 
-#main #right #album ul li:hover {
-	transform: scale(1.1);
-	transition-duration: 0.5s;
+#main #right #album ul a{
+	text-decoration: none;
+	color: white;
+	padding: 0px;
+}
+
+#main #right #album ul a:hover{
+	text-decoration: underline;
+}
+
+#main #right #album ul li{
+	color: white;
+	padding: 0px;
 }
 
 #main #right #trend {
-	margin-top: 7%;
+	margin-top: 5%;
 }
 
 #main #right #trend ul {

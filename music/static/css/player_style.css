@@ -10,7 +10,6 @@
 	height: 115px;
 	overflow: hidden;
 	border-radius: 5px;
-	/*box-shadow: 5px 5px 15px rgba(#364F3C, .4);*/
 }
 
 .clicked {
@@ -25,8 +24,6 @@
   position: absolute;
   bottom:0;
   background: rgba(white, .85);
-/*  transform: translateY(35px);
-  transition: all .5s ease-in-out;*/
 }
 
 .progress-bar {

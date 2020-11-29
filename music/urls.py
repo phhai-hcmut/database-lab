@@ -1,13 +1,11 @@
 from django.urls import path
 from . import views
-from user import views as user_view
-from django.conf.urls.static import static
-from django.conf import settings
-
+app_name = 'music'
 urlpatterns = [
-    path('home/', views.index, name='index'),
-    path('', user_view.login_view, name='login'),
-    # path('news/', views.newsPage, name='news'),
-    # path('play/', views.playPage, name='play'),
-    # path('profile/', views.profilePage, name='profile'),
+    # ex: /music/
+    #this one list all albums
+    path('', views.index, name='index'),
+    # ex: /music/5/
+    #this one shows one album details
+    path('<int:album_id>/', views.detail, name='detail'),
 ]
