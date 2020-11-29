@@ -3,10 +3,14 @@ from datetime import timedelta
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.db.models.deletion import CASCADE
+from django.db.models.fields.related import ForeignKey
 
 
 class Artist(models.Model):
     name = models.CharField(max_length=200)
+
+    def __str__(self) -> str:
+        return self.name
 
 class Album(models.Model):
     class AlbumType (models.TextChoices):
@@ -20,6 +24,8 @@ class Album(models.Model):
     artist = models.ManyToManyField(Artist) #NOTE: this does auto cascade so it does not have on_delete attribute.
     album_type = models.CharField(choices=AlbumType.choices,max_length=200)
 
+    def __str__(self) -> str:
+        return self.name + ', ' + str(self.release_date) + ', ' + self.album_type + ', Artists: ' + str([str(a) for a in self.artist.all()])
 class Track(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
     track_number = models.PositiveIntegerField()
@@ -29,6 +35,9 @@ class Track(models.Model):
 
     class Meta:
         unique_together = ['album', 'track_number']
+    
+    def __str__(self) -> str:
+        return str(self.track_number)+ ', ' + self.name + ', '+ str(self.duration)
 
 
 class Credit(models.Model):
@@ -42,6 +51,8 @@ class Credit(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     role = models.CharField(choices=CreditRole.choices, max_length=200)
 
+    def __str__(self) -> str:
+        return str(self.track) + ', ' + str(self.artist) + ', ' + self.role
 class User(models.Model):
     online = models.BooleanField()
     display_name = models.CharField(unique=True,max_length=200)
