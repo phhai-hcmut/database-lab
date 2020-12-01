@@ -21,17 +21,17 @@ class Album(models.Model):
 
     name = models.CharField(max_length=200)
     release_date = models.DateField()
-    artist = models.ManyToManyField(Artist) #NOTE: this does auto cascade so it does not have on_delete attribute.
+    owner = models.ManyToManyField(Artist, related_name= 'album') #NOTE: this does auto cascade so it does not have on_delete attribute.
     album_type = models.CharField(choices=AlbumType.choices,max_length=200)
 
     def __str__(self) -> str:
         return self.name + ', ' + str(self.release_date) + ', ' + self.album_type + ', Artists: ' + str([str(a) for a in self.artist.all()])
 class Track(models.Model):
-    album = models.ForeignKey(Album, on_delete=models.CASCADE)
+    album = models.ForeignKey(Album, on_delete=models.CASCADE,related_name='track')
     track_number = models.PositiveIntegerField()
     name = models.CharField(max_length=200)
     duration = models.DurationField(validators=[MinValueValidator(timedelta())])
-    artist_credits = models.ManyToManyField(Artist, through='Credit')
+    artist_credits = models.ManyToManyField(Artist, through='Credit', related_name='credit')
 
     class Meta:
         unique_together = ['album', 'track_number']
