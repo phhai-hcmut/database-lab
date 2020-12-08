@@ -65,7 +65,6 @@ CREATE TABLE  IF NOT EXISTS in_queue(
 );
 CREATE TABLE  IF NOT EXISTS queue(
 	user_id INT NOT NULL PRIMARY KEY,
-	queue_index INT NOT NULL CHECK (queue_index >= 0),
 	repeat_state REPEAT_STATE NOT NULL,
 	is_playing BOOL NOT NULL,
 	cur_queue_idx INT NOT NULL CHECK (cur_queue_idx >= 0),
