@@ -25,11 +25,18 @@ class RepeatState(SQLiteEnum):
     REPEAT_ONE = 1
     REPEAT_ALL = 2
 
+class UserRole(SQLiteEnum):
+    LISTENER = 0
+    ARTIST = 1
+    MODERATOR = 2
+    ADMIN = 3
+
 
 sqlite3.register_converter("BOOL", lambda x: x != 0)
 sqlite3.register_converter("ALBUM_TYPE", AlbumType)
 sqlite3.register_converter("CREDIT_ROLE", CreditRole)
 sqlite3.register_converter("REPEST_STATE", RepeatState)
+sqlite3.register_converter("USER_ROLE", UserRole)
 
 # ..........................SQL Classes.....................
 
