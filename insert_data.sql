@@ -1,38 +1,38 @@
 -- recordings --
 
-INSERT into recording(name,duration) VALUES ('Call',295);
-INSERT into recording(name,duration) VALUES ('Sunshine, My Choice',430);
-INSERT into recording(name,duration) VALUES ('Hibernate Magic',341);
-INSERT into recording(name,duration) VALUES ('Cold Era',500);
-INSERT into recording(name,duration) VALUES ('Closer Earth',234);
-INSERT into recording(name,duration) VALUES ('Instrumental Heaven',266);
-INSERT into recording(name,duration) VALUES ('Carebbian Saloon',421);
-INSERT into recording(name,duration) VALUES ('Unused Home',332);
-INSERT into recording(name,duration) VALUES ('The Hottest Soul',267);
-INSERT into recording(name,duration) VALUES ('#That Violin',438);
-INSERT into recording(name,duration) VALUES ('Late Chance',102);
-INSERT into recording(name,duration) VALUES ('The Agent',167);
-INSERT into recording(name,duration) VALUES ('Accepted Life',487);
-INSERT into recording(name,duration) VALUES ('Live Salon',350);
-INSERT into recording(name,duration) VALUES ('Banquet Magic',179);
-INSERT into recording(name,duration) VALUES ('Undiscovered Way',285);
-INSERT into recording(name,duration) VALUES ('Closer Times',137);
-INSERT into recording(name,duration) VALUES ('Not Enough Sleep Loop',113);
-INSERT into recording(name,duration) VALUES ('Light-Hearted Acoustic',252);
-INSERT into recording(name,duration) VALUES ('Torpor Of Lilies',314);
+INSERT into recording(recording_name,duration) VALUES ('Call',295);
+INSERT into recording(recording_name,duration) VALUES ('Sunshine, My Choice',430);
+INSERT into recording(recording_name,duration) VALUES ('Hibernate Magic',341);
+INSERT into recording(recording_name,duration) VALUES ('Cold Era',500);
+INSERT into recording(recording_name,duration) VALUES ('Closer Earth',234);
+INSERT into recording(recording_name,duration) VALUES ('Instrumental Heaven',266);
+INSERT into recording(recording_name,duration) VALUES ('Carebbian Saloon',421);
+INSERT into recording(recording_name,duration) VALUES ('Unused Home',332);
+INSERT into recording(recording_name,duration) VALUES ('The Hottest Soul',267);
+INSERT into recording(recording_name,duration) VALUES ('#That Violin',438);
+INSERT into recording(recording_name,duration) VALUES ('Late Chance',102);
+INSERT into recording(recording_name,duration) VALUES ('The Agent',167);
+INSERT into recording(recording_name,duration) VALUES ('Accepted Life',487);
+INSERT into recording(recording_name,duration) VALUES ('Live Salon',350);
+INSERT into recording(recording_name,duration) VALUES ('Banquet Magic',179);
+INSERT into recording(recording_name,duration) VALUES ('Undiscovered Way',285);
+INSERT into recording(recording_name,duration) VALUES ('Closer Times',137);
+INSERT into recording(recording_name,duration) VALUES ('Not Enough Sleep Loop',113);
+INSERT into recording(recording_name,duration) VALUES ('Light-Hearted Acoustic',252);
+INSERT into recording(recording_name,duration) VALUES ('Torpor Of Lilies',314);
 
 -- artist --
 
-INSERT INTO artist(name) VALUES ("Hunter Marsh");
-INSERT INTO artist(name) VALUES ("Karl Laine");
-INSERT INTO artist(name) VALUES ("Karl Laine");
-INSERT INTO artist(name) VALUES ("Bobby Dell");
-INSERT INTO artist(name) VALUES ("Erik Elliot");
-INSERT INTO artist(name) VALUES ("River Alexander");
-INSERT INTO artist(name) VALUES ("Alexis Arthur");
-INSERT INTO artist(name) VALUES ("Logan Raine");
-INSERT INTO artist(name) VALUES ("Lee Lord");
-INSERT INTO artist(name) VALUES ("Haiden Baker");
+INSERT INTO artist(artist_name) VALUES ("Hunter Marsh");
+INSERT INTO artist(artist_name) VALUES ("Karl Laine");
+INSERT INTO artist(artist_name) VALUES ("Thorin Dikan");
+INSERT INTO artist(artist_name) VALUES ("Bobby Dell");
+INSERT INTO artist(artist_name) VALUES ("Erik Elliot");
+INSERT INTO artist(artist_name) VALUES ("River Alexander");
+INSERT INTO artist(artist_name) VALUES ("Alexis Arthur");
+INSERT INTO artist(artist_name) VALUES ("Logan Raine");
+INSERT INTO artist(artist_name) VALUES ("Lee Lord");
+INSERT INTO artist(artist_name) VALUES ("Haiden Baker");
 
 -- credit --
 
@@ -64,16 +64,16 @@ INSERT INTO credit(recording_id,artist_id,role) VALUES (10,2,0);
 
 -- album --
 
-INSERT INTO album(name,release_date,album_type) VALUES ('Double trouble','1907-02-14',0);
-INSERT INTO album(name,release_date,album_type) VALUES ('No comment','1930-03-05',1);
-INSERT INTO album(name,release_date,album_type) VALUES ('Preaching choir','1938-03-18',2);
-INSERT INTO album(name,release_date,album_type) VALUES ('Ice cold','1979-03-28',0);
-INSERT INTO album(name,release_date,album_type) VALUES ('Sleeping dogs','1969-07-16',1);
-INSERT INTO album(name,release_date,album_type) VALUES ('Blank canvas','1986-12-02',2);
-INSERT INTO album(name,release_date,album_type) VALUES ('Concept art','2010-03-09',0);
-INSERT INTO album(name,release_date,album_type) VALUES ('No direction','2017-12-06',1);
-INSERT INTO album(name,release_date,album_type) VALUES ('Grains of salt','2019-03-27',2);
-INSERT INTO album(name,release_date,album_type) VALUES ('Curves','2019-11-28',0);
+INSERT INTO album(album_name,release_date,album_type) VALUES ('Double trouble','1907-02-14',0);
+INSERT INTO album(album_name,release_date,album_type) VALUES ('No comment','1930-03-05',1);
+INSERT INTO album(album_name,release_date,album_type) VALUES ('Preaching choir','1938-03-18',2);
+INSERT INTO album(album_name,release_date,album_type) VALUES ('Ice cold','1979-03-28',0);
+INSERT INTO album(album_name,release_date,album_type) VALUES ('Sleeping dogs','1969-07-16',1);
+INSERT INTO album(album_name,release_date,album_type) VALUES ('Blank canvas','1986-12-02',2);
+INSERT INTO album(album_name,release_date,album_type) VALUES ('Concept art','2010-03-09',0);
+INSERT INTO album(album_name,release_date,album_type) VALUES ('No direction','2017-12-06',1);
+INSERT INTO album(album_name,release_date,album_type) VALUES ('Grains of salt','2019-03-27',2);
+INSERT INTO album(album_name,release_date,album_type) VALUES ('Curves','2019-11-28',0);
 
 -- ownership --
 
