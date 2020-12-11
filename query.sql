@@ -1,5 +1,5 @@
 -- newest 5 albums
-SELECT album_name from album ORDER by release_date LIMIT 5
+SELECT album_name from album ORDER by release_date DESC LIMIT 5
 
 -- all recordings that credit an artist
 SELECT DISTINCT recording_name
@@ -83,11 +83,29 @@ GROUP BY artist_id
 HAVING COUNT( DISTINCT role) = 3
 
 -- top most credited artists
-SELECT artist_name, COUNT( DISTINCT role) as role_count
+
+SELECT artist_name, COUNT( DISTINCT role) as credit_count
 FROM
 	(artist
-    NATURAL JOIN credit)
+	NATURAL JOIN credit)
 GROUP BY artist_id
+HAVING credit_count = 3
+
+-- the below query is the same as the above but we do not know how many roles are there, we just get the artists with the max possible different role count
+SELECT *
+FROM 
+	(SELECT *, COUNT(DISTINCT role) as role_count
+	FROM 
+    	artist NATURAL JOIN credit
+	GROUP BY artist_id) as counted
+	LEFT JOIN
+	(SELECT MAX(counted.role_count) as max_role
+    FROM 
+        (SELECT *, COUNT(DISTINCT role) as role_count
+        FROM artist NATURAL JOIN credit
+        GROUP BY artist_id) as counted) as maxed
+	on counted.role_count = maxed.max_role
+WHERE max_role 
 
 -- albums song count
 SELECT album_name , COUNT(recording_id) as track_count
