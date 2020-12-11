@@ -52,7 +52,7 @@ CREATE TABLE IF NOT EXISTS user(
 	online BOOL NOT NULL,
 	username text not NULL UNIQUE,
   	password text not NULL,
-  	role USER_ROLE NOT NULL,
+  	role USER_ROLE NOT NULL
 );
 CREATE TABLE IF NOT EXISTS in_queue(
 	user_id INT NOT NULL REFERENCES user(user_id) ON DELETE CASCADE,

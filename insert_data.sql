@@ -127,13 +127,80 @@ INSERT INTO track(album_id,recording_id,track_number) VALUES (10,3,45);
 INSERT INTO track(album_id,recording_id,track_number) VALUES (10,3,200);
 
 -- user --
+INSERT INTO user(online,username,password,role) VALUES (0,'weirdkid','123abc',2);
+INSERT INTO user(online,username,password,role) VALUES (0,'bigtimegangsta','987654sad',2);
+INSERT INTO user(online,username,password,role) VALUES (0,'pphai','haizzzzzzzz',3);
+INSERT INTO user(online,username,password,role) VALUES (0,'someone','abcdefg',0);
+INSERT INTO user(online,username,password,role) VALUES (0,'daddypung','rememberthis',1);
+INSERT INTO user(online,username,password,role) VALUES (0,'whatthehell','mypassword',0);
+INSERT INTO user(online,username,password,role) VALUES (0,'kid_vippro','notvipproanymore',3);
+INSERT INTO user(online,username,password,role) VALUES (0,'pplfuckme','sohard',3);
+INSERT INTO user(online,username,password,role) VALUES (0,'sotired','healthynbalance',0);
+INSERT INTO user(online,username,password,role) VALUES (0,'something','helloworld',1);
+-- fake-online user --
+INSERT INTO user(online,username,password,role) VALUES (1,'online1','123456789',0);
+INSERT INTO user(online,username,password,role) VALUES (1,'online2','123123123',3);
+INSERT INTO user(online,username,password,role) VALUES (1,'online3','111111111',3);
+INSERT INTO user(online,username,password,role) VALUES (1,'online4','555555555',0);
+INSERT INTO user(online,username,password,role) VALUES (1,'online5','987654321',1);
+INSERT INTO user(online,username,password,role) VALUES (1,'online6','000000000',1);
 
--- authorization --
+-- fake-user_queue for virtual online user --
+INSERT INTO user_queue(user_id,repeat_state,is_playing,cur_queue_idx,cur_progress) VALUES (11,2,1,2,250);
+INSERT INTO user_queue(user_id,repeat_state,is_playing,cur_queue_idx,cur_progress) VALUES (12,1,0,2,432);
+INSERT INTO user_queue(user_id,repeat_state,is_playing,cur_queue_idx,cur_progress) VALUES (13,1,1,1,50);
+INSERT INTO user_queue(user_id,repeat_state,is_playing,cur_queue_idx,cur_progress) VALUES (14,0,1,1,83);
+INSERT INTO user_queue(user_id,repeat_state,is_playing,cur_queue_idx,cur_progress) VALUES (15,0,0,3,62);
+INSERT INTO user_queue(user_id,repeat_state,is_playing,cur_queue_idx,cur_progress) VALUES (16,2,1,5,222);
 
--- user_queue --
-
--- in_queue --
+-- fake-in_queue for virtual online user--
+INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (11,5,1);
+INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (11,8,2);
+INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (11,15,3);
+INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (12,2,1);
+INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (12,10,2);
+INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (13,11,1);
+INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (13,9,2);
+INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (15,1,1);
+INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (15,3,2);
+INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (15,12,3);
+INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (15,8,4);
+INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (14,11,1);
+INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (14,7,2);
+INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (16,16,1);
+INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (16,18,2);
+INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (16,20,3);
+INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (16,1,4);
+INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (16,2,5);
 
 -- playlist --
+INSERT INTO playlist(user_id,playlist_name,description,time_created,is_public) VALUES (2,'Chill','Music to chill','2000-11-22',0);
+INSERT INTO playlist(user_id,playlist_name,description,time_created,is_public) VALUES (4,'boringgg','sad music','2015-05-13',0);
+INSERT INTO playlist(user_id,playlist_name,description,time_created,is_public) VALUES (4,'romance and pop','send this to crush','2020-11-12',1);
+INSERT INTO playlist(user_id,playlist_name,description,time_created,is_public) VALUES (8,'lofi','study and work music','1999-06-26',0);
+INSERT INTO playlist(user_id,playlist_name,description,time_created,is_public) VALUES (5,'battle rap','my favor diss track','2005-01-02',1);
+INSERT INTO playlist(user_id,playlist_name,description,time_created,is_public) VALUES (5,'bolero','music for my mom and dad','2001-09-23',1);
+INSERT INTO playlist(user_id,playlist_name,description,time_created,is_public) VALUES (5,'trap,edm,remix','quay? len anh em oi','2019-9-19',1);
+INSERT INTO playlist(user_id,playlist_name,description,time_created,is_public) VALUES (9,'bts trash','no girl here, no trigger','2011-06-09',0);
 
 -- playlist_content --
+INSERT INTO playlist_content(user_id,playlist_name,recording_id,time_added) VALUES (2,'Chill',5,'2000-11-22');
+INSERT INTO playlist_content(user_id,playlist_name,recording_id,time_added) VALUES (2,'Chill',12,'2000-11-23');
+INSERT INTO playlist_content(user_id,playlist_name,recording_id,time_added) VALUES (2,'Chill',10,'2000-11-24');
+INSERT INTO playlist_content(user_id,playlist_name,recording_id,time_added) VALUES (4,'boringgg',7,'2015-05-13');
+INSERT INTO playlist_content(user_id,playlist_name,recording_id,time_added) VALUES (4,'romance and pop',1,'2020-11-12');
+INSERT INTO playlist_content(user_id,playlist_name,recording_id,time_added) VALUES (4,'romance and pop',13,'2020-12-01');
+INSERT INTO playlist_content(user_id,playlist_name,recording_id,time_added) VALUES (5,'battle rap',8,'2005-01-02');
+INSERT INTO playlist_content(user_id,playlist_name,recording_id,time_added) VALUES (5,'battle rap',15,'2005-10-12');
+INSERT INTO playlist_content(user_id,playlist_name,recording_id,time_added) VALUES (5,'bolero',2,'2001-09-23');
+INSERT INTO playlist_content(user_id,playlist_name,recording_id,time_added) VALUES (5,'bolero',3,'2001-09-25');
+INSERT INTO playlist_content(user_id,playlist_name,recording_id,time_added) VALUES (5,'bolero',6,'2001-10-02');
+INSERT INTO playlist_content(user_id,playlist_name,recording_id,time_added) VALUES (5,'bolero',13,'2002-10-11');
+INSERT INTO playlist_content(user_id,playlist_name,recording_id,time_added) VALUES (5,'bolero',14,'2002-10-15');
+INSERT INTO playlist_content(user_id,playlist_name,recording_id,time_added) VALUES (5,'trap,edm,remix',17,'2019-09-19');
+INSERT INTO playlist_content(user_id,playlist_name,recording_id,time_added) VALUES (5,'trap,edm,remix',15,'2019-09-25');
+INSERT INTO playlist_content(user_id,playlist_name,recording_id,time_added) VALUES (8,'lofi',4,'1999-06-26');
+INSERT INTO playlist_content(user_id,playlist_name,recording_id,time_added) VALUES (8,'lofi',9,'1999-06-27');
+INSERT INTO playlist_content(user_id,playlist_name,recording_id,time_added) VALUES (9,'bts trash',10,'2011-06-09');
+INSERT INTO playlist_content(user_id,playlist_name,recording_id,time_added) VALUES (9,'bts trash',11,'2011-06-14');
+INSERT INTO playlist_content(user_id,playlist_name,recording_id,time_added) VALUES (9,'bts trash',20,'2011-06-16');
