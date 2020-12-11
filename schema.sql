@@ -50,7 +50,9 @@ CREATE TABLE IF NOT EXISTS playlist_content(
 CREATE TABLE IF NOT EXISTS user(
 	user_id INTEGER NOT NULL PRIMARY KEY,
 	online BOOL NOT NULL,
-	display_name TEXT NOT NULL UNIQUE
+	username text not NULL UNIQUE,
+  	password text not NULL,
+  	role USER_ROLE NOT NULL,
 );
 CREATE TABLE IF NOT EXISTS in_queue(
 	user_id INT NOT NULL REFERENCES user(user_id) ON DELETE CASCADE,
@@ -66,13 +68,6 @@ CREATE TABLE IF NOT EXISTS user_queue(
 	cur_progress INT  NOT NULL CHECK (cur_progress >= 0),
 	FOREIGN KEY (user_id, cur_queue_idx) REFERENCES in_queue(user_id, queue_index)
 	ON DELETE CASCADE
-);
-CREATE TABLE if NOT EXISTS authorization (
-	user_id INT NOT NULL REFERENCES user(user_id) ON DELETE CASCADE,
-  	username text not NULL UNIQUE,
-  	password text not NULL,
-  	role USER_ROLE NOT NULL,
-  	PRIMARY KEY (user_id)
 );
 
 
