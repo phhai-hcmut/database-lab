@@ -106,3 +106,27 @@ FROM
     NATURAL JOIN track
     NATURAL JOIN album
 WHERE recording_name like '%me%' or album_name LIKE '%me%'
+
+-- album with wrong ordered tracks
+	--track number start with 1 so if lagest number > total track count -> has hole -> wrong order
+SELECT album_name
+FROM
+	album
+    NATURAL JOIN track
+GROUP by album_id
+HAVING MAX(track_number) > COUNT(track_number)
+-- album with duplicate recordings
+SELECT DISTINCT(album_name) --track1.recording_id ,track1.album_id,track1.track_number
+FROM
+	(track track1
+    LEFT JOIN track track2
+    on track1.album_id = track2.album_id AND track1.track_number != track2.track_number)
+    NATURAL join album
+WHERE track1.recording_id = track2.recording_id
+
+-- check username - password query
+SELECT *
+from
+	user
+WHERE username = 'bigtimegangsta' and password = '987654sad'
+
