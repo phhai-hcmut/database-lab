@@ -21,7 +21,7 @@ CREATE TABLE IF NOT EXISTS recording(
 CREATE TABLE IF NOT EXISTS track(
 	album_id NOT NULL REFERENCES album(album_id) ON DELETE CASCADE,
 	recording_id NOT NULL REFERENCES recording(recording_id) ON DELETE CASCADE,
-	track_number INT NOT NULL CHECK (track_number >= 0),
+	track_number INT NOT NULL CHECK (track_number >= 1),
 	PRIMARY KEY (album_id, track_number)
 );
 CREATE TABLE IF NOT EXISTS credit(
