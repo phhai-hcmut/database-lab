@@ -1,25 +1,27 @@
 -- recordings --
 
-INSERT into recording(recording_name,duration) VALUES ('Call',295);
-INSERT into recording(recording_name,duration) VALUES ('Sunshine, My Choice',430);
-INSERT into recording(recording_name,duration) VALUES ('Hibernate Magic',341);
-INSERT into recording(recording_name,duration) VALUES ('Cold Era',500);
-INSERT into recording(recording_name,duration) VALUES ('Closer Earth',234);
-INSERT into recording(recording_name,duration) VALUES ('Instrumental Heaven',266);
-INSERT into recording(recording_name,duration) VALUES ('Carebbian Saloon',421);
-INSERT into recording(recording_name,duration) VALUES ('Unused Home',332);
-INSERT into recording(recording_name,duration) VALUES ('The Hottest Soul',267);
-INSERT into recording(recording_name,duration) VALUES ('#That Violin',438);
-INSERT into recording(recording_name,duration) VALUES ('Late Chance',102);
-INSERT into recording(recording_name,duration) VALUES ('The Agent',167);
-INSERT into recording(recording_name,duration) VALUES ('Accepted Life',487);
-INSERT into recording(recording_name,duration) VALUES ('Live Salon',350);
-INSERT into recording(recording_name,duration) VALUES ('Banquet Magic',179);
-INSERT into recording(recording_name,duration) VALUES ('Undiscovered Way',285);
-INSERT into recording(recording_name,duration) VALUES ('Closer Times',137);
-INSERT into recording(recording_name,duration) VALUES ('Not Enough Sleep Loop',113);
-INSERT into recording(recording_name,duration) VALUES ('Light-Hearted Acoustic',252);
-INSERT into recording(recording_name,duration) VALUES ('Torpor Of Lilies',314);
+INSERT INTO recording(recording_name,duration) VALUES ('Call',295);
+INSERT INTO recording(recording_name,duration) VALUES ('Sunshine, My Choice',430);
+INSERT INTO recording(recording_name,duration) VALUES ('Hibernate Magic',341);
+INSERT INTO recording(recording_name,duration) VALUES ('Cold Era',500);
+INSERT INTO recording(recording_name,duration) VALUES ('Closer Earth',234);
+INSERT INTO recording(recording_name,duration) VALUES ('Instrumental Heaven',266);
+INSERT INTO recording(recording_name,duration) VALUES ('Carebbian Saloon',421);
+INSERT INTO recording(recording_name,duration) VALUES ('Unused Home',332);
+INSERT INTO recording(recording_name,duration) VALUES ('The Hottest Soul',267);
+INSERT INTO recording(recording_name,duration) VALUES ('#That Violin',438);
+
+-- these below songs are for backup cause i cant add credit for all :))
+-- INSERT INTO recording(recording_name,duration) VALUES ('Late Chance',102);
+-- INSERT INTO recording(recording_name,duration) VALUES ('The Agent',167);
+-- INSERT INTO recording(recording_name,duration) VALUES ('Accepted Life',487);
+-- INSERT INTO recording(recording_name,duration) VALUES ('Live Salon',350);
+-- INSERT INTO recording(recording_name,duration) VALUES ('Banquet Magic',179);
+-- INSERT INTO recording(recording_name,duration) VALUES ('Undiscovered Way',285);
+-- INSERT INTO recording(recording_name,duration) VALUES ('Closer Times',137);
+-- INSERT INTO recording(recording_name,duration) VALUES ('Not Enough Sleep Loop',113);
+-- INSERT INTO recording(recording_name,duration) VALUES ('Light-Hearted Acoustic',252);
+-- INSERT INTO recording(recording_name,duration) VALUES ('Torpor Of Lilies',314);
 
 -- artist --
 
@@ -102,27 +104,27 @@ INSERT INTO ownership(album_id,artist_id) VALUES (10,7);
 
 -- tracks --
 
-INSERT into track(album_id,recording_id,track_number) VALUES (1,8,1);
-INSERT into track(album_id,recording_id,track_number) VALUES (1,9,2);
-INSERT into track(album_id,recording_id,track_number) VALUES (1,10,3);
-INSERT into track(album_id,recording_id,track_number) VALUES (1,4,4);
-INSERT into track(album_id,recording_id,track_number) VALUES (2,5,1);
-INSERT into track(album_id,recording_id,track_number) VALUES (2,5,2);
-INSERT into track(album_id,recording_id,track_number) VALUES (3,8,1);
-INSERT into track(album_id,recording_id,track_number) VALUES (3,6,2);
-INSERT into track(album_id,recording_id,track_number) VALUES (4,7,1);
-INSERT into track(album_id,recording_id,track_number) VALUES (5,4,1);
-INSERT into track(album_id,recording_id,track_number) VALUES (6,5,1);
-INSERT into track(album_id,recording_id,track_number) VALUES (7,6,1);
-INSERT into track(album_id,recording_id,track_number) VALUES (7,7,2);
-INSERT into track(album_id,recording_id,track_number) VALUES (8,8,1);
-INSERT into track(album_id,recording_id,track_number) VALUES (8,5,2);
-INSERT into track(album_id,recording_id,track_number) VALUES (8,10,3);
+INSERT INTO track(album_id,recording_id,track_number) VALUES (1,8,1);
+INSERT INTO track(album_id,recording_id,track_number) VALUES (1,9,2);
+INSERT INTO track(album_id,recording_id,track_number) VALUES (1,10,3);
+INSERT INTO track(album_id,recording_id,track_number) VALUES (1,4,4);
+INSERT INTO track(album_id,recording_id,track_number) VALUES (2,5,1);
+INSERT INTO track(album_id,recording_id,track_number) VALUES (2,5,2);
+INSERT INTO track(album_id,recording_id,track_number) VALUES (3,8,1);
+INSERT INTO track(album_id,recording_id,track_number) VALUES (3,6,2);
+INSERT INTO track(album_id,recording_id,track_number) VALUES (4,7,1);
+INSERT INTO track(album_id,recording_id,track_number) VALUES (5,4,1);
+INSERT INTO track(album_id,recording_id,track_number) VALUES (6,5,1);
+INSERT INTO track(album_id,recording_id,track_number) VALUES (7,6,1);
+INSERT INTO track(album_id,recording_id,track_number) VALUES (7,7,2);
+INSERT INTO track(album_id,recording_id,track_number) VALUES (8,8,1);
+INSERT INTO track(album_id,recording_id,track_number) VALUES (8,5,2);
+INSERT INTO track(album_id,recording_id,track_number) VALUES (8,10,3);
 -- the albums below have tracks in massed up orders and also duplicated recordings
-INSERT into track(album_id,recording_id,track_number) VALUES (9,5,9);
-INSERT into track(album_id,recording_id,track_number) VALUES (9,5,15);
-INSERT into track(album_id,recording_id,track_number) VALUES (10,3,45);
-INSERT into track(album_id,recording_id,track_number) VALUES (10,3,200);
+INSERT INTO track(album_id,recording_id,track_number) VALUES (9,5,9);
+INSERT INTO track(album_id,recording_id,track_number) VALUES (9,5,15);
+INSERT INTO track(album_id,recording_id,track_number) VALUES (10,3,45);
+INSERT INTO track(album_id,recording_id,track_number) VALUES (10,3,200);
 
 -- user --
 
