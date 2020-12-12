@@ -74,3 +74,48 @@ CREATE TABLE IF NOT EXISTS user_queue(
 );
 
 
+---------------- INDEX CREATION ----------------
+
+-----------index for composite keys----------------
+
+-- idx for user queue to find song in the 'in_queue'
+CREATE INDEX if not EXISTS in_queue_idx
+on in_queue(user_id,queue_index);
+-- idx to find user's song in playlist 
+CREATE INDEX if NOT EXISTS playlist_content_idx
+on playlist_content(user_id,playlist_name,recording_id);
+
+-- idx to find 	user's playlist by name
+CREATE INDEX if NOT EXISTS playlist_user_name_idx
+on playlist(user_id,playlist_name);
+
+--user can search for album by description (cause usually they're forgetful)
+CREATE INDEX if NOT EXISTS playlist_desc_idx
+ON playlist(user_id,description);
+-- user can search filter added songs in playlist
+CREATE INDEX if NOT EXISTS playlist_content_time_idx
+ON playlist_content(user_id,time_added);
+-- user can filter playlist by creation time
+CREATE INDEX if NOT EXISTS playlist_time_idx
+ON playlist(user_id,time_created);
+-- finding playlist name
+CREATE INDEX if NOT EXISTS playlist_name_idx
+on playlist(playlist_name);
+-- finding username/password - u can query by username or by uname/pass 
+CREATE INDEX if NOT EXISTS authorization_idx
+on user(username,password);
+
+-- composite key index for credit
+--------- not made ---------
+-- composite key index for owenership
+--------- not made ---------
+
+-- finding recording name
+CREATE INDEX if NOT EXISTS recording_name_idx
+on recording(recording_name);
+-- finding album name
+CREATE INDEX if NOT EXISTS album_name_idx
+on album(album_name);
+-- finding artist name
+CREATE INDEX if NOT EXISTS artist_name_idx
+on artist(artist_name);
