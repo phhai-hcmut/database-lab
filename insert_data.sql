@@ -145,14 +145,6 @@ INSERT INTO user(online,username,password,role) VALUES (1,'online4','555555555',
 INSERT INTO user(online,username,password,role) VALUES (1,'online5','987654321',1);
 INSERT INTO user(online,username,password,role) VALUES (1,'online6','000000000',1);
 
--- fake-user_queue for virtual online user --
-INSERT INTO user_queue(user_id,repeat_state,is_playing,cur_queue_idx,cur_progress) VALUES (11,2,1,2,250);
-INSERT INTO user_queue(user_id,repeat_state,is_playing,cur_queue_idx,cur_progress) VALUES (12,1,0,2,432);
-INSERT INTO user_queue(user_id,repeat_state,is_playing,cur_queue_idx,cur_progress) VALUES (13,1,1,1,50);
-INSERT INTO user_queue(user_id,repeat_state,is_playing,cur_queue_idx,cur_progress) VALUES (14,0,1,1,83);
-INSERT INTO user_queue(user_id,repeat_state,is_playing,cur_queue_idx,cur_progress) VALUES (15,0,0,3,62);
-INSERT INTO user_queue(user_id,repeat_state,is_playing,cur_queue_idx,cur_progress) VALUES (16,2,1,5,222);
-
 -- fake-in_queue for virtual online user--
 INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (11,5,1);
 INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (11,8,2);
@@ -172,6 +164,14 @@ INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (16,18,2);
 INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (16,20,3);
 INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (16,1,4);
 INSERT INTO in_queue(user_id,recording_id,queue_index) VALUES (16,2,5);
+
+-- fake-user_queue for virtual online user --
+INSERT INTO user_queue(user_id,repeat_state,is_playing,cur_queue_idx,cur_progress) VALUES (11,2,1,2,250);
+INSERT INTO user_queue(user_id,repeat_state,is_playing,cur_queue_idx,cur_progress) VALUES (12,1,0,2,432);
+INSERT INTO user_queue(user_id,repeat_state,is_playing,cur_queue_idx,cur_progress) VALUES (13,1,1,1,50);
+INSERT INTO user_queue(user_id,repeat_state,is_playing,cur_queue_idx,cur_progress) VALUES (14,0,1,1,83);
+INSERT INTO user_queue(user_id,repeat_state,is_playing,cur_queue_idx,cur_progress) VALUES (15,0,0,3,62);
+INSERT INTO user_queue(user_id,repeat_state,is_playing,cur_queue_idx,cur_progress) VALUES (16,2,1,5,222);
 
 -- playlist --
 INSERT INTO playlist(user_id,playlist_name,description,time_created,is_public) VALUES (2,'Chill','Music to chill','2000-11-22',0);
