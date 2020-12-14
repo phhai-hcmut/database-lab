@@ -180,6 +180,8 @@ INSERT INTO playlist(user_id,playlist_name,description,time_created,is_public) V
 INSERT INTO playlist(user_id,playlist_name,description,time_created,is_public) VALUES (8,'lofi','study and work music','1999-06-26',0);
 INSERT INTO playlist(user_id,playlist_name,description,time_created,is_public) VALUES (5,'battle rap','my favor diss track','2005-01-02',1);
 INSERT INTO playlist(user_id,playlist_name,description,time_created,is_public) VALUES (5,'bolero','music for my mom and dad','2001-09-23',1);
+-- this is a same name playlist, empty
+INSERT INTO playlist(user_id,playlist_name,description,time_created,is_public) VALUES (2,'bolero','music for my mom and dad','2001-09-23',1);
 INSERT INTO playlist(user_id,playlist_name,description,time_created,is_public) VALUES (5,'trap,edm,remix','quay? len anh em oi','2019-9-19',1);
 INSERT INTO playlist(user_id,playlist_name,description,time_created,is_public) VALUES (9,'bts trash','no girl here, no trigger','2011-06-09',0);
 
