@@ -150,3 +150,9 @@ SELECT *
 from
 	user
 WHERE username = 'bigtimegangsta' and password = '987654sad';
+
+-- list duplicate playlist name
+SELECT playlist_name
+FROM playlist 
+GROUP BY playlist_name 
+HAVING COUNT(*) > 1;
