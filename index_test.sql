@@ -36,11 +36,11 @@
 
     EXPLAIN QUERY PLAN
     SELECT * FROM playlist_content
-    WHERE user_id = 3 and playlist_name = 'bolero';
+    WHERE user_id = 3 AND playlist_name = 'bolero';
 
     EXPLAIN QUERY PLAN
     SELECT * FROM playlist_content
-    WHERE user_id = 3 and recording_id = 5 = 'bolero';
+    WHERE user_id = 3 AND recording_id = 5;
 
     -- EXPLAIN QUERY PLAN
     -- SELECT * FROM playlist_content
@@ -48,7 +48,7 @@
 
     EXPLAIN QUERY PLAN
     SELECT * FROM playlist_content
-    WHERE user_id = 3 and playlist_name = 'bolero' and recording_id = 5 = 'bolero';
+    WHERE user_id = 3 and playlist_name = 'bolero' and recording_id = 5 ;
 -- finding username/password - already indexed
     
 -- test
@@ -62,15 +62,14 @@
     
 -----------other manual index----------------
 
--- finding playlist name
-CREATE INDEX if NOT EXISTS playlist_name_idx
-on playlist(playlist_name);
-   
+-- finding artist name
+CREATE INDEX if NOT EXISTS artist_name_idx
+on artist(artist_name);
+
 --test
     EXPLAIN QUERY PLAN
-    SELECT * FROM playlist
-    WHERE playlist_name = 'bolero';
-
+    SELECT * FROM artist
+    WHERE artist_name = 'Thorin Dikan';
 
 
 -- finding recording name
@@ -82,6 +81,13 @@ on recording(recording_name);
     SELECT * FROM recording
     WHERE recording_name = 'Call';
 
+    --recordings that are not tracks
+    EXPLAIN QUERY PLAN
+    SELECT recording_id,recording_name from recording
+    EXCEPT
+    SELECT recording_id,recording_name
+    from (recording NATURAL JOIN track);
+
 -- finding album name
 CREATE INDEX if NOT EXISTS album_name_idx
 on album(album_name);
@@ -91,11 +97,22 @@ on album(album_name);
     SELECT * FROM album
     WHERE album_name = 'Curves';
 
--- finding artist name
-CREATE INDEX if NOT EXISTS artist_name_idx
-on artist(artist_name);
-
+-- finding playlist name
+CREATE INDEX if NOT EXISTS playlist_name_idx
+on playlist(playlist_name);
+   
 --test
     EXPLAIN QUERY PLAN
-    SELECT * FROM artist
-    WHERE artist_name = 'Thorin Dikan';
+    SELECT * FROM playlist
+    WHERE playlist_name = 'bolero';
+
+    --playlist with same name
+    EXPLAIN QUERY PLAN
+    SELECT playlist_name
+    FROM playlist 
+    GROUP BY playlist_name 
+    HAVING COUNT(*) > 1;
+
+
+
+
