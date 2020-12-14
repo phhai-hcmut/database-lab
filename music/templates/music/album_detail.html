@@ -4,7 +4,7 @@
 	{% load static %}
 	<title>Music Streaming</title>
 	<script src="https://kit.fontawesome.com/39248c2d37.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/home_style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/album_detail_style.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/player_style.css' %}">
 </head>
 <body>
@@ -23,40 +23,21 @@
 			</ul>
 		</div>
 		<div id="right">
-			<div id="album">
-				<h2>Latest album</h2>
-				<div class="album-list">
-					{% if all_album_list %}
-						<ul>
-                            <li><strong>Name</strong></li>
-                            <li><strong>Release Date</strong></li> 
-                            <li><strong>Owner</strong></li>
-                            <li><strong>Type</strong></li>
-                        </ul>
-						{% for album in all_album_list %}
-                        <ul><a href="{% url 'music:detail' %}">
-							<li> {{ album.name }}</li>
-							<li> {{ album.release_date }}</li>
-							{% for owner in album.owner.all %}
-							<li> {{ owner }}</li>
-							{% endfor %}
-							<li> {{ album.album_type }}</li>
-                        </a></ul>
-						{% endfor %}
-	                {% else %}
-	                    <p>No albums are available.</p>
-	                {% endif %}
-				</div>
+			<div id="album-info">
+                <h1>Album name</h1>
+                <p>Những bản nhạc blah blah .... hay nhất</p>
+                <p>04/12/2020</p>
+                <p>30 Tracks</p>
 			</div>
-			<div id="trend">
-				<h2>Trending</h2>
-				<ul>
-					<li>track 1</li>
-					<li>track 2</li>
-					<li>track 3</li>
-					<li>track 4</li>
-					<li>track 5</li><li>track 5</li>
-				</ul>
+            <div id="track-list">
+                <i class="fas fa-play-circle"></i>
+                <h3>Track list</h3>
+                <ul>
+                    <li>No. Tilte</li>
+                    <li>Album</li>
+                    <li>Artists</li>
+                    <li>Duration</li>
+                </ul>
 			</div>
 		</div>
 	</div>
