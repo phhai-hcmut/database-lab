@@ -31,7 +31,7 @@ class Track(models.Model):
     track_number = models.PositiveIntegerField()
     name = models.CharField(max_length=200)
     duration = models.DurationField(validators=[MinValueValidator(timedelta())])
-    artist_credits = models.ManyToManyField(Artist, through='Credit', related_name='credit')
+    artist_credits = models.ManyToManyField(Artist, through='Credit', related_name='artist_credit')
 
     class Meta:
         unique_together = ['album', 'track_number']
