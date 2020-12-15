@@ -1,0 +1,138 @@
+
+
+#player {
+	background: white;
+	color: black;
+	bottom: 0;
+	position: fixed;
+	margin: auto;
+	width: 100%;
+	height: 115px;
+	overflow: hidden;
+	border-radius: 5px;
+}
+
+.clicked {
+	color: #49654D;
+	transform: scale(1.2);
+	transition: all .4s ease;
+}
+
+.info {
+  height: 115px;
+  width: 100%;
+  position: absolute;
+  bottom:0;
+  background: rgba(white, .85);
+}
+
+.progress-bar {
+	height: 5px;
+	width: 90%;
+	margin: 1% auto;
+	background: #C0CFB2;
+	border-radius: 10px;
+	font-family: 'Questrial', sans-serif;
+}
+
+.fill {
+	background-color: #8BA989;
+	width: 35%;
+	height: 0.3rem;
+	border-radius: 2px;
+}
+
+.time--current, .time--total {
+	color: #364F3C;
+	font-size: 10px;
+	position: absolute;
+	margin-top: -2px;
+}
+
+.time--current {
+  	left: 30px;
+}
+
+.time--total {
+  	right: 30px;
+}
+
+.currently-playing {
+	text-align: center;
+	margin-top: -3px;
+}
+
+.song-name, .artist-name {
+	font-family: 'Questrial', sans-serif;
+	text-transform: uppercase;
+	margin: 0;
+}
+
+.song-name {
+	font-size: .8em;
+	letter-spacing: 3px;
+	color: #364F3C;
+}
+
+.artist-name {
+	font-size: .6em;
+	letter-spacing: 1.5px;
+	color: #364F3C;
+	margin-top: 5px;
+}
+
+.controls {
+	display: flex;
+	align-items: center;
+	font-size: .8em;
+	justify-content: center;
+	color: #8BA989;
+}
+
+.play, .pause, .next, .previous, .option, .add, .volume, .shuffle {
+	cursor: pointer;
+}
+
+.controls .play, .controls .pause {
+	margin: 15px 25px;
+	color: #6e946c;
+	font-size: 15pt;
+}
+
+.controls .option {
+    left: 10px;
+    position: absolute;
+    font-size: 15pt;
+}
+.controls .add {
+    right: 10px; 
+    position: absolute;
+    font-size: 15pt;
+}
+.controls .volume {
+    margin-right: 30px;
+    font-size: 15pt;
+}
+.controls .shuffle {
+    margin-left: 30px;
+    font-size: 15pt;
+}
+
+.next {
+	margin-left: 30px;
+	font-size: 15pt;
+}
+
+.previous {
+	margin-right: 30px;
+	font-size: 15pt;
+}
+
+.play:hover, .pause:hover, .next:hover, .previous:hover, .option:hover, .add:hover, .volume:hover, .shuffle:hover {
+	opacity: 80%;
+}
+
+/*$primary: #49654D;
+$secondary: #8BA989;
+$light: #C0CFB2;
+$dark: #364F3C;*/
