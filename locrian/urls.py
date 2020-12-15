@@ -19,7 +19,6 @@ from django.urls import include, path
 urlpatterns = [
     # NOTE: add the /<your_destination> in the web's url to visit the correct site
     # Example: "http://127.0.0.1:8000/music/" to visit music
-    path('admin/', admin.site.urls),
-    path('music/', include('music.urls')),
-    path('playlist/', include('playlist.urls')),
+    path('', include('music.urls',namespace='music')),
+    path('admin/', admin.site.urls,name = 'admin'),
 ]

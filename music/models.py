@@ -8,6 +8,9 @@ from django.contrib.auth.models import AbstractBaseUser
 class Artist(models.Model):
     name = models.CharField(max_length=200)
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class Recording(models.Model):
     name = models.CharField(max_length=200)
@@ -23,19 +26,27 @@ class Album(models.Model):
 
     name = models.CharField(max_length=200)
     release_date = models.DateField()
-    artist = models.ManyToManyField(
-        Artist
-    )  # NOTE: this does auto cascade so it does not have on_delete attribute.
+    # NOTE: this does auto cascade so it does not have on_delete attribute.
+    owner = models.ManyToManyField(Artist, related_name='album')
     album_type = models.CharField(choices=AlbumType.choices, max_length=200)
 
 
+    def __str__(self) -> str:
+        artists = [str(a) for a in self.artist.all()]
+        return f"{self.name}, {self.release_date}, {self.album_type}, Artists: {artists}"
+
+
 class Track(models.Model):
-    album = models.ForeignKey(Album, on_delete=models.CASCADE)
+    album = models.ForeignKey(Album, on_delete=models.CASCADE,related_name='track')
     track_number = models.PositiveIntegerField()
     recording = models.ForeignKey(Recording, on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ['album', 'track_number']
+
+    def __str__(self) -> str:
+        track_name = self.recording.name
+        return f"{self.track_number}. {track_name}, {self.duration}"
 
 
 class Credit(models.Model):
@@ -48,6 +59,9 @@ class Credit(models.Model):
     recording = models.ForeignKey(Recording, on_delete=models.CASCADE)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     role = models.CharField(choices=CreditRole.choices, max_length=200)
+
+    def __str__(self) -> str:
+        return f"{self.track}, {self.artist}, {self.role}"
 
 
 class User(AbstractBaseUser):
