@@ -9,7 +9,8 @@ from dataclasses import dataclass
 from django.http import HttpResponse
 # Create your views here.
 
-from music.models import Album, Artist, Track, Playlist
+from music.models import Album, Artist, Track
+from playlist.models import Playlist
 
 
 
