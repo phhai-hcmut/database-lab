@@ -2,8 +2,7 @@ from datetime import timedelta
 
 from django.db import models
 from django.core.validators import MinValueValidator
-from django.db.models.deletion import CASCADE
-from django.db.models.fields.related import ForeignKey
+from django.contrib.auth.models import AbstractUser
 
 
 class Artist(models.Model):
@@ -22,12 +21,13 @@ class Album(models.Model):
 
     name = models.CharField(max_length=200)
     release_date = models.DateField()
-    owner = models.ManyToManyField(Artist,
-                                   related_name='album')  # NOTE: this does auto cascade so it does not have on_delete attribute.
+    # NOTE: this does auto cascade so it does not have on_delete attribute.
+    owner = models.ManyToManyField(Artist, related_name='album')
     album_type = models.CharField(choices=AlbumType.choices, max_length=200)
 
     def __str__(self) -> str:
-        return self.name + ', ' + str(self.release_date) + ', ' + self.album_type + ', Artists: ' + str([str(a) for a in self.owner.all()])
+        artists = [str(a) for a in self.owner.all()]
+        return f"{self.name}, {self.release_date}, {self.album_type}, Artists: {artists}"
 
 
 class Track(models.Model):
@@ -41,7 +41,8 @@ class Track(models.Model):
         unique_together = ['album', 'track_number']
 
     def __str__(self) -> str:
-        return str(self.track_number) + ', ' + self.name + ', ' + str(self.duration)
+        track_name = self.recording.name
+        return f"{self.track_number}. {track_name}, {self.recording.duration}"
 
 
 class Credit(models.Model):
@@ -56,49 +57,15 @@ class Credit(models.Model):
     role = models.CharField(choices=CreditRole.choices, max_length=200)
 
     def __str__(self) -> str:
-        return str(self.track) + ', ' + str(self.artist) + ', ' + self.role
+        return f"{self.recording}, {self.artist}, {self.role}"
 
 
-class User(models.Model):
-    online = models.BooleanField()
-    display_name = models.CharField(unique=True, max_length=200)
-
-
-class Playlist(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    name = models.CharField(max_length=200)
-    description = models.TextField(blank=True)
-    time_created = models.DateTimeField(auto_now_add=True)
-    is_public = models.BooleanField(default=False)
-    tracks = models.ManyToManyField(Track, through='PlaylistContent')
+class User(AbstractUser):
+    class UserRole(models.TextChoices):
+        ADMIN = 1, 'Administrator'
+        MOD = 2, 'Moderator'
+        ARTIST = 3, 'Artist'
+        LISTENER = 4, 'Listener (normal user)'
 
     class Meta:
         unique_together = ['user', 'name']
-
-
-class PlaylistContent(models.Model):
-    playlist = models.ForeignKey(Playlist, on_delete=models.CASCADE)
-    track = models.ForeignKey(Track, on_delete=models.CASCADE)
-    time_added = models.DateTimeField(auto_now_add=True)
-
-
-class QueueTrack(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    track = models.ForeignKey(Track, on_delete=models.CASCADE)
-    queue_index = models.PositiveIntegerField()
-
-    class Meta:
-        unique_together = ['user', 'queue_index']
-
-
-class CurrentlyListening(models.Model):
-    class RepeatState(models.TextChoices):
-        NO_REPEAT = 0, 'No Repeat'
-        REPEAT_CURRENT = 1, 'Repeat Current Song'
-        REPEAT_ALL = 2, 'Repeat All Playlist'
-
-    user = models.OneToOneField(User, on_delete=CASCADE, primary_key=True)
-    track = models.ForeignKey(QueueTrack, on_delete=models.CASCADE)
-    repeat_state = models.CharField(choices=RepeatState.choices, max_length=200)
-    is_playing = models.BooleanField()
-    progress = models.DurationField()
