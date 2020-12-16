@@ -9,7 +9,7 @@ from dataclasses import dataclass
 from django.http import HttpResponse
 # Create your views here.
 
-from music.models import Album, Artist, Track
+from music.models import Album, Artist, Track, Playlist
 from .decorators import unauthenticated_user, allowed_users, user_redirection
 
 
@@ -177,7 +177,13 @@ def detail(request):
 
 def index(request):
     all_album_list = Album.objects.order_by('-release_date')[:TOP_NUMBER]
-    context = {'all_album_list': all_album_list}
+    top_track_list = Track.objects.order_by('name')[:TOP_NUMBER]
+    top_artist_list = Artist.objects.order_by('name')[:TOP_NUMBER]
+    top_playlist = Playlist.objects.order_by('-time_created')[:TOP_NUMBER]
+    context = {'all_album_list': all_album_list,
+               'top_track_list': top_track_list,
+               'top_artist_list': top_artist_list,
+               'top_playlist': top_playlist}
     return render(request, 'music/index.html', context)
 
 
