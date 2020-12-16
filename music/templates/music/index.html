@@ -70,11 +70,8 @@
 						{% for track in top_track_list %}
                         <ul onclick="addItem()"><a>
 							<li> {{ track.album }}</li>
-							<li> {{ track.name }}</li>
-							<li> {{ track.duration }}</li>
-							{% for artist_credit in track.artist_credits.all %}
-							<li> {{ artist_credit }}</li>
-							{% endfor %}
+							<li> {{ track.track_number }}</li>
+							<li> {{ track.recording }}</li>
 							<li><i class="fas fa-plus-circle"></i> <i class="fas fa-play-circle"></i></li>
                         </a></ul>
 						{% endfor %}
