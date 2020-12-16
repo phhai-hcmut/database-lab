@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'music.apps.MusicConfig',
     'playlist',
+    'account',
+    'listening',
 ]
 
 MIDDLEWARE = [
@@ -126,5 +128,3 @@ MEDIA_URL = '/images/'
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-
-AUTH_USER_MODEL = 'music.User'
