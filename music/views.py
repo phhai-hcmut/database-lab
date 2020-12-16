@@ -10,54 +10,8 @@ from django.http import HttpResponse
 # Create your views here.
 
 from music.models import Album, Artist, Track
-from .decorators import unauthenticated_user, allowed_users, user_redirection
 
 
-# ____________________________AUTHENTICATION VIEWS AND HOME PAGES__________________________
-
-
-@unauthenticated_user
-def loginPage(request):
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
-
-        user = authenticate(request, username=username, password=password)
-
-        if user is not None:
-            login(request, user)
-            return redirect('music:home')
-        else:
-            messages.info(request, 'Username OR password is incorrect')
-
-    context = {}
-    return render(request, 'music/login.html', context)
-
-
-def logoutUser(request):
-    logout(request)
-    return redirect('music:login')
-
-
-@login_required(login_url='music:login')
-@user_redirection
-def home(request):
-    context = {}
-    return render(request, 'music/moderator_home.html', context)
-
-
-@login_required(login_url='music:login')
-@allowed_users(allowed_roles=['listener'])
-def listenerPage(request):
-    context = {}
-    return render(request, 'music/listener_home.html', context)
-
-
-@login_required(login_url='music:login')
-@allowed_users(allowed_roles=['artist'])
-def artistPage(request):
-    context = {}
-    return render(request, 'music/artist_home.html', context)
 
 
 # ____________________________LISTENER VIEWS__________________________

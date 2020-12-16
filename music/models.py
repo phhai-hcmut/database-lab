@@ -2,8 +2,7 @@ from datetime import timedelta
 
 from django.db import models
 from django.core.validators import MinValueValidator
-from django.contrib.auth.models import AbstractUser
-
+from django.contrib.auth.models import AbstractUser,Group
 
 class Artist(models.Model):
     name = models.CharField(max_length=200)
@@ -64,14 +63,3 @@ class Credit(models.Model):
         return f"{self.recording}, {self.artist}, {self.role}"
 
 
-class User(AbstractUser):
-    class UserRole(models.TextChoices):
-        ADMIN = 1, 'Administrator'
-        MOD = 2, 'Moderator'
-        ARTIST = 3, 'Artist'
-        LISTENER = 4, 'Listener (normal user)'
-
-    username = models.CharField(unique=True, max_length=200)
-    USERNAME_FIELD = 'username'
-    online = models.BooleanField()
-    role = models.CharField(choices=UserRole.choices, max_length=200)
