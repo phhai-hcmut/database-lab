@@ -14,6 +14,7 @@
         <a class="right-side" href=""> REGISTER</a>
 		<a class="right-side" href=""> LOGIN</a>
 	</div>
+
 	<div id="main">
 		<div id="left">
 			<ul>
@@ -32,6 +33,7 @@
                             <li><strong>Release Date</strong></li>
                             <li><strong>Owner</strong></li>
                             <li><strong>Type</strong></li>
+							<li> </li>
                         </ul>
 						{% for album in all_album_list %}
                         <ul><a href="{% url 'music:detail' %}">
@@ -41,6 +43,7 @@
 							<li> {{ owner }}</li>
 							{% endfor %}
 							<li> {{ album.album_type }}</li>
+							<li><i class="fas fa-plus-circle"></i> <i class="fas fa-play-circle"></i></li>
                         </a></ul>
 						{% endfor %}
 	                {% else %}
@@ -48,15 +51,79 @@
 	                {% endif %}
 				</div>
 			</div>
+
+			<!-- Top 5 trending track -->
 			<div id="trend">
 				<h2>Trending</h2>
-				<ul>
-					<li>track 1</li>
-					<li>track 2</li>
-					<li>track 3</li>
-					<li>track 4</li>
-					<li>track 5</li><li>track 5</li>
-				</ul>
+				<!-- <input type="text" id="candidate"/> -->
+				<!-- <button onclick="addItem()">add item</button>
+				<button onclick="removeItem()">remove item</button> -->
+				<div class="album-list">
+					{% if top_track_list %}
+						<ul>
+                            <li><strong>Name</strong></li>
+                            <li><strong>Release Date</strong></li>
+                            <li><strong>Owner</strong></li>
+                            <li><strong>Type</strong></li>
+							<li> </li>
+                        </ul>
+						{% for track in top_track_list %}
+                        <ul onclick="addItem()"><a>
+							<li> {{ track.album }}</li>
+							<li> {{ track.name }}</li>
+							<li> {{ track.duration }}</li>
+							{% for artist_credit in track.artist_credits.all %}
+							<li> {{ artist_credit }}</li>
+							{% endfor %}
+							<li><i class="fas fa-plus-circle"></i> <i class="fas fa-play-circle"></i></li>
+                        </a></ul>
+						{% endfor %}
+	                {% else %}
+	                    <p>No tracks are available.</p>
+	                {% endif %}
+				</div>
+			</div>
+
+			<!-- Top 5 artist by name -->
+			<div id="artist">
+				<h2>Artist</h2>
+				<div class="artist-list">
+					{% if top_artist_list %}
+						<ul>
+                            <li><strong>Name</strong></li>
+                        </ul>
+						{% for artist in top_artist_list %}
+                        <ul><a href="{% url 'music:artist-page' %}">
+							<li> {{ artist.name }}</li>
+                        </a></ul>
+						{% endfor %}
+	                {% else %}
+	                    <p>No artists are available.</p>
+	                {% endif %}
+				</div>
+			</div>
+
+			<!-- Top 5 playlist -->
+			<div id="playlist">
+				<h2>Playlist</h2>
+				<div class="playlist-list">
+					{% if top_playlist %}
+						<ul>
+                            <li><strong>Name</strong></li>
+                            <li><strong>User</strong></li>
+                            <li><strong>Time Created</strong></li>
+                        </ul>
+						{% for playlist in top_playlist %}
+                        <ul><a href="">
+							<li> {{ playlist.name }}</li>
+							<li> {{ playlist.user }}</li>
+							<li> {{ playlist.time_created }}</li>
+                        </a></ul>
+						{% endfor %}
+	                {% else %}
+	                    <p>No playlists are available.</p>
+	                {% endif %}
+				</div>
 			</div>
 		</div>
 	</div>
@@ -84,11 +151,33 @@
 				<div class="shuffle"><i class="fas fa-random"></i></div>
 				<div class="add"><i class="fas fa-plus"></i></div>
 			</div>
+			<div class="queue">
+				<ul id="dynamic-list">
+					<li></li>
+				</ul>
+			</div>
 		</div>
 	</div>
 
 	<div id="footer"></div>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 	<script src="{% static 'js/player.js' %}"></script>
+	<script type="text/javascript">
+		function addItem(){
+			var ul = document.getElementById("dynamic-list");
+			var candidate = document.getElementById("candidate");
+			var li = document.createElement("li");
+			li.setAttribute('id',candidate.value);
+			li.appendChild(document.createTextNode(candidate.textContent));
+			ul.appendChild(li);
+		}
+
+		function removeItem(){
+			var ul = document.getElementById("dynamic-list");
+			var candidate = document.getElementById("candidate");
+			var item = document.getElementById(candidate.value);
+			ul.removeChild(item);
+		}
+	</script>
 </body>
 </html>
