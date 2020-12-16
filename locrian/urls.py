@@ -15,12 +15,14 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
-
+from django.shortcuts import redirect
 urlpatterns = [
     # NOTE: add the /<your_destination> in the web's url to visit the correct site
     # Example: "http://127.0.0.1:8000/music/" to visit music
     
     
     path('', include('music.urls',namespace='music')),
+    #overwire admin logout link
+    path('admin/logout/', lambda request: redirect('music:logout', permanent=False)),
     path('admin/', admin.site.urls,name = 'admin'),
 ]
