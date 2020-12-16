@@ -24,10 +24,20 @@ CREATE TABLE IF NOT EXISTS ownership(
 	artist_id NOT NULL REFERENCES artist(artist_id) ON DELETE CASCADE,
 	PRIMARY KEY (album_id, artist_id)
 );
-
-CREATE TABLE IF NOT EXISTS credit(
-	recording_id INT NOT NULL REFERENCES recording(recording_id) ON DELETE CASCADE,
-	artist_id INT NOT NULL REFERENCES artist(artist_id) ON DELETE CASCADE,
+CREATE TABLE recording(
+	id INTEGER NOT NULL PRIMARY KEY,
+	name TEXT NOT NULL,
+	duration INT NOT NULL CHECK (duration > 0),
+);
+CREATE TABLE track(
+	album_id NOT NULL REFERENCES album(id) ON DELETE CASCADE,
+	recording_id NOT NULL REFERENCES recording(id) ON DELETE CASCADE,
+	track_number INT NOT NULL CHECK (track_number >= 0),
+	PRIMARY KEY (album_id, recording_id)
+);
+CREATE TABLE credit(
+	recording_id INT NOT NULL REFERENCES recording(id) ON DELETE CASCADE,
+	artist_id INT NOT NULL REFERENCES artist(id) ON DELETE CASCADE,
 	role CREDIT_ROLE NOT NULL,
 	PRIMARY KEY (recording_id, artist_id, role)
 );
@@ -57,6 +67,13 @@ CREATE TABLE IF NOT EXISTS playlist_content(
 	ON DELETE CASCADE ON UPDATE CASCADE,
 	PRIMARY KEY (user_id, playlist_name, recording_id)
 );
+CREATE TABLE IF NOT EXISTS user(
+	user_id INTEGER NOT NULL PRIMARY KEY,
+	username TEXT NOT NULL UNIQUE,
+	password TEXT NOT NULL,
+	role USER_ROLE NOT NULL
+	online BOOL NOT NULL,
+);
 CREATE TABLE IF NOT EXISTS in_queue(
 	user_id INT NOT NULL REFERENCES user(user_id) ON DELETE CASCADE,
 	recording_id INT NOT NULL REFERENCES recording(recording_id) ON DELETE CASCADE,
@@ -72,5 +89,3 @@ CREATE TABLE IF NOT EXISTS user_queue(
 	FOREIGN KEY (user_id, cur_queue_idx) REFERENCES in_queue(user_id, queue_index)
 	ON DELETE CASCADE
 );
-
-

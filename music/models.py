@@ -12,6 +12,12 @@ class Artist(models.Model):
         return self.name
 
 
+class Recording(models.Model):
+    name = models.CharField(max_length=200)
+    duration = models.DurationField(validators=[MinValueValidator(timedelta())])
+    artist_credits = models.ManyToManyField(Artist, through='Credit')
+
+
 class Album(models.Model):
     class AlbumType(models.TextChoices):
         EPS = 1, 'Single Extended Play Album'
@@ -33,9 +39,7 @@ class Album(models.Model):
 class Track(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name='track')
     track_number = models.PositiveIntegerField()
-    name = models.CharField(max_length=200)
-    duration = models.DurationField(validators=[MinValueValidator(timedelta())])
-    artist_credits = models.ManyToManyField(Artist, through='Credit', related_name='artist_credit')
+    recording = models.ForeignKey(Recording, on_delete=models.CASCADE)
 
     class Meta:
         unique_together = ['album', 'track_number']
@@ -52,7 +56,7 @@ class Credit(models.Model):
         PRODUCER = 3, 'Producer'
         WRITER = 4, 'Writer'
 
-    track = models.ForeignKey(Track, on_delete=models.CASCADE)
+    recording = models.ForeignKey(Recording, on_delete=models.CASCADE)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     role = models.CharField(choices=CreditRole.choices, max_length=200)
 
@@ -67,5 +71,7 @@ class User(AbstractUser):
         ARTIST = 3, 'Artist'
         LISTENER = 4, 'Listener (normal user)'
 
-    class Meta:
-        unique_together = ['user', 'name']
+    username = models.CharField(unique=True, max_length=200)
+    USERNAME_FIELD = 'username'
+    online = models.BooleanField()
+    role = models.CharField(choices=UserRole.choices, max_length=200)
