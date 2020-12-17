@@ -102,11 +102,11 @@ def track_list(request):
     return render(request, 'music/track_list.html', {'track_list': track_list})
 
 
-# def all_artists(request):
-#     artist_list = Artist.objects.all()
-#     artist_summary_list = [ArtistSummary(artist) for artist in artist_list]
-#     # TODO: link html file
-#     return render(request, 'HTML?', {'artist_list': artist_summary_list})
+def artist_list(request):
+    artist_list = Artist.objects.order_by('name').all()
+    # artist_summary_list = [ArtistSummary(artist) for artist in artist_list]
+    # TODO: link html file
+    return render(request, 'music/artist_list.html', {'artist_list': artist_list})
 
 
 # NOTE: function to get only top track/artist/album for homepage compact display

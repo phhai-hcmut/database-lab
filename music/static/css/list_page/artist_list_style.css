@@ -39,7 +39,7 @@ body{
 	color: white;
 }
 
-#main #right .latest-album-list {
+#main #right .artist-list {
 	width: 85%;
 	margin-left: 8%;
 }
@@ -50,7 +50,7 @@ body{
 }
 
 #main #right ul {
-	column-count: 3;
+	column-count: 1;
 	column-gap: 80px;
 	list-style-type: none;
 	padding: 12px 0px 12px 0px;

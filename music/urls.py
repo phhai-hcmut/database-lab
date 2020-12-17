@@ -11,5 +11,6 @@ urlpatterns = [
     path('track/<int:pk>', views.track_detail, name='track-detail'),
     path('playlist/', include(('playlist.urls','playlist'), namespace='playlist')),
     path('album/', views.album_list, name='album_list'),
-    path('track/', views.track_list, name='track_list')
+    path('track/', views.track_list, name='track_list'),
+    path('artist/', views.artist_list, name='artist_list')
 ]
