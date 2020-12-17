@@ -133,13 +133,4 @@ body{
 	background: grey;
 }
 
-#footer {
-	bottom: 0;
-	width: 100%;
-	background: #2ecc71;
-	clear: left;
-	clear: right;
-	/*position: fixed;*/
-	overflow: hidden;
-	padding-bottom: 0%;
-}
+

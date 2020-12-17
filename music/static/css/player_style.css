@@ -7,7 +7,7 @@
 	position: fixed;
 	margin: auto;
 	width: 100%;
-	height: 150px;
+	height: 120px;
 	overflow: scroll;
 	border-radius: 5px;
 }
@@ -19,11 +19,11 @@
 }
 
 .info {
-  height: 115px;
+  height: 100px;
   width: 100%;
   position: absolute;
-  bottom:0;
-  background: rgba(white, .85);
+  bottom: 0;
+  background: rgba(black, .2);
 }
 
 .progress-bar {
@@ -130,6 +130,29 @@
 
 .play:hover, .pause:hover, .next:hover, .previous:hover, .option:hover, .add:hover, .volume:hover, .shuffle:hover {
 	opacity: 80%;
+}
+
+.current-queue{
+
+}
+
+.current-queue ul {
+    border-top: 1px solid black;
+	column-count: 4;
+	margin: 0;
+	padding: 7px;
+	text-indent: 20px;
+	list-style-type: none;
+	cursor: pointer;
+}
+
+.current-queue ul:hover {
+    background-color: grey;
+}
+
+.current-queue ul a li {
+	color: black;
+	padding-bottom: 5px;
 }
 
 /*$primary: #49654D;

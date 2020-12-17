@@ -1,13 +1,12 @@
-
-
+// shuffle button
 $('.shuffle').click(function(){
   $(this).toggleClass('clicked');
 });
 
-//music player settings
+//music player settings (not needed any more)
 
 let audio = new Audio('');
-
+// play / pause button
 $('.pause').hide(); //hide pause button until clicked
 
 //play button
@@ -24,18 +23,29 @@ $('.pause').click(function(){
 	$('.pause').hide();
 });
 
-function addItem(){
-	var ul = document.getElementById("dynamic-list");
-	var candidate = document.getElementById("candidate");
-	var li = document.createElement("li");
-	li.setAttribute('id',candidate.value);
-	li.appendChild(document.createTextNode(candidate.value));
-	ul.appendChild(li);
-}
 
-function removeItem(){
-	var ul = document.getElementById("dynamic-list");
-	var candidate = document.getElementById("candidate");
-	var item = document.getElementById(candidate.value);
-	ul.removeChild(item);
-}
+//Show and hide the queue
+$('.current-queue').hide();
+var showed = false
+$('.option').click(function(){
+    if(!showed) {
+        $('#player').css('height','250px');
+        $('.info').css('bottom','130px');
+        $('.current-queue').show();
+        showed = true
+    } else {
+        $('#player').css('height','120px');
+        $('.info').css('bottom','0');
+        $('.current-queue').hide();
+        showed = false
+    };
+});
+
+
+// Display song when click
+$('#queue-list').click(function(){
+    $('.song-name span').text($('#get-track-name').text());
+    $('.artist-name span').text($('#get-artist-name').text());
+});
+
+
