@@ -1,20 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-	{% load static %}
-	<title>Music Streaming</title>
-	<script src="https://kit.fontawesome.com/39248c2d37.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/album_detail_style.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/player_style.css' %}">
-</head>
-<body>
-	<div id="menu_top">
-		<h1><i class="fas fa-compact-disc"></i> Lohaa Music</h1>
-		<input type="text" placeholder="Search for Artists, Tracks or playlists...">
-		<a class="right-side" href=""> REGISTER</a>
-		<a class="right-side" href=""> LOGIN</a>
-	</div>
-
+{% extends 'account/main.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/album_detail_style.css' %}">
+{% endblock %}
+{% block content %}
 	<div id="main">
 		<div id="left">
 			<ul>
@@ -91,86 +80,4 @@
 			</div>
 		</div>
 	</div>
-
-	<div id="footer"></div>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-	<script src="{% static 'js/player.js' %}"></script>
-</body>
-</html>
-
-<!-- <!DOCTYPE html>
-<html>
-<head>
-	{% load static %}
-	<title>Music Streaming</title>
-	<script src="https://kit.fontawesome.com/39248c2d37.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/playlist_detail_style.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/player_style.css' %}">
-</head>
-<body>
-	<div id="menu_top">
-		<h1><i class="fas fa-compact-disc"></i> Lohaa Music</h1>
-		<input type="text" placeholder="Search for Artists, Tracks or playlists...">
-		<a class="right-side" href=""> REGISTER</a>
-		<a class="right-side" href=""> LOGIN</a>
-	</div>
-
-	<div id="main">
-		<div id="left">
-			<ul>
-				<li><i class="fas fa-home"></i> Home</li>
-				<li><i class="fas fa-search"></i> Search</li>
-				<li><i class="fas fa-headphones-alt"></i> Your library</li>
-			</ul>
-		</div>
-		<div id="right">
-			<div id="playlist-info">
-                <h1>playlist {{playlist.name}}</h1>
-				<p>This is an playlist yey !!!</p>
-				<p>{{playlist.release_date}}</p>
-				<p>playlist track count here: 30</p>
-			</div>
-            <div id="track-list-header">
-                <i class="fas fa-play-circle"></i>
-                <h3>Track list</h3>
-                <ul>
-                    <li>No. Tilte</li>
-                    <li>playlist</li>
-                    <li>Artists</li>
-                    <li>Duration</li>
-                </ul>
-			</div>
-		</div>
-	</div>
-
-	<div id="player">
-		<div class="info">
-			<div class="progress-bar">
-				<div class="time--current">1:25</div>
-				<div class="time--total">
-					<span id="total" onload=""></span>
-				</div>
-				<div class="fill"></div>
-			</div>
-			<div class="currently-playing">
-				<h2 class="song-name">1 Phut</h2>
-				<h3 class="artist-name">Andiez</h3>
-			</div>
-			<div class="controls">
-				<div class="option"><i class="fas fa-bars"></i></div>
-				<div class="volume"><i class="fas fa-volume-up"></i></div>
-				<div class="previous"><i class="fas fa-backward"></i></div>
-				<div class="play"><i class="fas fa-play"></i></div>
-				<div class="pause"><i class="fas fa-pause"></i></div>
-				<div class="next"><i class="fas fa-forward"></i></div>
-				<div class="shuffle"><i class="fas fa-random"></i></div>
-				<div class="add"><i class="fas fa-plus"></i></div>
-			</div>
-		</div>
-	</div>
-
-	<div id="footer"></div>
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-	<script src="{% static 'js/player.js' %}"></script>
-</body>
-</html> -->
+{% endblock %}

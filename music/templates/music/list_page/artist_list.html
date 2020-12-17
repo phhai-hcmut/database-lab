@@ -1,14 +1,9 @@
-<!DOCTYPE html>
-<html>
-<head>
-	{% load static %}
-	<title>Music Streaming</title>
-	<script src="https://kit.fontawesome.com/39248c2d37.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/list_page/artist_list_style.css' %}">
-	<link rel="stylesheet" type="text/css" href="{% static 'css/player_style.css' %}">
-</head>
-<body>
-	{% include 'account/navbar.html' %}
+{% extends 'account/main.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/artist_list_style.css' %}">
+{% endblock %}
+{% block content %}
 	<div id="main">
 		<div id="left">
 			<ul>
@@ -71,8 +66,4 @@
 			</div>
 		</div>
 	</div>
-
-	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
-	<script src="{% static 'js/player.js' %}"></script>
-</body>
-</html>
+{% endblock %}

@@ -1,4 +1,8 @@
-{%  extends 'account/main.html' %}
+{% extends 'account/main.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/artist_style.css' %}">
+{% endblock %}
 {% block content %}
 
 <div id="main">
@@ -23,7 +27,7 @@
                     <li><strong>Owner</strong></li>
                     <li><strong>Type</strong></li>
                 </ul>
-                <ul id="list-hover"><a href="">
+                <ul class="list-hover"><a href="">
                     <li> {{ album.name }}</li>
                     <li> {{ album.release_date }}</li>
                     <li> {{ owner }}</li>
@@ -31,7 +35,7 @@
                 </a></ul>
             </div>
         </div>
-        
+
 
         <div class="list">
             <h3>Artist's Album</h3>
@@ -41,7 +45,7 @@
                 <li><strong>Owner</strong></li>
                 <li><strong>Type</strong></li>
             </ul>
-            <ul id="list-hover"><a href="">
+            <ul class="list-hover"><a href="">
                 <li> {{ album.name }}</li>
                 <li> {{ album.release_date }}</li>
                 <li> {{ owner }}</li>
@@ -51,7 +55,7 @@
 
     </div>
 </div>
-    {% endif %}
+
 <div id="player">
     <div class="info">
         <div class="progress-bar">
@@ -75,4 +79,4 @@
         </div>
     </div>
 </div>
-{% endblock content %}
+{% endblock %}

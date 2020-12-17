@@ -110,7 +110,7 @@ body{
 }
 
 #main #right #credit-album  ul {
-	column-count: 5;
+	column-count: 2;
 	column-gap: 50px;
 	list-style-type: none;
 	padding: 12px 0px 12px 15px;

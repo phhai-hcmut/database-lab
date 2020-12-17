@@ -129,7 +129,7 @@ body{
 	margin: 0;
 }
 
-#main #right .list #list-hover ul:hover {
+#main #right .list .list-hover ul:hover {
 	background: grey;
 }
 
