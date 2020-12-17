@@ -4,12 +4,11 @@
 	{% load static %}
 	<title>Music Streaming</title>
 	<script src="https://kit.fontawesome.com/39248c2d37.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/album_detail_style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/list_page/album_list_style.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/player_style.css' %}">
 </head>
 <body>
 	{% include 'account/navbar.html' %}
-
 	<div id="main">
 		<div id="left">
 			<ul>
@@ -19,35 +18,31 @@
 			</ul>
 		</div>
 		<div id="right">
-		{% if album %}
-			<div id="album-info">
-				<h1>{{album.name}}</h1>
-				<p>This is an album yey !!!</p>
-				<p>{{album.release_date}}</p>
-				<p>Album track count here: 30</p>
+			<h1>Latest Album</h1>
+			<div class="latest-album-list">
+				{% if album_list %}
+					<ul>
+						<li><strong>Name</strong></li>
+						<li><strong>Release Date</strong></li>
+						<li><strong>Owner</strong></li>
+						<li><strong>Type</strong></li>
+						<li> </li>
+					</ul>
+					{% for album in album_list %}
+					<ul  id="hover-this"><a href="{% url 'music:album-detail' album.id %}">
+						<li> {{ album.name }}</li>
+						<li> {{ album.release_date }}</li>
+						{% for owner in album.owner.all %}
+						<li> {{ owner }}</li>
+						{% endfor %}
+						<li> {{ album.album_type }}</li>
+						<li><i class="fas fa-plus-circle"></i> <i class="fas fa-play-circle"></i></li>
+					</a></ul>
+					{% endfor %}
+				{% else %}
+					<p>No albums are available.</p>
+				{% endif %}
 			</div>
-			<div id="track-list">
-				<i class="fas fa-play-circle"></i>
-				<h3>Track list</h3>
-				<ul>
-					<li><strong>Track Number</strong></li>
-					<li><strong>Name</strong></li>
-					<li><strong>Duration</strong></li>
-					<li><strong>Artists</strong></li>
-				</ul>
-				
-				{% for track in album.track_list %}
-				<ul><a href="">
-					<li> {{ track.track_number }}</li>
-					<li> {{ track.recording.name }}</li>
-					<li> {{ track.recording.duration }}</li>
-					<li>  NOT DONE </li>
-				</a></ul>
-				{% endfor %}
-			</div>
-		{% else %}
-			<p>No Album of this id available.</p>
-		{% endif %}
 		</div>
 	</div>
 
@@ -87,7 +82,6 @@
 		</div>
 	</div>
 
-	<div id="footer"></div>
 	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
 	<script src="{% static 'js/player.js' %}"></script>
 </body>
