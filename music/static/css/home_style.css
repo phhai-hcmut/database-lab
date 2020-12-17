@@ -4,58 +4,6 @@ body{
 	margin: 0px auto;
 }
 
-#menu_top {
-	background: black;
-	height: 70px;
-	line-height: 70px;
-	color: white;
-	overflow: hidden;
-	/*border-bottom-left-radius: 10px;
-	border-bottom-right-radius: 10px;*/
-}
-
-#menu_top h1 {
-	margin: 0px;
-	text-indent: 10px;
-	float: left;
-	cursor: pointer;
-}
-
-#menu_top input{
-	margin-left: 50px;
-	width: 380px;
-	height: 35px;
-	border-radius: 30px;
-	font-size: 14pt;
-	text-indent: 15px;
-}
-
-#menu_top input:focus {
-	outline: none;
-}
-
-#menu_top a {
-	text-decoration: none;
-	padding-left: 15px;
-	padding-right: 15px;
-	height: 70px;
-	line-height: 70px;
-}
-
-#menu_top a.right-side:hover {
-	background: #ddd;
-	color: black;
-}
-
-#menu_top a.right-side{
-	float: right;
-	color: white;
-}
-
-#main {
-
-}
-
 #main #left {
 	background: black;
 	width: 15%;
@@ -94,16 +42,24 @@ body{
 	color: white;
 	margin-left: 5%;
 	cursor: pointer;
+	float: left;
 }
 
 #main #right h2:hover {
 	text-decoration: underline;
 }
 
+#main #right a.more {
+    float: right;
+    margin: 35px 130px 0px 0px;
+    color: white;
+}
+
 #main #right #album .album-list{
 	background: #212121;
 	width: 85%;
 	margin-left: 8%;
+	clear: both;
 }
 
 #main #right #album ul {
@@ -127,7 +83,7 @@ body{
 
 
 #main #right #album ul a:hover{
-	text-decoration: underline;
+	text-decoration: none;
 }
 
 #main #right #album ul li{
@@ -144,6 +100,7 @@ body{
 	background: #212121;
 	width: 85%;
 	margin-left: 8%;
+	clear: both;
 }
 
 #main #right #trend ul {
@@ -183,6 +140,7 @@ body{
 	background: #212121;
 	width: 85%;
 	margin-left: 8%;
+	clear: both;
 }
 
 #main #right #artist ul {
@@ -222,6 +180,7 @@ body{
 	background: #212121;
 	width: 85%;
 	margin-left: 8%;
+	clear: both;
 }
 
 #main #right #playlist ul {

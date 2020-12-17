@@ -8,12 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/player_style.css' %}">
 </head>
 <body>
-	<div id="menu_top">
-		<h1><i class="fas fa-compact-disc"></i> Lohaa Music</h1>
-		<input type="text" placeholder="Search for Artists, Tracks or Albums...">
-        <a class="right-side" href=""> REGISTER</a>
-		<a class="right-side" href=""> LOGIN</a>
-	</div>
+	{% include 'account/navbar.html' %}
 
 	<div id="main">
 		<div id="left">
@@ -26,6 +21,7 @@
 		<div id="right">
 			<div id="album">
 				<h2>Latest album</h2>
+				<a class="more" href="">More >></a>
 				<div class="album-list">
 					{% if all_album_list %}
 						<ul>
@@ -55,9 +51,7 @@
 			<!-- Top 5 trending track -->
 			<div id="trend">
 				<h2>Trending</h2>
-				<!-- <input type="text" id="candidate"/> -->
-				<!-- <button onclick="addItem()">add item</button>
-				<button onclick="removeItem()">remove item</button> -->
+				<a class="more" href="">More >></a>
 				<div class="album-list">
 					{% if top_track_list %}
 						<ul>
@@ -81,13 +75,14 @@
 			<!-- Top 5 artist by name -->
 			<div id="artist">
 				<h2>Artist</h2>
+				<a class="more" href="">More >></a>
 				<div class="artist-list">
 					{% if top_artist_list %}
 						<ul>
                             <li><strong>Name</strong></li>
                         </ul>
 						{% for artist in top_artist_list %}
-                        <ul><a href="{% url 'music:artist-detail' artist.id %}">
+                        <ul><a href="{% url 'account:artist-page' %}">
 							<li> {{ artist.name }}</li>
                         </a></ul>
 						{% endfor %}
@@ -100,6 +95,7 @@
 			<!-- Top 5 playlist -->
 			<div id="playlist">
 				<h2>Playlist</h2>
+				<a class="more" href="">More >></a>
 				<div class="playlist-list">
 					{% if top_playlist %}
 						<ul>

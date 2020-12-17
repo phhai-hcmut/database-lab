@@ -1,23 +1,46 @@
 {% load static %}
 
-
 <style>
-  .hello-msg{
-    font-size: 18px;
-    color: #fff;
-    margin-right: 20px;
-  }
+    #navbar {
+        background: #343a40;
+        height: 70px;
+        line-height: 70px;
+        color: white;
+        overflow: hidden;
+    }
+
+    #navbar h1 {
+        margin: 0;
+        text-indent: 10px;
+        float: left;
+        cursor: pointer;
+        line-height: 70px;
+    }
+
+    #navbar input{
+        margin-left: 50px;
+        width: 380px;
+        height: 35px;
+        border-radius: 30px;
+        font-size: 14pt;
+        text-indent: 15px;
+    }
+
+    #navbar input:focus {
+        outline: none;
+    }
+
+	.hello-msg{
+        font-size: 18px;
+        color: #fff;
+        margin-right: 40px;
+        float: right;
+   }
 </style>
 
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
- <img src="{% static 'images/logo.png' %}">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <div class="collapse navbar-collapse" id="navbarNav">
-  </div>
-
-  <span class="hello-msg">Hello, {{request.user}}</span>
-  <span ><a  class="hello-msg" href="{% url 'account:logout' %}">Logout</a></span>
-
+<nav id="navbar">
+    <h1><i class="fas fa-compact-disc"></i> Lohaa Music</h1>
+    <input type="text" placeholder="Search for Artists, Tracks or Albums...">
+    <span ><a  class="hello-msg" href="{% url 'account:logout' %}">Logout</a></span>
+    <span class="hello-msg">Hello, {{request.user}}</span>
 </nav>

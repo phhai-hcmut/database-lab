@@ -8,12 +8,7 @@
 	<link rel="stylesheet" type="text/css" href="{% static 'css/player_style.css' %}">
 </head>
 <body>
-	<div id="menu_top">
-		<h1><i class="fas fa-compact-disc"></i> Lohaa Music</h1>
-		<input type="text" placeholder="Search for Artists, Tracks or Albums...">
-		<a class="right-side" href=""> REGISTER</a>
-		<a class="right-side" href=""> LOGIN</a>
-	</div>
+	{% include 'account/navbar.html' %}
 
 	<div id="main">
 		<div id="left">
