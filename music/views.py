@@ -73,11 +73,11 @@ class TrackSummary(TrackDetail):
 
 
 # NOTE: function for getting detailed page of album/artist/track
-def album_detail(request, album_id):
-    album = Album.objects.get(pk=album_id)
+def album_detail(request, pk):
+    album = Album.objects.get(pk=pk)
     album_detail = AlbumDetail(album)
     # TODO: link html file
-    return render(request, 'HTML?', {'album': album_detail})
+    return render(request, 'music/album_detail.html', {'album': album_detail})
 
 
 def track_detail(request, track_id):

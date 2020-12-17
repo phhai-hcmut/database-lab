@@ -135,7 +135,7 @@ body{
 
 #main #right #track-list ul {
 	column-count: 4;
-	column-gap: 5px;
+	column-gap: 80px;
 	list-style-type: none;
 	padding: 12px 0px 12px 15px;
 	border-bottom: 1px solid white;
@@ -144,6 +144,12 @@ body{
 
 #main #right #track-list ul:hover {
 	background: grey;
+}
+
+#main #right #track-list ul li{
+	color: white;
+	padding: 0px;
+	margin-left: 25px;
 }
 
 #footer {

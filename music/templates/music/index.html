@@ -36,7 +36,7 @@
 							<li> </li>
                         </ul>
 						{% for album in all_album_list %}
-                        <ul><a href="{% url 'music:detail' %}">
+                        <ul><a href="{% url 'music:album-detail' album.id %}">
 							<li> {{ album.name }}</li>
 							<li> {{ album.release_date }}</li>
 							{% for owner in album.owner.all %}
@@ -90,7 +90,7 @@
                             <li><strong>Name</strong></li>
                         </ul>
 						{% for artist in top_artist_list %}
-                        <ul><a href="{% url 'music:artist-page' %}">
+                        <ul><a href=""> <!-- url 'music:artist-page' -->
 							<li> {{ artist.name }}</li>
                         </a></ul>
 						{% endfor %}
