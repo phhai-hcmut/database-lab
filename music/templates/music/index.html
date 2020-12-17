@@ -68,7 +68,7 @@
 							<li> </li>
                         </ul>
 						{% for track in top_track_list %}
-                        <ul onclick="addItem()"><a>
+                        <ul><a>
 							<li> {{ track.album }}</li>
 							<li> {{ track.track_number }}</li>
 							<li> {{ track.recording }}</li>
@@ -90,7 +90,7 @@
                             <li><strong>Name</strong></li>
                         </ul>
 						{% for artist in top_artist_list %}
-                        <ul><a href=""> <!-- url 'music:artist-page' -->
+                        <ul><a href="{% url 'account:artist-page' %}">
 							<li> {{ artist.name }}</li>
                         </a></ul>
 						{% endfor %}
@@ -149,9 +149,13 @@
 				<div class="add"><i class="fas fa-plus"></i></div>
 			</div>
 			<div class="queue">
-				<ul id="dynamic-list">
-					<li></li>
-				</ul>
+				{% for track in top_playlist %}
+                    <ul id="queue-list"><a href="">
+						<li> {{ playlist.name }}</li>
+						<li> {{ playlist.user }}</li>
+						<li> {{ playlist.time_created }}</li>
+                    </a></ul>
+				{% endfor %}
 			</div>
 		</div>
 	</div>
@@ -159,22 +163,5 @@
 	<div id="footer"></div>
 	<script type="text/javascript" src="http://code.jquery.com/jquery-latest.js"></script>
 	<script src="{% static 'js/player.js' %}"></script>
-	<script type="text/javascript">
-		function addItem(){
-			var ul = document.getElementById("dynamic-list");
-			var candidate = document.getElementById("candidate");
-			var li = document.createElement("li");
-			li.setAttribute('id',candidate.value);
-			li.appendChild(document.createTextNode(candidate.textContent));
-			ul.appendChild(li);
-		}
-
-		function removeItem(){
-			var ul = document.getElementById("dynamic-list");
-			var candidate = document.getElementById("candidate");
-			var item = document.getElementById(candidate.value);
-			ul.removeChild(item);
-		}
-	</script>
 </body>
 </html>

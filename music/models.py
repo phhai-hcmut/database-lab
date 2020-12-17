@@ -2,7 +2,8 @@ from datetime import timedelta
 
 from django.db import models
 from django.core.validators import MinValueValidator
-from django.contrib.auth.models import AbstractUser,Group
+from django.contrib.auth.models import AbstractUser, Group
+
 
 class Artist(models.Model):
     name = models.CharField(max_length=200)
@@ -61,5 +62,3 @@ class Credit(models.Model):
 
     def __str__(self) -> str:
         return f"{self.recording}, {self.artist}, {self.role}"
-
-

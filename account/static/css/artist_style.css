@@ -1,0 +1,145 @@
+body{
+	font-family: Arial;
+	background: black;
+	margin: 0px auto;
+}
+
+#menu_top {
+	background: black;
+	height: 70px;
+	line-height: 70px;
+	color: white;
+	overflow: hidden;
+	/*border-bottom-left-radius: 10px;
+	border-bottom-right-radius: 10px;*/
+}
+
+#menu_top h1 {
+	margin: 0px;
+	text-indent: 10px;
+	float: left;
+	cursor: pointer;
+}
+
+#menu_top input{
+	margin-left: 50px;
+	width: 380px;
+	height: 35px;
+	border-radius: 30px;
+	font-size: 14pt;
+	text-indent: 15px;
+}
+
+#menu_top input:focus {
+	outline: none;
+}
+
+#menu_top a {
+	text-decoration: none;
+	padding-left: 15px;
+	padding-right: 15px;
+	height: 70px;
+	line-height: 70px;
+}
+
+#menu_top a.right-side:hover {
+	background: #ddd;
+	color: black;
+}
+
+#menu_top a.right-side{
+	float: right;
+	color: white;
+}
+
+#main {
+
+}
+
+#main #left {
+	background: black;
+	width: 15%;
+	float: left;
+}
+
+#main #left ul {
+	list-style-type: none;
+	padding-left: 0px;
+}
+
+#main #left ul li {
+	font-size: 15pt;
+	color: grey;
+	padding: 15px 5px 15px 15px;
+	margin-left: 10px;
+	margin-right: 10px;
+	cursor: pointer;
+}
+
+#main #left ul li:hover {
+	color: white;
+	border-radius: 3px;
+	background: #212121;
+}
+
+#main #right {
+	width: 85%;
+	float: right;
+	height: 0;
+	padding-bottom: 60%;
+}
+
+#main #right .artist-info {
+	background: black;
+    height: 250px;
+    color: white;
+    text-align: center;
+}
+
+#main #right .artist-info h1 {
+	font-size: 70pt;
+	margin: 0;
+	padding-top: 35px;
+}
+
+#main #right .artist-info p {
+	font-size: 15pt;
+	margin: 0;
+}
+
+#main #right .list {
+	padding-top: 30px;
+    height: 500px;
+	background: #343a40;
+    color: white;
+    text-indent: 30px;
+}
+
+#main #right .list h3 {
+    margin: 0;
+    font-size: 20pt;
+}
+
+#main #right .list ul {
+	column-count: 4;
+	column-gap: 5px;
+	list-style-type: none;
+	padding: 12px 0px 12px 15px;
+	border-bottom: 1px solid white;
+	margin: 0;
+}
+
+#main #right .list #list-hover ul:hover {
+	background: grey;
+}
+
+#footer {
+	bottom: 0;
+	width: 100%;
+	background: #2ecc71;
+	clear: left;
+	clear: right;
+	/*position: fixed;*/
+	overflow: hidden;
+	padding-bottom: 0%;
+}
