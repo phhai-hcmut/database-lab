@@ -20,10 +20,9 @@ class Recording(models.Model):
 
 class Album(models.Model):
     class AlbumType(models.TextChoices):
-        EPS = 1, 'Single Extended'
-        SINGLE = 2, 'Single'
-        COMPILATION = 3, 'Compilation'
-        REMIX = 4, 'Remix'
+        SINGLE = 1, 'Single'
+        EP = 2, 'Extended Play'
+        ALBUM = 3, 'Album'
 
     name = models.CharField(max_length=200)
     release_date = models.DateField()
