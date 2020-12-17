@@ -59,6 +59,7 @@ class Credit(models.Model):
     recording = models.ForeignKey(Recording, on_delete=models.CASCADE)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     role = models.CharField(choices=CreditRole.choices, max_length=200)
-
+    class Meta:
+        unique_together = ['recording', 'artist','role']
     def __str__(self) -> str:
         return f"{self.recording}, {self.artist}, {self.role}"

@@ -8,5 +8,6 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('album/<int:pk>/', views.album_detail, name='album-detail'),
     path('artist/<int:pk>/', views.artist_detail, name='artist-detail'),
+    path('track/<int:pk>', views.track_detail, name='track-detail'),
     path('playlist/', include(('playlist.urls','playlist'), namespace='playlist')),
 ]
