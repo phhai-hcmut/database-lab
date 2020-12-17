@@ -23,5 +23,5 @@ urlpatterns = [
     path('music/', include('music.urls',namespace='music')),
     #overwire admin logout link
     path('admin/logout/', lambda request: redirect('account:logout', permanent=False)),
-    path('admin/', admin.site.urls,name = 'admin'),
+    path('admin/', admin.site.urls,name = 'admin'), 
 ]
