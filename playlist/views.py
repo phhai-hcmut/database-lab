@@ -20,4 +20,4 @@ def detail(request, pk):
         resp = HttpResponse("Private playlist", status=401)
     else:
         resp = HttpResponse("A list of tracks in the playlist")
-    return resp
+    return render(request, 'music/playlist_detail.html', {'playlist': playlist})
