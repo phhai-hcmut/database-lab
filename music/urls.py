@@ -6,4 +6,5 @@ urlpatterns = [
     path('', views.index, name='index'),
     path('wat/', views.detail, name='detail'),
     path('album/<int:pk>/', views.album_detail, name='album-detail'),
+    path('artist/<int:pk>/', views.artist_detail, name='artist-detail'),
 ]

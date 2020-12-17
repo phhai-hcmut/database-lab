@@ -90,7 +90,7 @@
                             <li><strong>Name</strong></li>
                         </ul>
 						{% for artist in top_artist_list %}
-                        <ul><a href="{% url 'account:artist-page' %}">
+                        <ul><a href="{% url 'music:artist-detail' artist.id %}">
 							<li> {{ artist.name }}</li>
                         </a></ul>
 						{% endfor %}

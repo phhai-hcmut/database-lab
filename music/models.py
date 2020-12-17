@@ -15,15 +15,15 @@ class Artist(models.Model):
 class Recording(models.Model):
     name = models.CharField(max_length=200)
     duration = models.DurationField(validators=[MinValueValidator(timedelta())])
-    artist_credits = models.ManyToManyField(Artist, through='Credit')
+    artist_credits = models.ManyToManyField(Artist, through='Credit',related_name='artist_credit')
 
 
 class Album(models.Model):
     class AlbumType(models.TextChoices):
-        EPS = 1, 'Single Extended Play Album'
-        SINGLE = 2, 'Single Album'
-        COMPILATION = 3, 'Compilation Album'
-        REMIX = 4, 'Remix Album'
+        EPS = 1, 'Single Extended'
+        SINGLE = 2, 'Single'
+        COMPILATION = 3, 'Compilation'
+        REMIX = 4, 'Remix'
 
     name = models.CharField(max_length=200)
     release_date = models.DateField()
@@ -39,7 +39,7 @@ class Album(models.Model):
 class Track(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name='track')
     track_number = models.PositiveIntegerField()
-    recording = models.ForeignKey(Recording, on_delete=models.CASCADE)
+    recording = models.ForeignKey(Recording, on_delete=models.CASCADE,related_name='track')
 
     class Meta:
         unique_together = ['album', 'track_number']

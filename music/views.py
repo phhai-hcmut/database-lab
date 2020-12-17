@@ -9,10 +9,11 @@ from dataclasses import dataclass
 from django.http import HttpResponse
 # Create your views here.
 
-from music.models import Album, Artist, Track
+from music.models import Album, Artist, Credit, Track
 from playlist.models import Playlist
 
-
+#lib
+from itertools import chain
 
 
 # ____________________________LISTENER VIEWS__________________________
@@ -30,9 +31,8 @@ class ArtistDetail:
     def __init__(self, artist):
         self.name = artist.name
         self.owned_albums = artist.album.all()
-        self.credit_list = artist.track.all()
-
-
+        self.credited_recording = artist.artist_credit.all()
+        self.credited_tracks = Track.objects.filter(recording__in = self.credited_recording)
 class TrackDetail:
     def __init__(self, track):
         self.name = track.name
@@ -87,11 +87,11 @@ def track_detail(request, track_id):
     return render(request, 'HTML?', {'track': TrackDetail})
 
 
-def artist_detail(request, artist_id):
-    artist = Artist.objects.get(pk=artist_id)
+def artist_detail(request, pk):
+    artist = Artist.objects.get(pk=pk)
     artist_detail = ArtistDetail(artist)
     # TODO: link html file
-    return render(request, 'HTML?', {'artist': artist_detail})
+    return render(request, 'music/artist_detail.html', {'artist': artist_detail})
 
 
 # NOTE: function for getting full list track/artist/album for gallery view

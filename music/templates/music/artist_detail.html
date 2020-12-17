@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+	{% load static %}
+	<title>Music Streaming</title>
+	<script src="https://kit.fontawesome.com/39248c2d37.js" crossorigin="anonymous"></script>
+	<link rel="stylesheet" type="text/css" href="{% static 'css/artist_detail_style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/player_style.css' %}">
+</head>
+<body>
+	<div id="menu_top">
+		<h1><i class="fas fa-compact-disc"></i> Lohaa Music</h1>
+		<input type="text" placeholder="Search for Artists, Tracks or Albums...">
+		<a class="right-side" href=""> REGISTER</a>
+		<a class="right-side" href=""> LOGIN</a>
+	</div>
+
+	<div id="main">
+        <div id="left">
+            <ul>
+                <li><i class="fas fa-home"></i> Home</li>
+                <li><i class="fas fa-search"></i> Search</li>
+                <li><i class="fas fa-headphones-alt"></i> Your library</li>
+            </ul>
+        </div>
+        <div id="right">
+            <div id="artist-info">
+                <h1> {{artist.name}}</h1>
+                <p>This is an artist yey !!!</p>
+            </div>
+            <div id="credit-album">
+                <div class="list">
+                    <h3>Credited Tracks</h3>
+                    <ul>
+                        <li><strong>Name</strong></li>
+                        <li><strong>Duration</strong></li>
+                        <li><strong>Album Name</strong></li>
+                        <li><strong>Track Number</strong></li>
+                    </ul>
+                    {% for track in artist.credited_tracks %}
+                    <ul id="list-hover"><a style="text-decoration:none" href="{% url 'music:album-detail' track.album.id %}">
+                        <li> {{ track.recording.name }}</li>
+                        <li> {{ track.recording.duration }}</li>
+                        <li>   {{ track.album.name }}</li>
+                        <li> {{ track.track_number }}</li>
+                        <li><i class="fas fa-plus-circle"></i> <i class="fas fa-play-circle"></i></li>
+                    </a></ul>
+                    {% endfor%}
+                </div>     
+            </div>
+            
+    
+            <div id="owned-album">
+                <div class="list">
+                    <h1>Artist's Albums</h1>
+                <ul>
+                    <li><strong>Name</strong></li>
+                    <li><strong>Release Date</strong></li>
+                    <li><strong>Owner</strong></li>
+                    <li><strong>Type</strong></li>
+                </ul>
+                    {% for album in artist.owned_albums %}
+                    <ul id="list-hover"><a style="text-decoration:none" href="{% url 'music:album-detail' album.id %}">
+                    <li> {{ album.name }}</li>
+                    <li> {{ album.release_date }}</li>
+                        <li><ul id="list-owner"> 
+                        {%for owner in album.owner.all %}
+                        <li> {{ owner.name }}</li>
+                        {%endfor%}
+                        </ul></li>
+                    <li> {{ album.get_album_type_display }}</li>
+                    <li><i class="fas fa-plus-circle"></i> <i class="fas fa-play-circle"></i></li>
+                    </a></ul>
+                    {% endfor%}
+                
+                </div>
+            </div>
+    
+        </div>
+    </div>
+    
+    <div id="player">
+        <div class="info">
+            <div class="progress-bar">
+                <div class="time--current">1:25</div>
+                <div class="time--total">3:15</div>
+                <div class="fill"></div>
+            </div>
+            <div class="currently-playing">
+                <h2 class="song-name">1 Phut</h2>
+                <h3 class="artist-name">Andiez</h3>
+            </div>
+            <div class="controls">
+                <div class="option"><i class="fas fa-bars"></i></div>
+                <div class="volume"><i class="fas fa-volume-up"></i></div>
+                <div class="previous"><i class="fas fa-backward"></i></div>
+                <div class="play"><i class="fas fa-play"></i></div>
+                <div class="pause"><i class="fas fa-pause"></i></div>
+                <div class="next"><i class="fas fa-forward"></i></div>
+                <div class="shuffle"><i class="fas fa-random"></i></div>
+                <div class="add"><i class="fas fa-plus"></i></div>
+            </div>
+        </div>
+    </div>
+
+	<div id="player">
+		<div class="info">
+			<div class="progress-bar">
+				<div class="time--current">1:25</div>
+				<div class="time--total">
+					<span id="total" onload=""></span>
+				</div>
+				<div class="fill"></div>
+			</div>
+			<div class="currently-playing">
+				<h2 class="song-name">1 Phut</h2>
+				<h3 class="artist-name">Andiez</h3>
+			</div>
+			<div class="controls">
+				<div class="option"><i class="fas fa-bars"></i></div>
+				<div class="volume"><i class="fas fa-volume-up"></i></div>
+				<div class="previous"><i class="fas fa-backward"></i></div>
+				<div class="play"><i class="fas fa-play"></i></div>
+				<div class="pause"><i class="fas fa-pause"></i></div>
+				<div class="next"><i class="fas fa-forward"></i></div>
+				<div class="shuffle"><i class="fas fa-random"></i></div>
+				<div class="add"><i class="fas fa-plus"></i></div>
+			</div>
+		</div>
+	</div>
+
+	<div id="footer"></div>
+	<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js'></script>
+	<script src="{% static 'js/player.js' %}"></script>
+</body>
+</html>
