@@ -92,22 +92,27 @@ def artist_detail(request, artist_id):
 def album_list(request):
     album_list = Album.objects.order_by('-release_date').all()
     album_summary_list = [AlbumSummary(album) for album in album_list]
-    return render(request, 'music/album_list.html', {'album_list': album_list})
+    return render(request, 'music/list_page/album_list.html', {'album_list': album_list})
 
 
 def track_list(request):
     track_list = Track.objects.order_by('track_number').all()
     # track_summary_list = [TrackSummary(track) for track in track_list]
     # TODO: link html file
-    return render(request, 'music/track_list.html', {'track_list': track_list})
+    return render(request, 'music/list_page/track_list.html', {'track_list': track_list})
 
 
 def artist_list(request):
     artist_list = Artist.objects.order_by('name').all()
     # artist_summary_list = [ArtistSummary(artist) for artist in artist_list]
     # TODO: link html file
-    return render(request, 'music/artist_list.html', {'artist_list': artist_list})
+    return render(request, 'music/list_page/artist_list.html', {'artist_list': artist_list})
 
+def playlist_list(request):
+    playlist_list = Playlist.objects.order_by('name').all()
+    # artist_summary_list = [ArtistSummary(artist) for artist in artist_list]
+    # TODO: link html file
+    return render(request, 'music/list_page/playlist_list.html', {'playlist_list': playlist_list})
 
 # NOTE: function to get only top track/artist/album for homepage compact display
 TOP_NUMBER = 5

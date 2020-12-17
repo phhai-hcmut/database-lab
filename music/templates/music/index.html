@@ -95,7 +95,7 @@
 			<!-- Top 5 playlist -->
 			<div id="playlist">
 				<h2>Playlist</h2>
-				<a class="more" href="">More >></a>
+				<a class="more" href="{% url 'music:playlist_list' %}">More >></a>
 				<div class="playlist-list">
 					{% if top_playlist %}
 						<ul>

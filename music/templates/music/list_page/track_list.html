@@ -4,7 +4,7 @@
 	{% load static %}
 	<title>Music Streaming</title>
 	<script src="https://kit.fontawesome.com/39248c2d37.js" crossorigin="anonymous"></script>
-	<link rel="stylesheet" type="text/css" href="{% static 'css/list_page/artist_list_style.css' %}">
+	<link rel="stylesheet" type="text/css" href="{% static 'css/list_page/track_list_style.css' %}">
 	<link rel="stylesheet" type="text/css" href="{% static 'css/player_style.css' %}">
 </head>
 <body>
@@ -19,20 +19,23 @@
 		</div>
 		<div id="right">
 			<h1>Top Trending Track</h1>
-			<div class="artist-list">
-                {% if artist_list %}
-                    <ul>
-                        <li><strong>Name</strong></li>
-                    </ul>
-                    {% for artist in artist_list %}
-                    <ul id="hover-this"><a href="{% url 'account:artist-page' %}">
-                        <li> {{ artist.name }}</li>
-                    </a></ul>
-                    {% endfor %}
-                {% else %}
-                    <p>No artists are available.</p>
-                {% endif %}
-				</div>
+			<div class="latest-album-list">
+				{% if track_list %}
+					<ul>
+						<li><strong>Track Number</strong></li>
+						<li><strong>Album</strong></li>
+						<li><strong>Track Name</strong></li>
+					</ul>
+					{% for track in track_list %}
+					<ul id="hover-this"><a href="{% url 'music:track-detail' track.id %}">
+						<li> {{ track.track_number }}</li>
+						<li> {{ track.album.name }}</li>
+						<li> {{ track.recording.name }}</li>
+					</a></ul>
+					{% endfor %}
+				{% else %}
+					<p>No tracks are available.</p>
+				{% endif %}
 			</div>
 		</div>
 	</div>
