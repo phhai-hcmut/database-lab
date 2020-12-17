@@ -8,6 +8,8 @@ from django.contrib.auth.models import Group
 from dataclasses import dataclass
 from django.http import HttpResponse
 
+
+from music.models import Artist
 # Create your views here.
 # ____________________________AUTHENTICATION VIEWS AND HOME PAGES__________________________
 
@@ -56,3 +58,4 @@ def listenerPage(request):
 def artistPage(request):
     context = {}
     return render(request, 'account/artist_home.html', context)
+

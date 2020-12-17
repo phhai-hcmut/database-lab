@@ -61,18 +61,16 @@
 				<div class="album-list">
 					{% if top_track_list %}
 						<ul>
-                            <li><strong>Name</strong></li>
-                            <li><strong>Release Date</strong></li>
+                            <li><strong>Track Number</strong></li>
+                            <li><strong>Album</strong></li>
                             <li><strong>Owner</strong></li>
                             <li><strong>Type</strong></li>
-							<li> </li>
                         </ul>
 						{% for track in top_track_list %}
                         <ul><a>
-							<li> {{ track.album }}</li>
 							<li> {{ track.track_number }}</li>
+							<li> {{ track.album }}</li>
 							<li> {{ track.recording }}</li>
-							<li><i class="fas fa-plus-circle"></i> <i class="fas fa-play-circle"></i></li>
                         </a></ul>
 						{% endfor %}
 	                {% else %}

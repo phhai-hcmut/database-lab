@@ -142,6 +142,10 @@ body{
 	margin: 0;
 }
 
+#main #right #track-list ul a {
+	text-decoration: none;	
+}
+
 #main #right #track-list ul:hover {
 	background: grey;
 }
@@ -150,15 +154,4 @@ body{
 	color: white;
 	padding: 0px;
 	margin-left: 25px;
-}
-
-#footer {
-	bottom: 0;
-	width: 100%;
-	background: #2ecc71;
-	clear: left;
-	clear: right;
-	/*position: fixed;*/
-	overflow: hidden;
-	padding-bottom: 0%;
 }

@@ -66,8 +66,8 @@
 				<div class="fill"></div>
 			</div>
 			<div class="currently-playing">
-				<h2 class="song-name">1 Phut</h2>
-				<h3 class="artist-name">Andiez</h3>
+				<h2 class="song-name"><span>Fuck</span></h2>
+				<h3 class="artist-name"><span>off</span></h3>
 			</div>
 			<div class="controls">
 				<div class="option"><i class="fas fa-bars"></i></div>
@@ -79,6 +79,16 @@
 				<div class="shuffle"><i class="fas fa-random"></i></div>
 				<div class="add"><i class="fas fa-plus"></i></div>
 			</div>
+			<div class="current-queue">
+				{% for track in album.track_list %}
+					<ul id="queue-list">
+						<li> {{ track.track_number }}</li>
+						<li id="get-track-name"> {{ track.recording.name }}</li>
+						<li> {{ track.recording.duration }}</li>
+						<li id="get-artist-name">  NOT DONE </li>
+					</ul>
+				{% endfor %}
+			</div>
 		</div>
 	</div>
 
@@ -87,6 +97,7 @@
 	<script src="{% static 'js/player.js' %}"></script>
 </body>
 </html>
+
 <!-- <!DOCTYPE html>
 <html>
 <head>
