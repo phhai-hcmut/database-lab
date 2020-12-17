@@ -9,7 +9,7 @@ from dataclasses import dataclass
 from django.http import HttpResponse
 # Create your views here.
 
-from music.models import Album, Artist, Track
+from music.models import Album, Artist, Credit, Track
 from playlist.models import Playlist
 
 
@@ -87,12 +87,7 @@ def track_detail(request, pk):
 def artist_detail(request, artist_id):
     artist = Artist.objects.get(pk=artist_id)
     artist_detail = ArtistDetail(artist)
-<<<<<<< HEAD
     return render(request, 'music/artist_detail.html', {'artist': artist_detail})
-=======
-    # TODO: link html file
-    return render(request, 'HTML?', {'artist': artist_detail})
->>>>>>> 7d333a507abd688b5c8f3a2fa895ab108a41aa46
 
 
 # NOTE: function for getting full list track/artist/album for gallery view
