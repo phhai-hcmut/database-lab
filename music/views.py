@@ -77,7 +77,7 @@ class TrackSummary(TrackDetail):
 def album_detail(request, pk):
     album = Album.objects.get(pk=pk)
     album_detail = AlbumDetail(album)
-    in_queue = InQueue.objects.order_by('queue_index')
+    in_queue = InQueue.objects.filter(user = request.user).order_by('queue_index')
     return render(request, 'music/album_detail.html', {'album': album_detail,
                                                        'in_queue': in_queue})
 
@@ -85,7 +85,7 @@ def album_detail(request, pk):
 def track_detail(request, pk):
     track = Track.objects.get(pk=pk)
     track_detail = TrackDetail(track)
-    in_queue = InQueue.objects.order_by('queue_index')
+    in_queue = InQueue.objects.filter(user = request.user).order_by('queue_index')
     return render(request, 'music/track_detail.html', {'track': track_detail,
                                                        'in_queue': in_queue})
 
@@ -93,7 +93,7 @@ def track_detail(request, pk):
 def artist_detail(request, pk):
     artist = Artist.objects.get(pk=pk)
     artist_detail = ArtistDetail(artist)
-    in_queue = InQueue.objects.order_by('queue_index')
+    in_queue = InQueue.objects.filter(user = request.user).order_by('queue_index')
     return render(request, 'music/artist_detail.html', {'artist': artist_detail,
                                                         'in_queue': in_queue})
 
@@ -101,14 +101,14 @@ def artist_detail(request, pk):
 # NOTE: function for getting full list track/artist/album for gallery view
 def album_list(request):
     album_list = Album.objects.order_by('-release_date').all()
-    in_queue = InQueue.objects.order_by('queue_index')
+    in_queue = InQueue.objects.filter(user = request.user).order_by('queue_index')
     return render(request, 'music/list_page/album_list.html', {'album_list': album_list,
                                                                'in_queue': in_queue})
 
 
 def track_list(request):
     track_list = Track.objects.order_by('track_number').all()
-    in_queue = InQueue.objects.order_by('queue_index')
+    in_queue = InQueue.objects.filter(user = request.user).order_by('queue_index')
     # TODO: link html file
     return render(request, 'music/list_page/track_list.html', {'track_list': track_list,
                                                                'in_queue': in_queue})
@@ -116,14 +116,14 @@ def track_list(request):
 
 def artist_list(request):
     artist_list = Artist.objects.order_by('name').all()
-    in_queue = InQueue.objects.order_by('queue_index')
+    in_queue = InQueue.objects.filter(user = request.user).order_by('queue_index')
     # TODO: link html file
     return render(request, 'music/list_page/artist_list.html', {'artist_list': artist_list,
                                                                 'in_queue': in_queue})
 
 def playlist_list(request):
     playlist_list = Playlist.objects.order_by('name').all()
-    in_queue = InQueue.objects.order_by('queue_index')
+    in_queue = InQueue.objects.filter(user = request.user).order_by('queue_index')
     # TODO: link html file
     return render(request, 'music/list_page/playlist_list.html', {'playlist_list': playlist_list,
                                                                   'in_queue': in_queue})
@@ -140,7 +140,7 @@ def index(request):
     top_track_list = Track.objects.order_by('track_number')[:TOP_NUMBER]
     top_artist_list = Artist.objects.order_by('name')[:TOP_NUMBER]
     top_playlist = Playlist.objects.order_by('-time_created')[:TOP_NUMBER]
-    in_queue = InQueue.objects.order_by('queue_index')
+    in_queue = InQueue.objects.filter(user = request.user).order_by('queue_index')
     context = {'all_album_list': all_album_list,
                'top_track_list': top_track_list,
                'top_artist_list': top_artist_list,
