@@ -1,23 +1,8 @@
 {% extends 'account/main.html' %}
-{% load static %}
-{% block css %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/track_detail_style.css' %}">
-{% endblock %}
 {% block content %}
-	<div id="main">
-        <div id="left">
-            <ul>
-                <li><i class="fas fa-home"></i> Home</li>
-                <li><i class="fas fa-search"></i> Search</li>
-                <li><i class="fas fa-headphones-alt"></i> Your library</li>
-            </ul>
-        </div>
-        <div id="right">
 			<form action="{{ request.path }}" method="post">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="Submit">
 </form>
-        </div>
-    </div>
 {% endblock %}

@@ -19,12 +19,13 @@ from django.shortcuts import redirect
 urlpatterns = [
     # NOTE: add the /<your_destination> in the web's url to visit the correct site
     # Example: "http://127.0.0.1:8000/music/" to visit music
-    path('', include('account.urls',namespace='account')),
-    path('music/', include('music.urls',namespace='music')),
+    path('', include('account.urls', namespace='account')),
+    path('', include('music.urls', namespace='music')),
+    path('playlist/', include('playlist.urls')),
     path('searching/', include(('searching.urls','searching'),namespace='searching')),
     path('your-library/', include('playlist.urls',namespace='playlist')),
     #overwire admin logout link
     path('admin/logout/', lambda request: redirect('account:logout', permanent=False)),
-    path('admin/', admin.site.urls,name='admin'),
+    path('admin/', admin.site.urls, name='admin'),
 
 ]

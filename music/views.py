@@ -8,11 +8,8 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import Group
-from django.forms import inlineformset_factory
 from django.http import HttpResponse
 from django.shortcuts import redirect, render
-from django.urls import reverse_lazy
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
 
 from music.models import Album, Artist, Credit, Recording, Track
 from playlist.models import Playlist
@@ -210,21 +207,6 @@ def artist_album(artist):
 
 
 # ____________________________ARTIST VIEWS__________________________
-class AlbumCreate(CreateView):
-    model = Album
-    fields = '__all__'
-
-
-class AlbumUpdate(UpdateView):
-    model = Album
-    fields = '__all__'
-
-
-class AlbumDelete(DeleteView):
-    model = Album
-    template_name = 'music/album_form.html'
-    success_url = reverse_lazy('music:index')
-    fields = '__all__'
 
 
 # ____________________________MODERATOR VIEWS__________________________
