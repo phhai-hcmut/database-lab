@@ -12,6 +12,7 @@ from django.http import HttpResponse
 
 from music.models import Album, Artist, Credit, Recording, Track
 from playlist.models import Playlist
+from listening.models import InQueue
 
 
 # ____________________________LISTENER VIEWS__________________________
@@ -76,57 +77,59 @@ class TrackSummary(TrackDetail):
 def album_detail(request, pk):
     album = Album.objects.get(pk=pk)
     album_detail = AlbumDetail(album)
-    return render(request, 'music/album_detail.html', {'album': album_detail})
+    in_queue = InQueue.objects.order_by('queue_index')
+    return render(request, 'music/album_detail.html', {'album': album_detail,
+                                                       'in_queue': in_queue})
 
 
 def track_detail(request, pk):
     track = Track.objects.get(pk=pk)
     track_detail = TrackDetail(track)
-    return render(request, 'music/track_detail.html', {'track': track_detail})
+    in_queue = InQueue.objects.order_by('queue_index')
+    return render(request, 'music/track_detail.html', {'track': track_detail,
+                                                       'in_queue': in_queue})
 
 
 def artist_detail(request, pk):
     artist = Artist.objects.get(pk=pk)
     artist_detail = ArtistDetail(artist)
-    return render(request, 'music/artist_detail.html', {'artist': artist_detail})
+    in_queue = InQueue.objects.order_by('queue_index')
+    return render(request, 'music/artist_detail.html', {'artist': artist_detail,
+                                                        'in_queue': in_queue})
 
 
 # NOTE: function for getting full list track/artist/album for gallery view
 def album_list(request):
     album_list = Album.objects.order_by('-release_date').all()
-    album_summary_list = [AlbumSummary(album) for album in album_list]
-    return render(request, 'music/list_page/album_list.html', {'album_list': album_list})
+    in_queue = InQueue.objects.order_by('queue_index')
+    return render(request, 'music/list_page/album_list.html', {'album_list': album_list,
+                                                               'in_queue': in_queue})
 
 
 def track_list(request):
     track_list = Track.objects.order_by('track_number').all()
-    # track_summary_list = [TrackSummary(track) for track in track_list]
+    in_queue = InQueue.objects.order_by('queue_index')
     # TODO: link html file
-    return render(request, 'music/list_page/track_list.html', {'track_list': track_list})
+    return render(request, 'music/list_page/track_list.html', {'track_list': track_list,
+                                                               'in_queue': in_queue})
 
 
 def artist_list(request):
     artist_list = Artist.objects.order_by('name').all()
-    # artist_summary_list = [ArtistSummary(artist) for artist in artist_list]
+    in_queue = InQueue.objects.order_by('queue_index')
     # TODO: link html file
-    return render(request, 'music/list_page/artist_list.html', {'artist_list': artist_list})
+    return render(request, 'music/list_page/artist_list.html', {'artist_list': artist_list,
+                                                                'in_queue': in_queue})
 
 def playlist_list(request):
     playlist_list = Playlist.objects.order_by('name').all()
-    # artist_summary_list = [ArtistSummary(artist) for artist in artist_list]
+    in_queue = InQueue.objects.order_by('queue_index')
     # TODO: link html file
-    return render(request, 'music/list_page/playlist_list.html', {'playlist_list': playlist_list})
+    return render(request, 'music/list_page/playlist_list.html', {'playlist_list': playlist_list,
+                                                                  'in_queue': in_queue})
 
 # NOTE: function to get only top track/artist/album for homepage compact display
 TOP_NUMBER = 5
-
-
-# def all_albums(request):
-#     album_list = Album.objects.order_by('-release_date')[:TOP_NUMBER]
-#     album_summary_list = [AlbumSummary(album) for album in album_list]
-#     # TODO: link html file
-#     return render(request, 'HTML?', {'album_list': album_summary_list})
-
 def detail(request):
     # return HttpResponse("You're looking at album  %s." % album_id)
     return render(request, 'music/album_detail.html')
@@ -137,10 +140,12 @@ def index(request):
     top_track_list = Track.objects.order_by('track_number')[:TOP_NUMBER]
     top_artist_list = Artist.objects.order_by('name')[:TOP_NUMBER]
     top_playlist = Playlist.objects.order_by('-time_created')[:TOP_NUMBER]
+    in_queue = InQueue.objects.order_by('queue_index')
     context = {'all_album_list': all_album_list,
                'top_track_list': top_track_list,
                'top_artist_list': top_artist_list,
-               'top_playlist': top_playlist}
+               'top_playlist': top_playlist,
+               'in_queue': in_queue}
     return render(request, 'music/index.html', context)
 
 

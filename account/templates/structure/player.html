@@ -22,11 +22,11 @@
 				<div class="add"><i class="fas fa-plus"></i></div>
 			</div>
 			<div class="current-queue">
-				{% for track in album.track_list %}
+				{% for cur in in_queue %}
 					<ul id="queue-list">
-						<li> {{ track.track_number }}</li>
-						<li id="get-track-name"> {{ track.recording.name }}</li>
-						<li> {{ track.recording.duration }}</li>
+						<li> {{ cur.queue_index }}</li>
+						<li id="get-track-name"> {{ cur.recording.name }}</li>
+						<li> {{ cur.recording.duration }}</li>
 						<li id="get-artist-name">  NOT DONE </li>
 					</ul>
 				{% endfor %}
