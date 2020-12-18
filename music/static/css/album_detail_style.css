@@ -15,6 +15,10 @@ body{
 	padding-left: 0px;
 }
 
+#main #left ul a {
+	text-decoration: none;
+}
+
 #main #left ul li {
 	font-size: 15pt;
 	color: grey;
