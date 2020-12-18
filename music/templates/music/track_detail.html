@@ -4,37 +4,28 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/track_detail_style.css' %}">
 {% endblock %}
 {% block content %}
-	<div id="main">
-        <div id="left">
-            <ul>
-                <a href="{% url 'music:index' %}"><li><i class="fas fa-home"></i> Home</li></a>
-                <li><i class="fas fa-search"></i> Search</li>
-                <li><i class="fas fa-headphones-alt"></i> Your library</li>
-            </ul>
+    <div id="right">
+        <div id="artist-info">
+            <h1> {{track.name}}</h1>
+            <p>This is a track yey !!!</p>
+            <p>Duration: {{track.duration}}</p>
+            <p>Album: {{track.album.name}}</p>
+            <p>Track Number: {{track.track_number}}</p>
         </div>
-        <div id="right">
-            <div id="artist-info">
-                <h1> {{track.name}}</h1>
-                <p>This is a track yey !!!</p>
-                <p>Duration: {{track.duration}}</p>
-                <p>Album: {{track.album.name}}</p>
-                <p>Track Number: {{track.track_number}}</p>
-            </div>
-            
-            <div id="credit-album">
-                <div class="list">
-                    <h3>Artists Credits</h3>
-                    <ul>
-                        <li><strong>Name</strong></li>
-                        <li><strong>Role</strong></li>
-                    </ul>
-                    {% for credit in track.credit %}
-                    <ul id="list-hover"><a style="text-decoration:none" href="{% url 'music:artist-detail' credit.artist.id %}">
-                        <li> {{ credit.artist.name }}</li>
-                        <li> {{ credit.get_role_display }}</li>
-                    </a></ul>
-                    {% endfor%}
-                </div>     
+
+        <div id="credit-album">
+            <div class="list">
+                <h3>Artists Credits</h3>
+                <ul>
+                    <li><strong>Name</strong></li>
+                    <li><strong>Role</strong></li>
+                </ul>
+                {% for credit in track.credit %}
+                <ul id="list-hover"><a style="text-decoration:none" href="{% url 'music:artist-detail' credit.artist.id %}">
+                    <li> {{ credit.artist.name }}</li>
+                    <li> {{ credit.get_role_display }}</li>
+                </a></ul>
+                {% endfor%}
             </div>
         </div>
     </div>

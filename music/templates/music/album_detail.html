@@ -4,15 +4,7 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/album_detail_style.css' %}">
 {% endblock %}
 {% block content %}
-	<div id="main">
-		<div id="left">
-			<ul>
-				<a href="{% url 'music:index' %}"><li><i class="fas fa-home"></i> Home</li></a>
-				<li><i class="fas fa-search"></i> Search</li>
-				<li><i class="fas fa-headphones-alt"></i> Your library</li>
-			</ul>
-		</div>
-		<div id="right">
+	<div id="right">
 		{% if album %}
 			<div id="album-info">
 				<h1>{{album.name}}</h1>
@@ -29,7 +21,7 @@
 					<li><strong>Duration</strong></li>
 					<li><strong>Artists</strong></li>
 				</ul>
-				
+
 				{% for track in album.track_list %}
 				<ul><a href="">
 					<li> {{ track.track_number }}</li>
@@ -42,6 +34,5 @@
 		{% else %}
 			<p>No Album of this id available.</p>
 		{% endif %}
-		</div>
 	</div>
 {% endblock %}

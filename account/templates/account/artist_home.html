@@ -4,15 +4,6 @@
 <link rel="stylesheet" type="text/css" href="{% static 'css/artist_style.css' %}">
 {% endblock %}
 {% block content %}
-
-<div id="main">
-    <div id="left">
-        <ul>
-            <li><i class="fas fa-home"></i> Home</li>
-            <li><i class="fas fa-search"></i> Search</li>
-            <li><i class="fas fa-headphones-alt"></i> Your library</li>
-        </ul>
-    </div>
     <div id="right">
         {% if album %}
         <div id="credit-album">
@@ -53,5 +44,4 @@
             </a></ul>
         </div>
     </div>
-</div>
 {% endblock %}
