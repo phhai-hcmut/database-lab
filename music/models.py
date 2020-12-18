@@ -33,6 +33,9 @@ class Album(models.Model):
     def __str__(self) -> str:
         artists = [str(a) for a in self.owner.all()]
         return f"{self.name}, {self.release_date}, {self.album_type}, Artists: {artists}"
+    
+    def get_absolute_url(self):
+        return reverse('album-detail', kwargs={'pk': self.pk})
 
 
 class Track(models.Model):
