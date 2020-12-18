@@ -33,10 +33,12 @@ def user_redirection(view_func):
 			group = request.user.groups.all()[0].name
 
 		if group == 'listener':
-			return redirect('account:listener-page')
+			return redirect('music/')
+			# return redirect('account:listener-page')
 		
 		if group == 'artist':
-			return redirect('account:artist-page')
+			return redirect('music/')
+			# return redirect('account:artist-page')
 
 		if group == 'moderator':
 			return view_func(request, *args, **kwargs)

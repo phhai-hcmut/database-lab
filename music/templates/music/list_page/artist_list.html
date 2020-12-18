@@ -20,7 +20,7 @@
                         <li><strong>Name</strong></li>
                     </ul>
                     {% for artist in artist_list %}
-                    <ul id="hover-this"><a href="{% url 'account:artist-page' %}">
+                    <ul id="hover-this"><a href="{% url 'music:artist-detail' artist.id %}">
                         <li> {{ artist.name }}</li>
                     </a></ul>
                     {% endfor %}

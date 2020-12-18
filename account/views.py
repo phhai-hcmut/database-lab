@@ -46,16 +46,16 @@ def home(request):
     return render(request, 'account/moderator_home.html', context)
 
 
-@login_required(login_url='account:login')
-@allowed_users(allowed_roles=['listener'])
-def listenerPage(request):
-    context = {}
-    return render(request, 'account/listener_home.html', context)
+# @login_required(login_url='account:login')
+# @allowed_users(allowed_roles=['listener'])
+# def listenerPage(request):
+#     context = {}
+#     return render(request, 'account/listener_home.html', context)
 
 
-@login_required(login_url='account:login')
-@allowed_users(allowed_roles=['artist'])
-def artistPage(request):
-    context = {}
-    return render(request, 'account/artist_home.html', context)
+# @login_required(login_url='account:login')
+# @allowed_users(allowed_roles=['artist'])
+# def artistPage(request):
+#     context = {}
+#     return render(request, 'account/artist_home.html', context)
 
