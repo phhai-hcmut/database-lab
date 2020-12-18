@@ -28,7 +28,8 @@ class ArtistDetail:
     def __init__(self, artist):
         self.name = artist.name
         self.owned_albums = artist.album.all()
-        self.credit_list = artist.track.all()
+        self.credited_recording = artist.artist_credit.all()
+        self.credited_tracks = Track.objects.filter(recording__in = self.credited_recording)
 
 
 class TrackDetail:
@@ -82,8 +83,8 @@ def track_detail(request, pk):
     return render(request, 'music/track_detail.html', {'track': track_detail})
 
 
-def artist_detail(request, artist_id):
-    artist = Artist.objects.get(pk=artist_id)
+def artist_detail(request, pk):
+    artist = Artist.objects.get(pk=pk)
     artist_detail = ArtistDetail(artist)
     return render(request, 'music/artist_detail.html', {'artist': artist_detail})
 
