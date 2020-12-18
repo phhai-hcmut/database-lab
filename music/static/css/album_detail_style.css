@@ -108,10 +108,11 @@ body{
 	margin-left: 25px;
 }
 
-#main #right #track-list .add-button{
-	font-size: 10pt;
+#main #right #track-list #add-button i:hover {
+    cursor: pointer;
+    transform: scale(1.12);
+	transition: all .4s ease;
 }
-
 
 #artist_item ul {
 	all: initial;

@@ -130,14 +130,6 @@ def playlist_list(request):
 
 # NOTE: function to get only top track/artist/album for homepage compact display
 TOP_NUMBER = 5
-
-
-# def all_albums(request):
-#     album_list = Album.objects.order_by('-release_date')[:TOP_NUMBER]
-#     album_summary_list = [AlbumSummary(album) for album in album_list]
-#     # TODO: link html file
-#     return render(request, 'HTML?', {'album_list': album_summary_list})
-
 def detail(request):
     # return HttpResponse("You're looking at album  %s." % album_id)
     return render(request, 'music/album_detail.html')
