@@ -54,8 +54,8 @@ body{
 }
 
 #main #right ul {
-	column-count: 3;
-	column-gap: 80px;
+	column-count: 4;
+	column-gap: 30px;
 	list-style-type: none;
 	padding: 12px 0px 12px 0px;
 	border-bottom: 1px solid white;

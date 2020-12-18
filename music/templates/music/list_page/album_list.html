@@ -16,15 +16,16 @@
 					<li> </li>
 				</ul>
 				{% for album in album_list %}
-				<ul  id="hover-this"><a href="{% url 'music:album-detail' album.id %}">
-					<li> {{ album.name }}</li>
+				<ul  id="hover-this">
+					<a href="{% url 'music:album-detail' album.id %}"><li> {{ album.name }}</li></a>
 					<li> {{ album.release_date }}</li>
-					{% for owner in album.owner.all %}
-					<li> {{ owner }}</li>
-					{% endfor %}
-					<li> {{ album.album_type }}</li>
-					<li><i class="fas fa-plus-circle"></i> <i class="fas fa-play-circle"></i></li>
-				</a></ul>
+					<li id = "artist_item"> <ul id="artist_list">
+						{%for artist in album.owner.distinct %}
+						<a href = "{%url 'music:artist-detail' artist.id%}"><li>{{artist.name}}</li></a>
+						{%endfor%}
+					</ul></li>
+					<li> {{ album.get_album_type_display }}</li>
+				</ul>
 				{% endfor %}
 			{% else %}
 				<p>No albums are available.</p>
