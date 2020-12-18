@@ -45,7 +45,9 @@
 
 <nav id="navbar">
     <a href="{% url 'music:index' %}"><h1><i class="fas fa-compact-disc"></i> Lohaa Music</h1></a>
-    <input type="text" placeholder="Search for Artists, Tracks or Albums...">
+    <form action="{% url 'searching:search-results' %}" method="get">
+        <input name="q" type="text" placeholder="Search for Artists, Tracks or Albums...">
+    </form>
     <span ><a  class="hello-msg" href="{% url 'account:logout' %}">Logout</a></span>
     <span class="hello-msg">Hello, {{request.user}}</span>
 </nav>
