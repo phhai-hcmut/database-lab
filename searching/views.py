@@ -16,8 +16,11 @@ class SearchResultView(ListView):
         albums = Album.objects.filter(
             Q(name__icontains=query)
         )
+        playlist_query = Q(is_public=True)
+        if self.request.user.is_authenticated:
+            playlist_query = playlist_query | Q(user=self.request.user)
         playlists = Playlist.objects.filter(
-            Q(name__icontains=query)
+            Q(name__icontains=query), playlist_query
         )   
         artists = Artist.objects.filter(
             Q(name__icontains=query)
