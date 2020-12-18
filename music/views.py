@@ -18,8 +18,8 @@ from music.models import Album, Artist, Credit, Recording, Track
 from playlist.models import Playlist
 from listening.models import InQueue
 
-# Create your views here.
 
+# Create your views here.
 
 
 # ____________________________LISTENER VIEWS__________________________
@@ -38,7 +38,7 @@ class ArtistDetail:
         self.name = artist.name
         self.owned_albums = artist.album.all()
         self.credited_recording = artist.artist_credit.all()
-        self.credited_tracks = Track.objects.filter(recording__in = self.credited_recording)
+        self.credited_tracks = Track.objects.filter(recording__in=self.credited_recording)
 
 
 class TrackDetail:
@@ -46,7 +46,7 @@ class TrackDetail:
         self.name = track.recording.name
         self.track_number = track.track_number
         self.duration = track.recording.duration
-        self.credit = Credit.objects.filter(recording = track.recording)
+        self.credit = Credit.objects.filter(recording=track.recording)
         self.album = track.album
 
 
@@ -84,7 +84,7 @@ class TrackSummary(TrackDetail):
 def album_detail(request, pk):
     album = Album.objects.get(pk=pk)
     album_detail = AlbumDetail(album)
-    in_queue = InQueue.objects.filter(user = request.user).order_by('queue_index')
+    in_queue = InQueue.objects.filter(user=request.user).order_by('queue_index')
     return render(request, 'music/album_detail.html', {'album': album_detail,
                                                        'in_queue': in_queue})
 
@@ -92,7 +92,7 @@ def album_detail(request, pk):
 def track_detail(request, pk):
     track = Track.objects.get(pk=pk)
     track_detail = TrackDetail(track)
-    in_queue = InQueue.objects.filter(user = request.user).order_by('queue_index')
+    in_queue = InQueue.objects.filter(user=request.user).order_by('queue_index')
     return render(request, 'music/track_detail.html', {'track': track_detail,
                                                        'in_queue': in_queue})
 
@@ -100,7 +100,7 @@ def track_detail(request, pk):
 def artist_detail(request, pk):
     artist = Artist.objects.get(pk=pk)
     artist_detail = ArtistDetail(artist)
-    in_queue = InQueue.objects.filter(user = request.user).order_by('queue_index')
+    in_queue = InQueue.objects.filter(user=request.user).order_by('queue_index')
     return render(request, 'music/artist_detail.html', {'artist': artist_detail,
                                                         'in_queue': in_queue})
 
@@ -108,14 +108,14 @@ def artist_detail(request, pk):
 # NOTE: function for getting full list track/artist/album for gallery view
 def album_list(request):
     album_list = Album.objects.order_by('-release_date').all()
-    in_queue = InQueue.objects.filter(user = request.user).order_by('queue_index')
+    in_queue = InQueue.objects.filter(user=request.user).order_by('queue_index')
     return render(request, 'music/list_page/album_list.html', {'album_list': album_list,
                                                                'in_queue': in_queue})
 
 
 def track_list(request):
     track_list = Track.objects.order_by('track_number').all()
-    in_queue = InQueue.objects.filter(user = request.user).order_by('queue_index')
+    in_queue = InQueue.objects.filter(user=request.user).order_by('queue_index')
     # TODO: link html file
     return render(request, 'music/list_page/track_list.html', {'track_list': track_list,
                                                                'in_queue': in_queue})
@@ -123,20 +123,24 @@ def track_list(request):
 
 def artist_list(request):
     artist_list = Artist.objects.order_by('name').all()
-    in_queue = InQueue.objects.filter(user = request.user).order_by('queue_index')
+    in_queue = InQueue.objects.filter(user=request.user).order_by('queue_index')
     # TODO: link html file
     return render(request, 'music/list_page/artist_list.html', {'artist_list': artist_list,
                                                                 'in_queue': in_queue})
 
+
 def playlist_list(request):
     playlist_list = Playlist.objects.order_by('name').all()
-    in_queue = InQueue.objects.filter(user = request.user).order_by('queue_index')
+    in_queue = InQueue.objects.filter(user=request.user).order_by('queue_index')
     # TODO: link html file
     return render(request, 'music/list_page/playlist_list.html', {'playlist_list': playlist_list,
                                                                   'in_queue': in_queue})
 
+
 # NOTE: function to get only top track/artist/album for homepage compact display
 TOP_NUMBER = 5
+
+
 def detail(request):
     # return HttpResponse("You're looking at album  %s." % album_id)
     return render(request, 'music/album_detail.html')
@@ -147,7 +151,7 @@ def index(request):
     top_track_list = Track.objects.order_by('track_number')[:TOP_NUMBER]
     top_artist_list = Artist.objects.order_by('name')[:TOP_NUMBER]
     top_playlist = Playlist.objects.order_by('-time_created')[:TOP_NUMBER]
-    in_queue = InQueue.objects.filter(user = request.user).order_by('queue_index')
+    in_queue = InQueue.objects.filter(user=request.user).order_by('queue_index')
     context = {'all_album_list': all_album_list,
                'top_track_list': top_track_list,
                'top_artist_list': top_artist_list,
@@ -204,6 +208,7 @@ def artist_track(artist):
 def artist_album(artist):
     return artist.album.all()
 
+
 # ____________________________ARTIST VIEWS__________________________
 class AlbumCreate(CreateView):
     model = Album
@@ -221,23 +226,25 @@ class AlbumDelete(DeleteView):
     success_url = reverse_lazy('music:index')
     fields = '__all__'
 
+
 # ____________________________MODERATOR VIEWS__________________________
 from django.views.decorators.csrf import csrf_exempt
+
 
 @csrf_exempt
 def addMusic(request):
     if request.is_ajax():
-        track_id = request.POST.get('id',None)
+        track_id = request.POST.get('id', None)
         user_id = request.user.id
-        print('user id:',user_id,'track: ',track_id)
-        #find the recording
-        recording = Track.objects.get(pk = track_id).recording
+        print('user id:', user_id, 'track: ', track_id)
+        # find the recording
+        recording = Track.objects.get(pk=track_id).recording
         user = request.user
-        if not InQueue.objects.filter(user = user):
-            InQueue.objects.create(user = user, recording = recording, queue_index = 1)
+        if not InQueue.objects.filter(user=user):
+            InQueue.objects.create(user=user, recording=recording, queue_index=1)
         else:
-            last_queued = InQueue.objects.filter(user = user).last()
-            InQueue.objects.create(user = user, recording = recording, queue_index = last_queued.queue_index + 1)
+            last_queued = InQueue.objects.filter(user=user).last()
+            InQueue.objects.create(user=user, recording=recording, queue_index=last_queued.queue_index + 1)
     else:
         print('no')
     return HttpResponse('Updated')
