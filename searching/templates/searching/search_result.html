@@ -20,7 +20,7 @@
 		<div id="right">
 			<div id="album">
 				<h2>Latest album</h2>
-				<a class="more" href="">More >></a>
+				<a class="more" href="{%url 'searching:search-album' result.query %} ">More >></a>
 				<div class="album-list">
 					{% if result.albums %}
 						<ul>
@@ -50,7 +50,7 @@
 			<!-- Top 5 trending track -->
 			<div id="trend">
 				<h2>Trending</h2>
-				<a class="more" href="">More >></a>
+				<a class="more" href="{%url 'searching:search-track' result.query %} ">More >></a>
 				<div class="album-list">
 					{% if result.tracks %}
 						<ul>
@@ -74,7 +74,7 @@
 			<!-- Top 5 artist by name -->
 			<div id="artist">
 				<h2>Artist</h2>
-				<a class="more" href="">More >></a>
+				<a class="more" href="{%url 'searching:search-artist' result.query %} ">More >></a>
 				<div class="artist-list">
 					{% if result.artists %}
 						<ul>
@@ -94,7 +94,7 @@
 			<!-- Top 5 playlist -->
 			<div id="playlist">
 				<h2>Playlist</h2>
-				<a class="more" href="">More >></a>
+				<a class="more" href="{%url 'searching:search-playlist' result.query %} ">More >></a>
 				<div class="playlist-list">
 					{% if result.playlists %}
 						<ul>

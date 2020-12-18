@@ -1,0 +1,28 @@
+{% extends 'account/main.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/list_page/playlist_list_style.css' %}">
+{% endblock %}
+{% block content %}
+    <div id="right">
+        <h1>Search Playlist Result</h1>
+        <div class="playlist-list">
+            {% if playlist_list %}
+                <ul>
+                    <li><strong>Name</strong></li>
+                    <li><strong>User</strong></li>
+                    <li><strong>Time Created</strong></li>
+                </ul>
+                {% for playlist in playlist_list %}
+                <ul id="hover-this"><a href="{%url 'music:playlist:playlist-detail' playlist.id%}">
+                    <li> {{ playlist.name }}</li>
+                    <li> {{ playlist.user }}</li>
+                    <li> {{ playlist.time_created }}</li>
+                </a></ul>
+                {% endfor %}
+            {% else %}
+                <p>No playlists are available.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

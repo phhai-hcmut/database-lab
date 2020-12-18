@@ -1,0 +1,29 @@
+{% extends 'account/main.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/list_page/track_list_style.css' %}">
+{% endblock %}
+{% block content %}
+	<div id="right">
+		<h1>Search Track List Result</h1>
+		<div class="latest-album-list">
+			{% if track_list %}
+				<ul>
+					<li><strong>Track Number</strong></li>
+					<li><strong>Album</strong></li>
+					<li><strong>Track Name</strong></li>
+				</ul>
+				{% for track in track_list %}
+				<ul id="hover-this">
+					<li> {{ track.track_number }}</li>
+						<a href="{% url 'music:album-detail' track.album.id %}"><li> {{track.album.name}}</li></a>
+						<a href="{% url 'music:track-detail' track.id %}"><li> {{ track.recording.name }}</li></a>
+						<li id="add-button" onclick="addTrack( '{{ track.id }}' );return false;"><i class="fas fa-plus-circle"></i></li>
+				</ul>
+				{% endfor %}
+			{% else %}
+				<p>No tracks are available.</p>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

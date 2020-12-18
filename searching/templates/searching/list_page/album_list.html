@@ -1,0 +1,35 @@
+{% extends 'account/main.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/list_page/album_list_style.css' %}">
+{% endblock %}
+{% block content %}
+	<div id="right">
+		<h1>Search album result</h1>
+		<div class="latest-album-list">
+			{% if album_list %}
+				<ul>
+					<li><strong>Name</strong></li>
+					<li><strong>Release Date</strong></li>
+					<li><strong>Owner</strong></li>
+					<li><strong>Type</strong></li>
+					<li> </li>
+				</ul>
+				{% for album in album_list %}
+				<ul  id="hover-this">
+					<a href="{% url 'music:album-detail' album.id %}"><li> {{ album.name }}</li></a>
+					<li> {{ album.release_date }}</li>
+					<li id = "artist_item"> <ul id="artist_list">
+						{%for artist in album.owner.distinct %}
+						<a href = "{%url 'music:artist-detail' artist.id%}"><li>{{artist.name}}</li></a>
+						{%endfor%}
+					</ul></li>
+					<li> {{ album.get_album_type_display }}</li>
+				</ul>
+				{% endfor %}
+			{% else %}
+				<p>No albums are available.</p>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

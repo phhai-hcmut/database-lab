@@ -1,0 +1,24 @@
+{% extends 'account/main.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/list_page/artist_list_style.css' %}">
+{% endblock %}
+{% block content %}
+    <div id="right">
+        <h1>Search artists result</h1>
+        <div class="artist-list">
+            {% if artist_list %}
+                <ul>
+                    <li><strong>Name</strong></li>
+                </ul>
+                {% for artist in artist_list %}
+                <ul id="hover-this"><a href="{% url 'music:artist-detail' artist.id %}">
+                    <li> {{ artist.name }}</li>
+                </a></ul>
+                {% endfor %}
+            {% else %}
+                <p>No artists are available.</p>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}
