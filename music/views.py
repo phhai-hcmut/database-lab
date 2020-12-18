@@ -39,6 +39,7 @@ class TrackDetail:
         self.track_number = track.track_number
         self.duration = track.recording.duration
         self.credit = Credit.objects.filter(recording = track.recording)
+        self.album = track.album
 
 
 class AlbumSummary(AlbumDetail):
