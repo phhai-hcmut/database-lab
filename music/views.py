@@ -1,3 +1,4 @@
+from listening.models import InQueue
 from django.shortcuts import render, redirect
 from django.forms import inlineformset_factory
 from django.contrib.auth.forms import UserCreationForm
@@ -9,7 +10,7 @@ from dataclasses import dataclass
 from django.http import HttpResponse
 # Create your views here.
 
-from music.models import Album, Artist, Credit, Track
+from music.models import Album, Artist, Credit, Recording, Track
 from playlist.models import Playlist
 
 
@@ -194,3 +195,22 @@ def artist_album(artist):
 
 
 # ____________________________MODERATOR VIEWS__________________________
+from django.views.decorators.csrf import csrf_exempt
+
+@csrf_exempt
+def addMusic(request):
+    if request.is_ajax():
+        track_id = request.POST.get('id',None)
+        user_id = request.user.id
+        print('user id:',user_id,'track: ',track_id)
+        #find the recording
+        recording = Track.objects.get(pk = track_id).recording
+        user = request.user
+        if not InQueue.objects.filter(user = user):
+            InQueue.objects.create(user = user, recording = recording, queue_index = 1)
+        else:
+            last_queued = InQueue.objects.filter(user = user).last()
+            InQueue.objects.create(user = user, recording = recording, queue_index = last_queued.queue_index + 1)
+    else:
+        print('no')
+    return HttpResponse('Updated')

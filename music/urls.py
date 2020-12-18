@@ -13,5 +13,7 @@ urlpatterns = [
     path('album/', views.album_list, name='album_list'),
     path('track/', views.track_list, name='track_list'),
     path('artist/', views.artist_list, name='artist_list'),
-    path('playlists/', views.playlist_list, name='playlist_list')
+    path('playlists/', views.playlist_list, name='playlist_list'),
+    
+    path('add/', views.addMusic, name='add'),
 ]

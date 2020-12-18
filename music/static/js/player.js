@@ -5,20 +5,17 @@ $('.shuffle').click(function(){
 
 //music player settings (not needed any more)
 
-let audio = new Audio('');
 // play / pause button
 $('.pause').hide(); //hide pause button until clicked
 
 //play button
 $('.play').click(function(){
-	audio.play();
     $('.play').hide();
 	$('.pause').show();
 });
 
 //pause button
 $('.pause').click(function(){
-	audio.pause();
 	$('.play').show();
 	$('.pause').hide();
 });
@@ -48,4 +45,20 @@ $('#queue-list').click(function(){
     $('.artist-name span').text($('#get-artist-name').text());
 });
 
+function addTrack(id){
+    console.log('called with track id:', id)
+    $.ajax({
+        type: 'POST',
+        url: '/music/add/',
+        data: {'id': id},
+        dataType: 'json',
+        complete: function () {
+            console.log('done adding to queue in db, reload!')
+            document.location.reload();
+            // alert("The queue has been changed." + name);
+          }
+    });
+    return false;
+	}
 
+// $('#add-button').click();
