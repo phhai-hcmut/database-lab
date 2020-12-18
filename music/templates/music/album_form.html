@@ -13,7 +13,7 @@
             </ul>
         </div>
         <div id="right">
-            <form action="/music/album/add/" method="post">
+			<form action="{{ request.path }}" method="post">
     {% csrf_token %}
     {{ form }}
     <input type="submit" value="Submit">
