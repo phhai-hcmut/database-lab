@@ -9,7 +9,7 @@
             <h1> {{track.name}}</h1>
             <p>This is a track yey !!!</p>
             <p>Duration: {{track.duration}}</p>
-            <p>Album: {{track.album.name}}</p>
+            <a href="{% url 'music:album-detail' track.album.id %}"> <p>Album: {{track.album.name}}</p></a>
             <p>Track Number: {{track.track_number}}</p>
         </div>
 

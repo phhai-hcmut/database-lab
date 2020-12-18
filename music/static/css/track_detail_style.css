@@ -42,12 +42,16 @@ body{
 }
 
 #main #right #artist-info {
+	list-style: none;
 	background: black;
     height: 250px;
     color: white;
     text-align: center;
 }
-
+#main #right #artist-info p{
+    color: white;
+    text-align: center;
+}
 #main #right #credit-album {
     height: 500px;
 	background: rgb(2,0,36);
