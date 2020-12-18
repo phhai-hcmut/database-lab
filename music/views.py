@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.models import Group
+from django.views.generic.edit import CreateView, DeleteView, UpdateView
 from dataclasses import dataclass
 from django.http import HttpResponse
 # Create your views here.
@@ -191,6 +192,7 @@ def artist_album(artist):
     return artist.album.all()
 
 # ____________________________ARTIST VIEWS__________________________
-
+class AlbumCreate(LoginRequiredMixin, CreateView):
+    model = Album
 
 # ____________________________MODERATOR VIEWS__________________________
