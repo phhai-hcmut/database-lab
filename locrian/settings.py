@@ -42,6 +42,7 @@ INSTALLED_APPS = [
     'account',
     'listening',
     'searching',
+    'edit',
 ]
 
 MIDDLEWARE = [

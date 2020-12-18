@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add track</title>
+	{% load static %}
+	<script src="{% static 'js/form.js' %}"></script>
+<!-- <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script> -->
+</head>
+<body>
+    <h1>Add a new track</h1>
+    <form id="form-container" method="POST">
+        {% csrf_token %}
+		{{ album_form }}
+        {{track_formset.management_form}}
+        {% for form in track_formset %}
+        <div class="track-form">
+        {{ form }}
+        </div>
+        {% endfor %}
+		<button id="add-form" type="button" onclick="addForm('.track-form:last', 'form')">Add Another Track</button>
+        <button type="submit">Create Tracks</button>
+    </form>
+    </body>
+</html>
