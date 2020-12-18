@@ -21,9 +21,9 @@ urlpatterns = [
     # Example: "http://127.0.0.1:8000/music/" to visit music
     path('', include('account.urls', namespace='account')),
     path('', include('music.urls', namespace='music')),
-    path('playlist/', include('playlist.urls')),
+    path('', include('edit.urls')),
+    path('playlist/', include('playlist.urls', namespace='playlist')),
     path('searching/', include(('searching.urls','searching'),namespace='searching')),
-    path('your-library/', include('playlist.urls',namespace='playlist')),
     #overwire admin logout link
     path('admin/logout/', lambda request: redirect('account:logout', permanent=False)),
     path('admin/', admin.site.urls, name='admin'),
