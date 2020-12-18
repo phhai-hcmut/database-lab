@@ -9,8 +9,14 @@
 			<div id="album-info">
 				<h1>{{album.name}}</h1>
 				<p>This is an album yey !!!</p>
-				<p>{{album.release_date}}</p>
+				<p>Release Date: {{album.release_date}}</p>
 				<p>Album track count here: 30</p>
+				<ul id="list-owner"> 
+					<li> Owners: </li>
+					{%for artist in album.owner_list %}
+					<a href = "{%url 'music:artist-detail' artist.id%}"><li>{{artist.name}}</li></a>
+					{%endfor%}
+				</ul>
 			</div>
 			<div id="track-list">
 				<!-- <div class="big-button"><i class="fas fa-play-circle"></i></div> -->

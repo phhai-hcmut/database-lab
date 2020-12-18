@@ -1,7 +1,7 @@
 {% extends 'account/main.html' %}
 {% load static %}
 {% block css %}
-<link rel="stylesheet" type="text/css" href="{% static 'css/album_detail_style.css' %}">
+<link rel="stylesheet" type="text/css" href="{% static 'css/artist_detail_style.css' %}">
 {% endblock %}
 {% block content %}
     <div id="right">
@@ -11,7 +11,7 @@
         </div>
         <div id="credit-album">
             <div class="list">
-                <h3>Credited Tracks</h3>
+                <h1>Credited Tracks</h1>
                 <ul>
                     <li><strong>Name</strong></li>
                     <li><strong>Duration</strong></li>
@@ -19,13 +19,13 @@
                     <li><strong>Track Number</strong></li>
                 </ul>
                 {% for track in artist.credited_tracks %}
-                <ul class="list-hover"><a style="text-decoration:none" href="{% url 'music:album-detail' track.album.id %}">
-                    <li> {{ track.recording.name }}</li>
+                <ul class="list-hover">
+                    <a href="{% url 'music:track-detail' track.id %}"><li> {{ track.recording.name }}</li></a>
                     <li> {{ track.recording.duration }}</li>
-                    <li>   {{ track.album.name }}</li>
+                    <a style="text-decoration:none" href="{% url 'music:album-detail' track.album.id %}"><li>   {{ track.album.name }}</li></a>
                     <li> {{ track.track_number }}</li>
-                    <li><i class="fas fa-plus-circle"></i> <i class="fas fa-play-circle"></i></li>
-                </a></ul>
+                    <li id="add-button" onclick="addTrack( '{{ track.id }}' );return false;"><i class="fas fa-plus-circle"></i></li>
+                </ul>
                 {% endfor %}
             </div>
         </div>
@@ -42,15 +42,14 @@
             </ul>
                 {% for album in artist.owned_albums %}
                 <ul class="list-hover"><a style="text-decoration:none" href="{% url 'music:album-detail' album.id %}">
-                <li> {{ album.name }}</li>
-                <li> {{ album.release_date }}</li>
-                    <li><ul id="list-owner">
-                    {% for owner in album.owner.all %}
-                    <li> {{ owner.name }}</li>
-                    {% endfor %}
+                    <a href="{% url 'music:album-detail' album.id %}"><li> {{ album.name }}</li></a>
+                    <li> {{ album.release_date }}</li>
+                    <li id = "artist_item"> <ul id="list-owner">
+                        {%for artist in album.owner.all %}
+                        <a href = "{%url 'music:artist-detail' artist.id%}"><li>{{artist.name}}</li></a>
+                        {%endfor%}
                     </ul></li>
                 <li> {{ album.get_album_type_display }}</li>
-                <li><i class="fas fa-plus-circle"></i> <i class="fas fa-play-circle"></i></li>
                 </a></ul>
                 {% endfor %}
             </div>

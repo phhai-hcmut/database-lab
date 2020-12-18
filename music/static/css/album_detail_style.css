@@ -122,4 +122,20 @@ body{
 #artist_item ul li {
 	all: initial;
 	font-family: Arial;
+	font-size: medium;
+}
+#list-owner {
+	all: initial;
+	font-size: 15pt;
+	list-style: none;
+	color: white;
+}
+#list-owner a {
+	text-decoration: none;
+}
+#list-owner li{
+	color: white;
+	font-size: 15pt;
+	display: inline;
+	
 }

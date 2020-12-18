@@ -49,7 +49,7 @@ body{
 }
 
 #main #right #credit-album {
-    height: 500px;
+    height: 300px;
 	background: rgb(2,0,36);
     background: linear-gradient(0deg, rgba(0,0,0,1) 50%, rgba(240,147,43,1) 80%);
     color: white;
@@ -82,7 +82,7 @@ body{
 }
 
 #main #right #owned-album {
-    height: 500px;
+    height: 300px;
 	background: rgb(2,0,36);
     background: linear-gradient(0deg, rgba(0,0,0,1) 50%, rgba(240,147,43,1) 80%);
     color: white;
@@ -93,7 +93,7 @@ body{
 	column-count: 5;
 	column-gap: 5px;
 	list-style-type: none;
-	padding: 6px 0px 6px 5px;
+	padding: 12px 0px 12px 15px;
 	border-bottom: 1px solid white;
 	margin: 0;
 }

@@ -22,7 +22,7 @@ class AlbumDetail:
         self.release_date = album.release_date
         self.album_type = album.album_type
         self.track_list = album.track.all()
-        self.owner_list = album.owner.all()
+        self.owner_list = album.owner.distinct()
 
 
 class ArtistDetail:
