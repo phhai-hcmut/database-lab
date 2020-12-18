@@ -27,7 +27,7 @@
 					<li> {{ track.track_number }}</li>
 					<li> {{ track.recording.name }}</li>
 					<li> {{ track.recording.duration }}</li> 
-					<li id = "artist_item"> <ul id="artist_list">
+					<li id = "artist_item"> <ul>
 						{%for artist in track.recording.artist_credits.all.distinct %}
 						<a href = "{%url 'music:artist-detail' artist.id%}"><li>{{artist.name}}</li></a>
 						{%endfor%}

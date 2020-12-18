@@ -107,8 +107,8 @@ body{
 }
 
 #main #right #trend ul {
-	column-count: 3;
-	column-gap: 80px;
+	column-count: 4;
+	column-gap: 30px;
 	list-style-type: none;
 	padding: 12px 0px 12px 0px;
 	border-bottom: 1px solid white;
@@ -188,7 +188,7 @@ body{
 
 #main #right #playlist ul {
 	column-count: 3;
-	column-gap: 80px;
+	column-gap: 30px;
 	list-style-type: none;
 	padding: 12px 0px 12px 0px;
 	border-bottom: 1px solid white;
@@ -224,4 +224,19 @@ body{
 	/*position: fixed;*/
 	overflow: hidden;
 	padding-bottom: 0%;
+}
+
+#artist_item ul {
+	all: initial;
+	display: inline;
+	list-style: none;
+	border-bottom: none;
+}
+#artist_item ul li{
+	all: initial;
+	color: white;
+	padding: 0px;
+	margin-left: 25px;
+	font-family:  Arial;
+	font-size: 15;
 }

@@ -112,13 +112,14 @@ body{
 	font-size: 10pt;
 }
 
-#artist_list {
+
+#artist_item ul {
 	all: initial;
 	display: inline;
 	list-style: none;
 	
 }
-#artist_list li {
+#artist_item ul li {
 	all: initial;
 	font-family: Arial;
 }
