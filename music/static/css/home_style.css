@@ -15,13 +15,17 @@ body{
 	padding-left: 0px;
 }
 
+#main #left ul a {
+	text-decoration: none;
+}
+
 #main #left ul li {
 	font-size: 15pt;
-	color: grey;
 	padding: 15px 5px 15px 15px;
 	margin-left: 10px;
 	margin-right: 10px;
 	cursor: pointer;
+	color: grey;
 }
 
 #main #left ul li:hover {
