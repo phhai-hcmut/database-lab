@@ -111,3 +111,14 @@ body{
 #main #right #track-list .add-button{
 	font-size: 10pt;
 }
+
+#artist_list {
+	all: initial;
+	display: inline;
+	list-style: none;
+	
+}
+#artist_list li {
+	all: initial;
+	
+}
