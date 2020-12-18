@@ -48,6 +48,6 @@
     <span ><a  class="hello-msg" href="{% url 'account:logout' %}">Logout</a></span>
     <span class="hello-msg">Hello, {{request.user}}</span>
     <form action="{% url 'searching:search-results' %}" method="get">
-        <input name="q" type="text" placeholder="Search for Artists, Tracks or Albums...">
+        <input id="search-box" name="q" type="text" placeholder="Search for Artists, Tracks or Albums...">
     </form>
 </nav>
