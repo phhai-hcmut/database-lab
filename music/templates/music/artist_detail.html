@@ -11,37 +11,37 @@
         </div>
         <div id="credit-album">
             <div class="list">
-                <h1>Credited Tracks</h1>
-                <ul>
+                <h3>Credited Tracks</h3>
+                <ul id="header">
                     <li><strong>Name</strong></li>
                     <li><strong>Duration</strong></li>
                     <li><strong>Album Name</strong></li>
                     <li><strong>Track Number</strong></li>
+                    <li></li>
                 </ul>
                 {% for track in artist.credited_tracks %}
-                <ul class="list-hover">
+                <ul class="hover-this">
                     <a href="{% url 'music:track-detail' track.id %}"><li> {{ track.recording.name }}</li></a>
                     <li> {{ track.recording.duration }}</li>
-                    <a style="text-decoration:none" href="{% url 'music:album-detail' track.album.id %}"><li>   {{ track.album.name }}</li></a>
-                    <li> {{ track.track_number }}</li>
+                    <a style="text-decoration:none" href="{% url 'music:album-detail' track.album.id %}"><li> {{ track.album.name }}</li></a>
+                    <li id="track-numb"> {{ track.track_number }}</li>
                     <li id="add-button" onclick="addTrack( '{{ track.id }}' );return false;"><i class="fas fa-plus-circle"></i></li>
                 </ul>
                 {% endfor %}
             </div>
         </div>
 
-
         <div id="owned-album">
             <div class="list">
-                <h1>Artist's Albums</h1>
-            <ul>
+                <h3>Artist's Albums</h3>
+            <ul id="header">
                 <li><strong>Name</strong></li>
                 <li><strong>Release Date</strong></li>
                 <li><strong>Owner</strong></li>
                 <li><strong>Type</strong></li>
             </ul>
                 {% for album in artist.owned_albums %}
-                <ul class="list-hover"><a style="text-decoration:none" href="{% url 'music:album-detail' album.id %}">
+                <ul class="hover-this"><a style="text-decoration:none" href="{% url 'music:album-detail' album.id %}">
                     <a href="{% url 'music:album-detail' album.id %}"><li> {{ album.name }}</li></a>
                     <li> {{ album.release_date }}</li>
                     <li id = "artist_item"> <ul id="list-owner">

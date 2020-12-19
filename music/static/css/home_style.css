@@ -117,7 +117,7 @@ body{
 	padding: 12px 0px 12px 0px;
 	border-bottom: 1px solid white;
 	margin: 0;
-	text-indent: 10
+	text-indent: 10px;
 }
 
 #main #right #trend #add-button i:hover {

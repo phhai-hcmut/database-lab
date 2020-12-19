@@ -21,7 +21,7 @@
 			<div id="track-list">
 				<!-- <div class="big-button"><i class="fas fa-play-circle"></i></div> -->
 				<h3>Track list</h3>
-				<ul>
+				<ul id="header">
 					<li><strong>Track Number</strong></li>
 					<li><strong>Name</strong></li>
 					<li><strong>Duration</strong></li>
@@ -29,8 +29,8 @@
 				</ul>
 
 				{% for track in album.track_list %}
-				<ul>
-					<li> {{ track.track_number }}</li>
+				<ul class="hover-this">
+					<li id="track-numb"> {{ track.track_number }}</li>
 					<a href="{% url 'music:track-detail' track.id %}"><li> {{ track.recording.name }}</li></a>
 					<li> {{ track.recording.duration }}</li> 
 					<li id = "artist_item"> <ul>

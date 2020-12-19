@@ -10,13 +10,13 @@ body{
 	float: left;
 }
 
-#main #left ul a {
-	text-decoration: none;
-}
-
 #main #left ul {
 	list-style-type: none;
 	padding-left: 0px;
+}
+
+#main #left ul a {
+	text-decoration: none;
 }
 
 #main #left ul li {
@@ -41,42 +41,70 @@ body{
 	padding-bottom: 60%;
 }
 
+#main #right .hover-this:hover {
+    background:grey;
+}
+
+#main #right .hover-this li:hover {
+    cursor: pointer;
+}
+
+#main #right #track-numb{
+    text-indent: 75px;
+}
+
+#main #right #header {
+	border-bottom: 2px solid white;
+}
+
 #main #right #artist-info {
-	list-style: none;
-	background: black;
+	background: #637b67;
     height: 250px;
     color: white;
     text-align: center;
 }
-#main #right #artist-info p{
-    color: white;
-    text-align: center;
+
+#main #right #artist-info h1 {
+	font-size: 70pt;
+	margin: 0;
+	padding-top: 35px;
 }
+
+#main #right #artist-info p {
+	font-size: 15pt;
+	margin: 0;
+}
+
+#main #right #artist-info a {
+	text-decoration: none;
+	color: white;
+}
+
 #main #right #credit-album {
     height: 500px;
 	background: rgb(2,0,36);
-    background: linear-gradient(0deg, rgba(0,0,0,1) 50%, rgba(240,147,43,1) 80%);
+    background: linear-gradient(0deg, #000 30%, #77957c 130%);
     color: white;
     text-indent: 30px;
 }
 
 #main #right #credit-album h3 {
     margin: 0;
-    font-size: 20pt;
+    font-size: 30pt;
+    padding-top: 40px;
+    padding-bottom: 20px;
 }
 
-#main #right #credit-album  ul {
+#main #right #credit-album ul {
 	column-count: 2;
-	column-gap: 50px;
+	column-gap: 30px;
 	list-style-type: none;
 	padding: 12px 0px 12px 15px;
-	border-bottom: 1px solid white;
 	margin: 0;
 }
 
-#main #right #credit-album  ul:hover {
-	background: grey;
-	text-decoration: underline;
+#main #right #credit-album ul a {
+	text-decoration: none;	
 }
 
 #main #right #credit-album ul li{
@@ -85,36 +113,35 @@ body{
 	margin-left: 25px;
 }
 
-#main #right #owned-album {
-    height: 500px;
-	background: rgb(2,0,36);
-    background: linear-gradient(0deg, rgba(0,0,0,1) 50%, rgba(240,147,43,1) 80%);
-    color: white;
-    text-indent: 30px;
+#main #right #credit-album #add-button i:hover {
+    cursor: pointer;
+    transform: scale(1.12);
+	transition: all .4s ease;
 }
 
-#main #right #owned-album  ul {
-	column-count: 5;
-	column-gap: 5px;
-	list-style-type: none;
-	padding: 6px 0px 6px 5px;
-	border-bottom: 1px solid white;
-	margin: 0;
-}
-
-#main #right #owned-album  ul:hover {
-	background: grey;
-}
-
-#main #right #owned-album ul li{
-	color: white;
-	padding: 0px;
-	margin-left: 10px;
-}
-#main #right #owned-album #list-owner {
+#main #right #artist_item ul {
 	all: initial;
-	list-style-type: none;
-}
-#main #right #owned-album #list-owner li{
 	display: inline;
+	list-style: none;
+	margin-left: -20px;	
+}
+#artist_item ul li {
+	all: initial;
+	font-family: Arial;
+	font-size: medium;
+}
+#list-owner {
+	all: initial;
+	font-size: 15pt;
+	list-style: none;
+	color: white;
+}
+#list-owner a {
+	text-decoration: none;
+}
+#list-owner li{
+	color: white;
+	font-size: 15pt;
+	display: inline;
+	
 }
