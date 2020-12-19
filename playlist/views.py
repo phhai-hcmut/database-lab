@@ -1,6 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render
-from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
 from django.contrib.auth.decorators import login_required
 from django.forms import (
     ModelForm,
@@ -8,9 +8,11 @@ from django.forms import (
     modelform_factory,
     HiddenInput,
 )
+from django import forms
 from django.urls import reverse, reverse_lazy
 
-from .models import Playlist
+from .models import Playlist, PlaylistContent
+from music.models import Recording
 from listening.models import InQueue
 
 
@@ -55,15 +57,13 @@ class PlaylistForm(ModelForm):
         widgets = {'user': HiddenInput()}
 
 
-class UserFormMixin:
-    def get_initial(self):
-        return {'user': self.request.user.pk}
-
-
-class PlaylistCreate(UserFormMixin, CreateView):
+class PlaylistCreate(CreateView):
     model = Playlist
     template_name = 'edit/recording_form.html'
     form_class = PlaylistForm
+
+    def get_initial(self):
+        return {'user': self.request.user.pk}
 
 
 class PlaylistUpdate(UpdateView):
@@ -76,3 +76,31 @@ class PlaylistDelete(DeleteView):
     model = Playlist
     template_name = 'edit/recording_form.html'
     success_url = reverse_lazy('playlist:playlist-index')
+
+
+class UserPlaylistsForm(forms.Form):
+    def __init__(self, user, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        query = Playlist.objects.filter(user=user)
+        self.fields['playlists'] = forms.ModelMultipleChoiceField(query, widget=forms.CheckboxSelectMultiple)
+
+
+class PlaylistAddRecording(FormView):
+    template_name = 'edit/recording_form.html'
+    form_class = UserPlaylistsForm
+    success_url = '/'
+
+    def get_form(self, form_class=None):
+        if self.request.POST:
+            form = self.form_class(self.request.user, self.request.POST)
+        else:
+            form = self.form_class(self.request.user)
+        return form
+
+    def form_valid(self, form):
+        print("called.............")
+        playlists = form.cleaned_data['playlists']
+        recording = Recording.objects.get(pk=self.kwargs['recording_pk'])
+        for playlist in playlists:
+            PlaylistContent(playlist=playlist, recording=recording).save()
+        return super().form_valid(form)

@@ -11,4 +11,5 @@ urlpatterns = [
     path('add/', views.PlaylistCreate.as_view(), name='playlist-add'),
     path('<int:pk>/edit/', views.PlaylistUpdate.as_view(), name='playlist-update'),
     path('<int:pk>/delete/', views.PlaylistDelete.as_view(), name='playlist-update'),
+    path('add-recording/<int:recording_pk>/', views.PlaylistAddRecording.as_view(), name='playlist-add-recording'),
 ]
