@@ -1,12 +1,15 @@
-from pprint import pformat
-
+from django.forms import (
+    ModelForm,
+    inlineformset_factory,
+    modelform_factory,
+)
+from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
+from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
-from django.urls import reverse_lazy
-from django.forms import formset_factory, ModelForm, modelform_factory, inlineformset_factory
-from django.http import HttpResponse
 
 from music.models import Album, Artist, Credit, Recording, Track
+
 
 # Create your views here.
 class AlbumCreate(CreateView):
@@ -26,53 +29,68 @@ class AlbumDelete(DeleteView):
     fields = '__all__'
 
 
-AlbumForm = modelform_factory(Album, fields='__all__')
+class AlbumForm(ModelForm):
+    prefix = 'album'
 
-
-class TrackForm(ModelForm):
     class Meta:
-        model = Track
-        fields = ['track_number', 'recording']
+        model = Album
+        fields = '__all__'
 
 
-# TrackFormSet = formset_factory(TrackForm, extra=1)
-TrackFormSet = inlineformset_factory(Album, Track, fields=('track_number', 'recording'), extra=1)
+TrackUpdateFormSet = inlineformset_factory(
+    Album, Track, fields=('track_number', 'recording'), extra=0
+)
+TrackCreateFormSet = inlineformset_factory(
+    Album, Track, fields=('track_number', 'recording'), extra=1, can_delete=False
+)
 
 
 def album_create(request):
     if request.method == 'POST':
-        album = AlbumForm(request.POST)
-        tracks = TrackFormSet(request.POST)
-        if tracks.is_valid():
-            resp = HttpResponse(tracks[0].cleaned_data['album'])
+        album_form = AlbumForm(request.POST)
+        if album_form.is_valid():
+            album = album_form.save()
+            track_formset = TrackUpdateFormSet(request.POST, instance=album)
+            if track_formset.is_valid():
+                track_formset.save()
+                resp = HttpResponseRedirect(
+                    reverse('music:album-detail', kwargs={'pk': album.pk})
+                )
+            else:
+                form = {'album_form': album_form, 'track_formset': track_formset}
+                resp = render(request, 'edit/album_form.html', form)
+        else:
+            track_formset = TrackUpdateFormSet(request.POST)
+            form = {'album_form': album_form, 'track_formset': track_formset}
+            resp = render(request, 'edit/album_form.html', form)
     else:
-        form = {'album_form': AlbumForm(), 'track_formset': TrackFormSet(initial=[{'track_number':1}])}
+        form = {
+            'album_form': AlbumForm(),
+            'track_formset': TrackCreateFormSet(initial=[{'track_number': 1}]),
+        }
         resp = render(request, 'edit/album_form.html', form)
+    # print(type(TrackUpdateFormSet))
     return resp
 
 
 def album_update(request, pk):
+    album = Album.objects.get(pk=pk)
     if request.method == 'POST':
-        album = AlbumForm(request.POST)
-        tracks = TrackFormSet(request.POST)
-        if album.is_valid() and tracks.is_valid():
-            album.save()
-            tracks.save()
-            resp = HttpResponse("OK")
+        album_form = AlbumForm(request.POST, instance=album)
+        track_formset = TrackUpdateFormSet(request.POST, instance=album)
+        if album_form.is_valid() and track_formset.is_valid():
+            album_form.save()
+            track_formset.save()
+            resp = HttpResponseRedirect(
+                reverse('music:album-detail', kwargs={'pk': album.pk})
+            )
         else:
-            resp = HttpResponse("Error")
+            form = {'album_form': album_form, 'track_formset': track_formset}
+            resp = render(request, 'edit/album_form.html', form)
     else:
-        album = Album.objects.get(pk=pk)
-        form = {'album_form': AlbumForm(instance=album), 'track_formset': TrackFormSet(instance=album)}
+        form = {
+            'album_form': AlbumForm(instance=album),
+            'track_formset': TrackUpdateFormSet(instance=album),
+        }
         resp = render(request, 'edit/album_form.html', form)
     return resp
-
-
-# def album_delete(request, pk):
-#     album = Album.objects.get(pk=pk)
-#     if request.method == 'POST':
-#         album.delete()
-#         resp = HttpResponse("OK")
-#     else:
-#         resp = render(request, 'edit/album_form.html')
-#     return resp
