@@ -14,7 +14,7 @@
                     <li><strong>Time Created</strong></li>
                 </ul>
                 {% for playlist in playlist_list %}
-                <ul id="hover-this"><a href="{%url 'music:playlist:playlist-detail' playlist.id%}">
+                <ul id="hover-this"><a href="{%url 'playlist:playlist-detail' playlist.id%}">
                     <li> {{ playlist.name }}</li>
                     <li> {{ playlist.user }}</li>
                     <li> {{ playlist.time_created }}</li>

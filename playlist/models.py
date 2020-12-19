@@ -1,5 +1,6 @@
 from django.conf import settings
 from django.db import models
+from django.urls import reverse
 
 from music.models import Track
 
@@ -14,6 +15,9 @@ class Playlist(models.Model):
 
     class Meta:
         unique_together = ['user', 'name']
+
+    def get_absolute_url(self):
+        return reverse('playlist:playlist-detail', kwargs={'pk': self.pk})
 
 
 class PlaylistContent(models.Model):

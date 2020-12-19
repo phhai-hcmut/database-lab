@@ -15,7 +15,12 @@ class Artist(models.Model):
 class Recording(models.Model):
     name = models.CharField(max_length=200)
     duration = models.DurationField(validators=[MinValueValidator(timedelta())])
-    artist_credits = models.ManyToManyField(Artist, through='Credit',related_name='artist_credit')
+    artist_credits = models.ManyToManyField(
+        Artist, through='Credit', related_name='artist_credit'
+    )
+
+    def get_absolute_url(self):
+        return reverse('track-detail', kwargs={'pk': self.pk})
 
 
 class Album(models.Model):
@@ -41,7 +46,9 @@ class Album(models.Model):
 class Track(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE, related_name='track')
     track_number = models.PositiveIntegerField()
-    recording = models.ForeignKey(Recording, on_delete=models.CASCADE,related_name='track')
+    recording = models.ForeignKey(
+        Recording, on_delete=models.CASCADE, related_name='track'
+    )
 
     class Meta:
         unique_together = ['album', 'track_number']
@@ -62,6 +69,7 @@ class Credit(models.Model):
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     role = models.CharField(choices=CreditRole.choices, max_length=200)
     class Meta:
-        unique_together = ['recording', 'artist','role']
+        unique_together = ['recording', 'artist', 'role']
+
     def __str__(self) -> str:
         return f"{self.recording}, {self.artist}, {self.role}"
