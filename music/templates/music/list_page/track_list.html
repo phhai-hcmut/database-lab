@@ -15,10 +15,10 @@
 				</ul>
 				{% for track in track_list %}
 				<ul id="hover-this">
-					<li> {{ track.track_number }}</li>
-						<a href="{% url 'music:album-detail' track.album.id %}"><li> {{track.album.name}}</li></a>
-						<a href="{% url 'music:track-detail' track.id %}"><li> {{ track.recording.name }}</li></a>
-						<li id="add-button" onclick="addTrack( '{{ track.id }}' );return false;"><i class="fas fa-plus-circle"></i></li>
+					<li id="track-numb"> {{ track.track_number }}</li>
+					<a href="{% url 'music:album-detail' track.album.id %}"><li> {{track.album.name}}</li></a>
+					<a href="{% url 'music:track-detail' track.id %}"><li> {{ track.recording.name }}</li></a>
+					<li id="add-button" onclick="addTrack( '{{ track.id }}' );return false;"><i class="fas fa-plus-circle"></i></li>
 				</ul>
 				{% endfor %}
 			{% else %}

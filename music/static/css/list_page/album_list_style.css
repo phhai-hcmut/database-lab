@@ -72,8 +72,6 @@ body{
 	padding: 0px;
 }
 
-
-
 #main #right ul a:hover{
 	text-decoration: none;
 }
@@ -84,17 +82,22 @@ body{
 	margin-left: 25px;
 }
 
-#artist_item ul {
+#main #right #artist_item ul {
 	all: initial;
 	display: inline;
 	list-style: none;
 	border-bottom: none;
+	margin-left: 5px;
 }
-#artist_item ul li{
+
+#main #right #artist_item li:hover {
+    cursor: pointer;
+}
+
+#main #right #artist_item ul li{
 	all: initial;
 	color: white;
 	padding: 0px;
-	margin-left: 25px;
-	font-family:  Arial;
+	font-family: Arial;
 	font-size: 15;
 }
