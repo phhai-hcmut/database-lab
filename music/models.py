@@ -3,6 +3,7 @@ from datetime import timedelta
 from django.db import models
 from django.core.validators import MinValueValidator
 from django.contrib.auth.models import AbstractUser, Group
+from django.urls import reverse
 
 
 class Artist(models.Model):

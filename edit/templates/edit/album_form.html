@@ -1,25 +1,21 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Album Form</title>
-	{% load static %}
-	<script src="{% static 'js/form.js' %}"></script>
-	<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-</head>
-<body>
-    <form id="form-container" method="POST">
-        {% csrf_token %}
-		{{ album_form }}
-        {{track_formset.management_form}}
-        {% for form in track_formset %}
-        <div class="track-form">
-        {{ form }}
-        </div>
-        {% endfor %}
-		<button id="add-form" type="button" onclick="addForm('.track-form:last', 'track')">Add Another Track</button>
-        <button type="submit">Create Tracks</button>
-    </form>
-    </body>
-</html>
+{% extends 'account/main.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form_style.css' %}">
+{% endblock %}
+{% block content %}
+    <div id="right">
+        <form id="form-container" method="POST">
+            {% csrf_token %}
+            {{ album_form }}
+            {{track_formset.management_form}}
+            {% for form in track_formset %}
+            <div class="track-form">
+            {{ form }}
+            </div>
+            {% endfor %}
+            <button id="add-form" type="button" onclick="addForm('.track-form:last', 'track')">Add Another Track</button>
+            <button type="submit">Create Tracks</button>
+        </form>
+    </div>
+{% endblock %}
