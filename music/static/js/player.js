@@ -49,7 +49,7 @@ function addTrack(id){
     console.log('called with track id:', id)
     $.ajax({
         type: 'POST',
-        url: '/music/add/',
+        url: '/add/',
         data: {'id': id},
         dataType: 'json',
         complete: function () {
