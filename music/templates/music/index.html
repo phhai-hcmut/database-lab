@@ -18,7 +18,7 @@
 						<li> </li>
 					</ul>
 					{% for album in all_album_list %}
-					<ul>
+					<ul class="hover-this">
 						<a href="{% url 'music:album-detail' album.id %}"><li> {{ album.name }}</li></a>
 						<li> {{ album.release_date }}</li>
 						<li id = "artist_item"> <ul id="artist_list">
@@ -47,8 +47,8 @@
 						<li><strong>Track Name</strong></li>
 					</ul>
 					{% for track in top_track_list %}
-					<ul>
-						<li> {{ track.track_number }}</li>
+					<ul class="hover-this">
+						<li id="track-numb"> {{ track.track_number }}</li>
 						<a href="{% url 'music:album-detail' track.album.id %}"><li> {{track.album.name}}</li></a>
 						<a href="{% url 'music:track-detail' track.id %}"><li> {{ track.recording.name }}</li></a>
 						<li id="add-button" onclick="addTrack( '{{ track.id }}' );return false;"><i class="fas fa-plus-circle"></i></li>
@@ -66,9 +66,9 @@
 			<a class="more" href="{% url 'music:artist_list' %}">More >></a>
 			<div class="artist-list">
 				{% if top_artist_list %}
-					<ul>
+					<ul >
 						<li><strong>Name</strong></li>
-					</ul>
+					</ul class="hover-this">
 					{% for artist in top_artist_list %}
 					<ul><a href="{% url 'music:artist-detail' artist.id%}">
 						<li> {{ artist.name }}</li>
@@ -92,7 +92,7 @@
 						<li><strong>Time Created</strong></li>
 					</ul>
 					{% for playlist in top_playlist %}
-					<ul><a href="{%url 'playlist:playlist-detail' playlist.id%}">
+					<ul class="hover-this"><a href="{%url 'playlist:playlist-detail' playlist.id%}">
 						<li> {{ playlist.name }}</li>
 						<li> {{ playlist.user }}</li>
 						<li> {{ playlist.time_created }}</li>

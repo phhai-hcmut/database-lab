@@ -42,6 +42,14 @@ body{
 	padding-bottom: 105%;
 }
 
+#main #right .hover-this:hover {
+    background:grey;
+}
+
+#main #right .hover-this li:hover {
+    cursor: pointer;
+}
+
 #main #right h2 {
 	color: white;
 	margin-left: 5%;
@@ -73,10 +81,6 @@ body{
 	padding: 12px 0px 12px 0px;
 	border-bottom: 1px solid white;
 	margin: 0;
-}
-
-#main #right #album ul:hover {
-	background: grey;
 }
 
 #main #right #album ul a{
@@ -113,6 +117,7 @@ body{
 	padding: 12px 0px 12px 0px;
 	border-bottom: 1px solid white;
 	margin: 0;
+	text-indent: 10
 }
 
 #main #right #trend #add-button i:hover {
@@ -121,13 +126,10 @@ body{
 	transition: all .4s ease;
 }
 
-#main #right #trend ul:hover{
-	background: grey;
-}
-
 #main #right #trend ul li {
 	color: white;
 	padding: 0px;
+	margin-left: 25px;
 }
 
 #main #right #trend ul a{
@@ -158,10 +160,6 @@ body{
 	padding: 12px 0px 12px 0px;
 	border-bottom: 1px solid white;
 	margin: 0;
-}
-
-#main #right #artist ul:hover{
-	background: grey;
 }
 
 #main #right #artist ul li {
@@ -200,10 +198,6 @@ body{
 	margin: 0;
 }
 
-#main #right #playlist ul:hover{
-	background: grey;
-}
-
 #main #right #playlist ul li {
 	color: white;
 	padding: 0px;
@@ -220,28 +214,27 @@ body{
 	text-decoration: underline;
 }
 
-#footer {
-	bottom: 0;
-	width: 100%;
-	background: #2ecc71;
-	clear: left;
-	clear: right;
-	/*position: fixed;*/
-	overflow: hidden;
-	padding-bottom: 0%;
+#main #right #track-numb{
+    text-indent: 50px;
 }
 
-#artist_item ul {
+#main #right #artist_item ul {
 	all: initial;
 	display: inline;
 	list-style: none;
 	border-bottom: none;
+	margin-left: 5px;
 }
-#artist_item ul li{
+
+#main #right #artist_item li:hover {
+    cursor: pointer;
+}
+
+#main #right #artist_item ul li{
 	all: initial;
 	color: white;
 	padding: 0px;
-	margin-left: 25px;
-	font-family:  Arial;
+	font-family: Arial;
 	font-size: 15;
 }
+
