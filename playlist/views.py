@@ -26,14 +26,6 @@ def index(request):
     )
 
 
-# def playlist_list(request):
-#     playlist_list = Playlist.objects.order_by('name').all()
-#     in_queue = InQueue.objects.filter(user = request.user).order_by('queue_index')
-#     # TODO: link html file
-#     return render(request, 'music/list_page/playlist_list.html', {'playlist_list': playlist_list,
-#                                                                   'in_queue': in_queue})
-
-
 def playlist_list(request):
     playlist_list = Playlist.objects.order_by('name').all()
     in_queue = InQueue.objects.filter(user=request.user).order_by('queue_index')
