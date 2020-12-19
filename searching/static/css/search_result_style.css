@@ -15,13 +15,17 @@ body{
 	padding-left: 0px;
 }
 
+#main #left ul a {
+	text-decoration: none;
+}
+
 #main #left ul li {
 	font-size: 15pt;
-	color: grey;
 	padding: 15px 5px 15px 15px;
 	margin-left: 10px;
 	margin-right: 10px;
 	cursor: pointer;
+	color: grey;
 }
 
 #main #left ul li:hover {
@@ -36,6 +40,14 @@ body{
 	float: right;
 	height: 0;
 	padding-bottom: 105%;
+}
+
+#main #right .hover-this:hover {
+    background:grey;
+}
+
+#main #right .hover-this li:hover {
+    cursor: pointer;
 }
 
 #main #right h2 {
@@ -71,16 +83,11 @@ body{
 	margin: 0;
 }
 
-#main #right #album ul:hover {
-	background: grey;
-}
-
 #main #right #album ul a{
 	text-decoration: none;
 	color: white;
 	padding: 0px;
 }
-
 
 #main #right #album ul a:hover{
 	text-decoration: none;
@@ -104,16 +111,19 @@ body{
 }
 
 #main #right #trend ul {
-	column-count: 3;
-	column-gap: 80px;
+	column-count: 4;
+	column-gap: 30px;
 	list-style-type: none;
 	padding: 12px 0px 12px 0px;
 	border-bottom: 1px solid white;
 	margin: 0;
+	text-indent: 10
 }
 
-#main #right #trend ul:hover{
-	background: grey;
+#main #right #trend #add-button i:hover {
+    cursor: pointer;
+    transform: scale(1.12);
+	transition: all .4s ease;
 }
 
 #main #right #trend ul li {
@@ -152,10 +162,6 @@ body{
 	margin: 0;
 }
 
-#main #right #artist ul:hover{
-	background: grey;
-}
-
 #main #right #artist ul li {
 	color: white;
 	padding: 0px;
@@ -185,15 +191,11 @@ body{
 
 #main #right #playlist ul {
 	column-count: 3;
-	column-gap: 80px;
+	column-gap: 30px;
 	list-style-type: none;
 	padding: 12px 0px 12px 0px;
 	border-bottom: 1px solid white;
 	margin: 0;
-}
-
-#main #right #playlist ul:hover{
-	background: grey;
 }
 
 #main #right #playlist ul li {
@@ -211,3 +213,28 @@ body{
 #main #right #playlist ul a:hover{
 	text-decoration: underline;
 }
+
+#main #right #track-numb{
+    text-indent: 50px;
+}
+
+#main #right #artist_item ul {
+	all: initial;
+	display: inline;
+	list-style: none;
+	border-bottom: none;
+	margin-left: 5px;
+}
+
+#main #right #artist_item li:hover {
+    cursor: pointer;
+}
+
+#main #right #artist_item ul li{
+	all: initial;
+	color: white;
+	padding: 0px;
+	font-family: Arial;
+	font-size: 15;
+}
+

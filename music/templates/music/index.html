@@ -66,11 +66,11 @@
 			<a class="more" href="{% url 'music:artist_list' %}">More >></a>
 			<div class="artist-list">
 				{% if top_artist_list %}
-					<ul >
+					<ul>
 						<li><strong>Name</strong></li>
-					</ul class="hover-this">
+					</ul>
 					{% for artist in top_artist_list %}
-					<ul><a href="{% url 'music:artist-detail' artist.id%}">
+					<ul class="hover-this"><a href="{% url 'music:artist-detail' artist.id%}">
 						<li> {{ artist.name }}</li>
 					</a></ul>
 					{% endfor %}

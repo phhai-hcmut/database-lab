@@ -1,121 +1,107 @@
+{% extends 'account/main.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html>
-<head>
-	
-	<title>Music Streaming</title>
-	<link rel="stylesheet" type="text/css" href="{% static 'css\search_result_style.css' %}">
-</head>
-<body>
-	{% include 'account/navbar.html' %}
-
-	<div id="main">
-		<div id="left">
-			<ul>
-				<li><i class="fas fa-home"></i> Home</li>
-				<li><i class="fas fa-search"></i> Search</li>
-				<li><i class="fas fa-headphones-alt"></i> Your library</li>
-			</ul>
+{% block css %}
+		<link rel="stylesheet" type="text/css" href="{% static 'css\search_result_style.css' %}">
+{% endblock %}
+{% block content %}
+	<div id="right">
+		<div id="album">
+			<h2>Latest album</h2>
+			<a class="more" href="{%url 'searching:search-album' result.query %} ">More >></a>
+			<div class="album-list">
+				{% if result.albums %}
+					<ul>
+						<li><strong>Name</strong></li>
+						<li><strong>Release Date</strong></li>
+						<li><strong>Owner</strong></li>
+						<li><strong>Type</strong></li>
+						<li> </li>
+					</ul>
+					{% for album in result.albums %}
+					<ul class="hover-this">
+						<a href="{% url 'music:album-detail' album.id %}"><li> {{ album.name }}</li></a>
+						<li> {{ album.release_date }}</li>
+						<li id = "artist_item"> <ul id="artist_list">
+							{%for artist in album.owner.distinct %}
+							<a href = "{%url 'music:artist-detail' artist.id%}"><li>{{artist.name}}</li></a>
+							{%endfor%}
+						</ul></li>
+						<li> {{ album.get_album_type_display }}</li>
+					</ul>
+					{% endfor %}
+				{% else %}
+					<p>No albums are available.</p>
+				{% endif %}
+			</div>
 		</div>
-		<div id="right">
-			<div id="album">
-				<h2>Latest album</h2>
-				<a class="more" href="{%url 'searching:search-album' result.query %} ">More >></a>
-				<div class="album-list">
-					{% if result.albums %}
-						<ul>
-                            <li><strong>Name</strong></li>
-                            <li><strong>Release Date</strong></li>
-                            <li><strong>Owner</strong></li>
-                            <li><strong>Type</strong></li>
-							<li> </li>
-                        </ul>
-						{% for album in result.albums %}
-                        <ul><a href="{% url 'music:album-detail' album.id %}">
-							<li> {{ album.name }}</li>
-							<li> {{ album.release_date }}</li>
-							{% for owner in album.owner.all %}
-							<li> {{ owner }}</li>
-							{% endfor %}
-							<li> {{ album.album_type }}</li>
-							<li><i class="fas fa-plus-circle"></i> <i class="fas fa-play-circle"></i></li>
-                        </a></ul>
-						{% endfor %}
-	                {% else %}
-	                    <p>No albums are available.</p>
-	                {% endif %}
-				</div>
-			</div>
 
-			<!-- Top 5 trending track -->
-			<div id="trend">
-				<h2>Trending</h2>
-				<a class="more" href="{%url 'searching:search-track' result.query %} ">More >></a>
-				<div class="album-list">
-					{% if result.tracks %}
-						<ul>
-                            <li><strong>Track Number</strong></li>
-                            <li><strong>Album</strong></li>
-                            <li><strong>Track Name</strong></li>
-                    	</ul>
-						{% for track in result.tracks %}
-                        <ul><a href="{% url 'music:track-detail' track.id %}">
-							<li> {{ track.track_number }}</li>
-							<li> {{ track.album.name }}</li>
-							<li> {{ track.recording.name }}</li>
-                        </a></ul>
-						{% endfor %}
-	                {% else %}
-	                    <p>No tracks are available.</p>
-	                {% endif %}
-				</div>
+		<!-- Top 5 trending track -->
+		<div id="trend">
+			<h2>Trending</h2>
+			<a class="more" href="{%url 'searching:search-track' result.query %} ">More >></a>
+			<div class="album-list">
+				{% if result.tracks %}
+					<ul>
+						<li><strong>Track Number</strong></li>
+						<li><strong>Album</strong></li>
+						<li><strong>Track Name</strong></li>
+					</ul>
+					{% for track in result.tracks %}
+					<ul class="hover-this">
+						<li id="track-numb"> {{ track.track_number }}</li>
+						<a href="{% url 'music:album-detail' track.album.id %}"><li> {{track.album.name}}</li></a>
+						<a href="{% url 'music:track-detail' track.id %}"><li> {{ track.recording.name }}</li></a>
+						<li id="add-button" onclick="addTrack( '{{ track.id }}' );return false;"><i class="fas fa-plus-circle"></i></li>
+					</ul>
+					{% endfor %}
+				{% else %}
+					<p>No tracks are available.</p>
+				{% endif %}
 			</div>
+		</div>
 
-			<!-- Top 5 artist by name -->
-			<div id="artist">
-				<h2>Artist</h2>
-				<a class="more" href="{%url 'searching:search-artist' result.query %} ">More >></a>
-				<div class="artist-list">
-					{% if result.artists %}
-						<ul>
-                            <li><strong>Name</strong></li>
-                        </ul>
-						{% for artist in result.artists %}
-                        <ul><a href="{% url 'music:artist-detail' artist.id%}">
-							<li> {{ artist.name }}</li>
-                        </a></ul>
-						{% endfor %}
-	                {% else %}
-	                    <p>No artists are available.</p>
-	                {% endif %}
-				</div>
+		<!-- Top 5 artist by name -->
+		<div id="artist">
+			<h2>Artist</h2>
+			<a class="more" href="{%url 'searching:search-artist' result.query %} ">More >></a>
+			<div class="artist-list">
+				{% if result.artists %}
+					<ul>
+						<li><strong>Name</strong></li>
+					</ul>
+					{% for artist in result.artists %}
+					<ul class="hover-this"><a href="{% url 'music:artist-detail' artist.id%}">
+						<li> {{ artist.name }}</li>
+					</a></ul>
+					{% endfor %}
+				{% else %}
+					<p>No artists are available.</p>
+				{% endif %}
 			</div>
+		</div>
 
-			<!-- Top 5 playlist -->
-			<div id="playlist">
-				<h2>Playlist</h2>
-				<a class="more" href="{%url 'searching:search-playlist' result.query %} ">More >></a>
-				<div class="playlist-list">
-					{% if result.playlists %}
-						<ul>
-                            <li><strong>Name</strong></li>
-                            <li><strong>User</strong></li>
-                            <li><strong>Time Created</strong></li>
-                        </ul>
-						{% for playlist in result.playlists %}
-                        <ul><a href="{%url 'music:playlist:playlist-detail' playlist.id%}">
-							<li> {{ playlist.name }}</li>
-							<li> {{ playlist.user }}</li>
-							<li> {{ playlist.time_created }}</li>
-                        </a></ul>
-						{% endfor %}
-	                {% else %}
-	                    <p>No playlists are available.</p>
-	                {% endif %}
-				</div>
+		<!-- Top 5 playlist -->
+		<div id="playlist">
+			<h2>Playlist</h2>
+			<a class="more" href="{%url 'searching:search-playlist' result.query %} ">More >></a>
+			<div class="playlist-list">
+				{% if result.playlists %}
+					<ul>
+						<li><strong>Name</strong></li>
+						<li><strong>User</strong></li>
+						<li><strong>Time Created</strong></li>
+					</ul>
+					{% for playlist in result.playlists %}
+					<ul class="hover-this"><a href="{%url 'playlist:playlist-detail' playlist.id%}">
+						<li> {{ playlist.name }}</li>
+						<li> {{ playlist.user }}</li>
+						<li> {{ playlist.time_created }}</li>
+					</a></ul>
+					{% endfor %}
+				{% else %}
+					<p>No playlists are available.</p>
+				{% endif %}
 			</div>
 		</div>
 	</div>
-
-</body>
-</html>
+{% endblock %}
