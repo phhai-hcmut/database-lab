@@ -12,14 +12,23 @@ from music.models import Album, Artist, Credit, Recording, Track
 
 
 # Create your views here.
-class AlbumCreate(CreateView):
-    model = Album
+class RecordingCreate(CreateView):
+    model = Recording
     fields = '__all__'
+    template_name = 'edit/recording_form.html'
 
 
-class AlbumUpdate(UpdateView):
-    model = Album
+class RecodingUpdate(UpdateView):
+    model = Recording
     fields = '__all__'
+    template_name = 'edit/recording_form.html'
+
+
+class RecordingDelete(DeleteView):
+    model = Recording
+    success_url = reverse_lazy('music:index')
+    fields = '__all__'
+    template_name = 'edit/recording_form.html'
 
 
 class AlbumDelete(DeleteView):
@@ -69,7 +78,6 @@ def album_create(request):
             'track_formset': TrackCreateFormSet(initial=[{'track_number': 1}]),
         }
         resp = render(request, 'edit/album_form.html', form)
-    # print(type(TrackUpdateFormSet))
     return resp
 
 
