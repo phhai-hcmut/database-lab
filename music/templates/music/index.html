@@ -83,7 +83,7 @@
 		<!-- Top 5 playlist -->
 		<div id="playlist">
 			<h2>Playlist</h2>
-			<a class="more" href="{% url 'music:playlist_list' %}">More >></a>
+			<a class="more" href="{% url 'playlist:playlist-index' %}">More >></a>
 			<div class="playlist-list">
 				{% if top_playlist %}
 					<ul>
@@ -92,7 +92,7 @@
 						<li><strong>Time Created</strong></li>
 					</ul>
 					{% for playlist in top_playlist %}
-					<ul><a href="{%url 'music:playlist:playlist-detail' playlist.id%}">
+					<ul><a href="{%url 'playlist:playlist-detail' playlist.id%}">
 						<li> {{ playlist.name }}</li>
 						<li> {{ playlist.user }}</li>
 						<li> {{ playlist.time_created }}</li>
