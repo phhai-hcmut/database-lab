@@ -45,20 +45,50 @@ $('#queue-list').click(function(){
     $('.artist-name span').text($('#get-artist-name').text());
 });
 
-function addTrack(id){
-    console.log('called with track id:', id)
-    $.ajax({
-        type: 'POST',
-        url: '/add/',
-        data: {'id': id},
-        dataType: 'json',
-        complete: function () {
-            console.log('done adding to queue in db, reload!')
-            document.location.reload();
-            // alert("The queue has been changed." + name);
-          }
-    });
-    return false;
-	}
+function addTrack(id) {
+	console.log('called with track id:', id)
+	$.ajax({
+		type: 'POST',
+		url: queueAddUrl,
+		headers: {'X-CSRFToken': CSRF_TOKEN},
+		contentType: 'application/json',
+		data: JSON.stringify({'id': id}),
+		dataType: 'json',
+		success: function(data) {
+			console.log('done adding to queue in db, reload!')
+			drawQueue(data.queue)
+		}
+	});
+	return false;
+}
 
 // $('#add-button').click();
+function initPlayer() {
+	$.getJSON(queueGetUrl, function(data) {
+			console.log(data)
+			drawQueue(data.queue)
+			drawPlayer(data.queue[data.current_index])
+		}
+	)
+}
+
+function drawQueue(queue) {
+	const table = queue.map(song => `<ul class="queue-list">
+	<li>${song.index}</li>
+	<li class="get-track-name">${song.title}</li>
+	<li>${song.duration}</li>
+	<li class="get-artist-name">${song.artist}</li>
+	</ul>`).join('')
+	$('.current-queue').html(table)
+}
+
+function drawPlayer(song) {
+	let $player = $('.currently-playing')
+	$player.find('.song-name span').html(song.title)
+	$player.find('.artist-name span').html(song.artist)
+}
+
+
+$(document).ready(function() {
+	initPlayer()
+})

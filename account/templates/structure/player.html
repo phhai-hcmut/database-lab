@@ -1,35 +1,32 @@
-	<div id="player">
-		<div class="info">
-			<div class="progress-bar">
-				<div class="time--current">1:25</div>
-				<div class="time--total">
-					<span id="total" onload=""></span>
-				</div>
-				<div class="fill"></div>
+<div id="player">
+	<div class="info">
+		<div class="progress-bar">
+			<div class="time--current">1:25</div>
+			<div class="time--total">
+				<span id="total" onload=""></span>
 			</div>
-			<div class="currently-playing">
-				<h2 class="song-name"><span>Fuck</span></h2>
-				<h3 class="artist-name"><span>off</span></h3>
-			</div>
-			<div class="controls">
-				<div class="option"><i class="fas fa-bars"></i></div>
-				<div class="volume"><i class="fas fa-volume-up"></i></div>
-				<div class="previous"><i class="fas fa-backward"></i></div>
-				<div class="play"><i class="fas fa-play"></i></div>
-				<div class="pause"><i class="fas fa-pause"></i></div>
-				<div class="next"><i class="fas fa-forward"></i></div>
-				<div class="shuffle"><i class="fas fa-random"></i></div>
-				<div class="add"><i class="fas fa-plus"></i></div>
-			</div>
-			<div class="current-queue">
-				{% for cur in in_queue %}
-					<ul id="queue-list">
-						<li> {{ cur.queue_index }}</li>
-						<li id="get-track-name"> {{ cur.recording.name }}</li>
-						<li> {{ cur.recording.duration }}</li>
-						<li id="get-artist-name">  NOT DONE </li>
-					</ul>
-				{% endfor %}
-			</div>
+			<div class="fill"></div>
+		</div>
+		<div class="currently-playing">
+			<h2 class="song-name"><span>Fuck</span></h2>
+			<h3 class="artist-name"><span>off</span></h3>
+		</div>
+		<div class="controls">
+			<div class="option"><i class="fas fa-bars"></i></div>
+			<div class="volume"><i class="fas fa-volume-up"></i></div>
+			<div class="previous"><i class="fas fa-backward"></i></div>
+			<div class="play"><i class="fas fa-play"></i></div>
+			<div class="pause"><i class="fas fa-pause"></i></div>
+			<div class="next"><i class="fas fa-forward"></i></div>
+			<div class="shuffle"><i class="fas fa-random"></i></div>
+			<div class="add"><i class="fas fa-plus"></i></div>
+		</div>
+		<div class="current-queue">
 		</div>
 	</div>
+	<script type="text/javascript" charset="utf-8">
+		const queueGetUrl = "{% url 'queue:queue-index' %}"
+		const queueAddUrl = "{% url 'queue:queue-song' %}"
+		window.CSRF_TOKEN = "{{ csrf_token }}"
+	</script>
+</div>

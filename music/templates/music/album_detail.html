@@ -37,7 +37,7 @@
 						<a href = "{%url 'music:artist-detail' artist.id%}"><li>{{artist.name}}</li></a>
 						{%endfor%}
 					</ul></li>
-					<li id="add-button" onclick="addTrack( '{{ track.id }}' );return false;"><i class="fas fa-plus-circle"></i></li>
+					<li id="add-button" onclick="addTrack({{ track.id }})"><i class="fas fa-plus-circle"></i></li>
 				</ul>
 				{% endfor %}
 			</div>

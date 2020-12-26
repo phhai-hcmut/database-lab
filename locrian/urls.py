@@ -27,5 +27,5 @@ urlpatterns = [
     #overwire admin logout link
     path('admin/logout/', lambda request: redirect('account:logout', permanent=False)),
     path('admin/', admin.site.urls, name='admin'),
-
+    path('queue/', include('listening.urls', namespace='queue')),
 ]
