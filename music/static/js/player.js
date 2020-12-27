@@ -1,6 +1,6 @@
 // shuffle button
-$('.shuffle').click(function(){
-  $(this).toggleClass('clicked');
+$('.shuffle').click(function() {
+	$(this).toggleClass('clicked');
 });
 
 //music player settings (not needed any more)
@@ -9,13 +9,13 @@ $('.shuffle').click(function(){
 $('.pause').hide(); //hide pause button until clicked
 
 //play button
-$('.play').click(function(){
-    $('.play').hide();
+$('.play').click(function() {
+	$('.play').hide();
 	$('.pause').show();
 });
 
 //pause button
-$('.pause').click(function(){
+$('.pause').click(function() {
 	$('.play').show();
 	$('.pause').hide();
 });
@@ -24,28 +24,28 @@ $('.pause').click(function(){
 //Show and hide the queue
 $('.current-queue').hide();
 var showed = false
-$('.option').click(function(){
-    if(!showed) {
-        $('#player').css('height','250px');
-        $('.info').css('bottom','130px');
-        $('.current-queue').show();
-        showed = true
-    } else {
-        $('#player').css('height','120px');
-        $('.info').css('bottom','0');
-        $('.current-queue').hide();
-        showed = false
-    };
+$('.option').click(function() {
+	if (!showed) {
+		$('#player').css('height', '250px');
+		$('.info').css('bottom', '130px');
+		$('.current-queue').show();
+		showed = true
+	} else {
+		$('#player').css('height', '120px');
+		$('.info').css('bottom', '0');
+		$('.current-queue').hide();
+		showed = false
+	};
 });
 
 
 // Display song when click
-$('#queue-list').click(function(){
-    $('.song-name span').text($('#get-track-name').text());
-    $('.artist-name span').text($('#get-artist-name').text());
+$('#queue-list').click(function() {
+	$('.song-name span').text($('#get-track-name').text());
+	$('.artist-name span').text($('#get-artist-name').text());
 });
 
-function addTrack(id) {
+function addSongToQueue(id) {
 	console.log('called with track id:', id)
 	$.ajax({
 		type: 'POST',

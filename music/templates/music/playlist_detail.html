@@ -5,32 +5,26 @@
 {% endblock %}
 {% block content %}
 	<div id="right">
-		{% if playlist %}
-			<div id="album-info">
-				<h1>{{playlist.name}}</h1>
-				<p>{{playlist.time_created}}</p>
-				<p>playlist track count here: 30</p>
-			</div>
-			<div id="track-list">
-				<h3>Track list</h3>
-				<ul>
-					<li><strong>Track Number</strong></li>
-					<li><strong>Name</strong></li>
-					<li><strong>Duration</strong></li>
-					<li><strong>Artists</strong></li>
-				</ul>
+		<div id="album-info">
+			<h1>{{playlist.name}}</h1>
+			<p>Created at {{playlist.time_created}}</p>
+			<p>Playlist song count: {{ playlist.song_list|length }}</p>
+		</div>
+		<div id="track-list">
+			<h3>Song List</h3>
+			<ul>
+				<li><strong>Name</strong></li>
+				<li><strong>Duration</strong></li>
+				<li><strong>Artists</strong></li>
+			</ul>
 
-				{% for track in playlist.tracks.all %}
-				<ul><a href="">
-					<li> {{ track.track_number }}</li>
-					<li> {{ track.recording.name }}</li>
-					<li> {{ track.recording.duration }}</li>
-					<li>  NOT DONE </li>
-				</a></ul>
-				{% endfor %}
-			</div>
-		{% else %}
-			<p>No playlist of this id available.</p>
-		{% endif %}
+			{% for recording in playlist.song_list %}
+			<ul><a href="{{ recording.get_absolute_url }}">
+				<li>{{ recording.name }}</li>
+				<li>{{ recording.duration }}</li>
+				<li>{{ recording.get_artist_names }}</li>
+			</a></ul>
+			{% endfor %}
+		</div>
 	</div>
 {% endblock %}

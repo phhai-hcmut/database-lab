@@ -5,19 +5,19 @@
 {% endblock %}
 {% block content %}
     <div id="right">
-        <h1>Your Playlists</h1>
+        <h1>My Playlists</h1>
         <div class="playlist-list">
             {% if playlist_list %}
                 <ul>
                     <li><strong>Name</strong></li>
-                    <li><strong>User</strong></li>
+                    <li><strong># Songs</strong></li>
                     <li><strong>Time Created</strong></li>
                 </ul>
                 {% for playlist in playlist_list %}
                 <ul id="hover-this"><a href="{%url 'playlist:playlist-detail' playlist.id%}">
-                    <li> {{ playlist.name }}</li>
-                    <li> {{ playlist.user }}</li>
-                    <li> {{ playlist.time_created }}</li>
+                    <li>{{ playlist.name }}</li>
+                    <li>{{ playlist.total_songs }}</li>
+                    <li>{{ playlist.time_created }}</li>
                 </a></ul>
                 {% endfor %}
             {% else %}

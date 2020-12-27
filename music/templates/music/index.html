@@ -38,7 +38,7 @@
 		<!-- Top 5 trending track -->
 		<div id="trend">
 			<h2>Trending</h2>
-			<a class="more" href="{% url 'music:track_list' %}">More >></a>
+			{# <a class="more" href="{% url 'music:track_list' %}">More >></a> #}
 			<div class="album-list">
 				{% if top_track_list %}
 					<ul>
@@ -51,7 +51,7 @@
 						<li id="track-numb"> {{ track.track_number }}</li>
 						<a href="{% url 'music:album-detail' track.album.id %}"><li> {{track.album.name}}</li></a>
 						<a href="{% url 'music:track-detail' track.id %}"><li> {{ track.recording.name }}</li></a>
-						<li id="add-button" onclick="addTrack( '{{ track.id }}' );return false;"><i class="fas fa-plus-circle"></i></li>
+						<li id="add-button" onclick="addSongToQueue({{ track.recording.id }})"><i class="fas fa-plus-circle"></i></li>
 					</ul>
 					{% endfor %}
 				{% else %}
@@ -82,7 +82,7 @@
 
 		<!-- Top 5 playlist -->
 		<div id="playlist">
-			<h2>Playlist</h2>
+			<h2>All Playlists</h2>
 			<a class="more" href="{% url 'playlist:playlist-index' %}">More >></a>
 			<div class="playlist-list">
 				{% if top_playlist %}

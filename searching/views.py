@@ -1,78 +1,62 @@
-from listening.models import InQueue
-from django.shortcuts import render
+from django.views.generic import TemplateView, ListView
 
 # Create your views here.
-from music.models import *
-from playlist.models import *
-# ___________________________SEARCH VIEWS__________________________
-from django.views.generic import TemplateView, ListView
-from django.db.models import Q
+from listening.models import InQueue
+from music.models import Artist, Album, Track
+from playlist.models import Playlist
 
 
-def searchView(request):
-    return render(request, 'structure/navbar.html', None)
-
-class QueryHolder:
-    def __init__(self,query_str) -> None:
-        self.value = query_str
-class SearchResultView(ListView):
+class SearchResultView(TemplateView):
     template_name = 'searching/search_result.html'
-    context_object_name = 'result'
 
-    def get_queryset(self):  # new
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         query = self.request.GET.get('q')
-        albums = Album.objects.filter(
-            Q(name__icontains=query)
+        context['query'] = query
+        context['albums'] = Album.objects.filter(
+            name__icontains=query
         )
-        playlist_query = Q(is_public=True)
-        if self.request.user.is_authenticated:
-            playlist_query = playlist_query | Q(user=self.request.user)
-        playlists = Playlist.objects.filter(
-            Q(name__icontains=query), playlist_query
+        context['playlists'] = Playlist.objects.visible(self.request.user).filter(
+            name__icontains=query
         )
-        artists = Artist.objects.filter(
-            Q(name__icontains=query)
+        context['artists'] = Artist.objects.filter(
+            name__icontains=query
         )
-        tracks = Track.objects.filter(
-            Q(recording__name__icontains=query)
+        context['tracks'] = Track.objects.filter(
+            recording__name__icontains=query
         )
-        result = {'albums': albums, 'playlists': playlists, 'artists': artists, 'tracks': tracks, 'query' : query}
-        return result
+        return context
 
 
-def searchArtist(request,query):
-    playlist_list = Artist.objects.filter(
-            Q(name__icontains=query)
-        )
-    in_queue = InQueue.objects.filter(user = request.user).order_by('queue_index')
-    # TODO: link html file
-    return render(request, 'searching/list_page/artist_list.html', {'artist_list': playlist_list,
-                                                                  'in_queue': in_queue})
-                                                                
-def searchAlbum(request,query):
-    playlist_list = Album.objects.filter(
-            Q(name__icontains=query)
-        )
-    in_queue = InQueue.objects.filter(user = request.user).order_by('queue_index')
-    # TODO: link html file
-    return render(request, 'searching/list_page/album_list.html', {'album_list': playlist_list,
-                                                                  'in_queue': in_queue})
-def searchTrack(request,query):
-    playlist_list = Track.objects.filter(
-            Q(recording__name__icontains=query)
-        )
-    in_queue = InQueue.objects.filter(user = request.user).order_by('queue_index')
-    # TODO: link html file
-    return render(request, 'searching/list_page/track_list.html', {'track_list': playlist_list,
-                                                                  'in_queue': in_queue})
-def searchPlaylist(request,query):
-    playlist_query = Q(is_public=True)
-    if request.user.is_authenticated:
-        playlist_query = playlist_query | Q(user=request.user)
-    playlist_list = Playlist.objects.filter(
-        Q(name__icontains=query), playlist_query
-    )
-    in_queue = InQueue.objects.filter(user = request.user).order_by('queue_index')
-    # TODO: link html file
-    return render(request, 'searching/list_page/playlist_list.html', {'playlist_list': playlist_list,
-                                                                  'in_queue': in_queue})
+class SearchArtistView(ListView):
+    template_name = 'searching/list_page/artist_list.html'
+
+    def get_queryset(self):
+        query = self.kwargs['query']
+        return Artist.objects.filter(name__icontains=query)
+
+
+class SearchAlbumView(ListView):
+    template_name = 'searching/list_page/album_list.html'
+
+    def get_queryset(self):
+        search_query = self.kwargs['query']
+        queryset = Album.objects.filter(name__icontains=search_query)
+        return queryset
+
+# def searchTrack(request,query):
+#     playlist_list = Track.objects.filter(
+#             Q(recording__name__icontains=query)
+#         )
+#     in_queue = InQueue.objects.filter(user = request.user).order_by('queue_index')
+#     # TODO: link html file
+#     return render(request, 'searching/list_page/track_list.html', {'track_list': playlist_list,
+
+
+class SearchPlaylistView(ListView):
+    template_name = 'searching/list_page/playlist_list.html'
+
+    def get_queryset(self):
+        search_query = self.kwargs['query']
+        queryset = Playlist.objects.visible(self.request.user).filter(name__icontains=search_query)
+        return queryset

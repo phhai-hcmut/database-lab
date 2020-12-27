@@ -7,9 +7,9 @@
 	<div id="right">
 		<div id="album">
 			<h2>Latest album</h2>
-			<a class="more" href="{%url 'searching:search-album' result.query %} ">More >></a>
+			<a class="more" href="{%url 'searching:search-album' query %} ">More >></a>
 			<div class="album-list">
-				{% if result.albums %}
+				{% if albums %}
 					<ul>
 						<li><strong>Name</strong></li>
 						<li><strong>Release Date</strong></li>
@@ -17,7 +17,7 @@
 						<li><strong>Type</strong></li>
 						<li> </li>
 					</ul>
-					{% for album in result.albums %}
+					{% for album in albums %}
 					<ul class="hover-this">
 						<a href="{% url 'music:album-detail' album.id %}"><li> {{ album.name }}</li></a>
 						<li> {{ album.release_date }}</li>
@@ -38,20 +38,20 @@
 		<!-- Top 5 trending track -->
 		<div id="trend">
 			<h2>Trending</h2>
-			<a class="more" href="{%url 'searching:search-track' result.query %} ">More >></a>
+			{#<a class="more" href="{%url 'searching:search-track' query %} ">More >></a>#}
 			<div class="album-list">
-				{% if result.tracks %}
+				{% if tracks %}
 					<ul>
 						<li><strong>Track Number</strong></li>
 						<li><strong>Album</strong></li>
 						<li><strong>Track Name</strong></li>
 					</ul>
-					{% for track in result.tracks %}
+					{% for track in tracks %}
 					<ul class="hover-this">
 						<li id="track-numb"> {{ track.track_number }}</li>
 						<a href="{% url 'music:album-detail' track.album.id %}"><li> {{track.album.name}}</li></a>
 						<a href="{% url 'music:track-detail' track.id %}"><li> {{ track.recording.name }}</li></a>
-						<li id="add-button" onclick="addTrack( '{{ track.id }}' );return false;"><i class="fas fa-plus-circle"></i></li>
+						<li id="add-button" onclick="addSongToQueue({{ track.recording.id }})"><i class="fas fa-plus-circle"></i></li>
 					</ul>
 					{% endfor %}
 				{% else %}
@@ -63,13 +63,13 @@
 		<!-- Top 5 artist by name -->
 		<div id="artist">
 			<h2>Artist</h2>
-			<a class="more" href="{%url 'searching:search-artist' result.query %} ">More >></a>
+			<a class="more" href="{%url 'searching:search-artist' query %} ">More >></a>
 			<div class="artist-list">
-				{% if result.artists %}
+				{% if artists %}
 					<ul>
 						<li><strong>Name</strong></li>
 					</ul>
-					{% for artist in result.artists %}
+					{% for artist in artists %}
 					<ul class="hover-this"><a href="{% url 'music:artist-detail' artist.id%}">
 						<li> {{ artist.name }}</li>
 					</a></ul>
@@ -83,15 +83,15 @@
 		<!-- Top 5 playlist -->
 		<div id="playlist">
 			<h2>Playlist</h2>
-			<a class="more" href="{%url 'searching:search-playlist' result.query %} ">More >></a>
+			<a class="more" href="{%url 'searching:search-playlist' query %} ">More >></a>
 			<div class="playlist-list">
-				{% if result.playlists %}
+				{% if playlists %}
 					<ul>
 						<li><strong>Name</strong></li>
 						<li><strong>User</strong></li>
 						<li><strong>Time Created</strong></li>
 					</ul>
-					{% for playlist in result.playlists %}
+					{% for playlist in playlists %}
 					<ul class="hover-this"><a href="{%url 'playlist:playlist-detail' playlist.id%}">
 						<li> {{ playlist.name }}</li>
 						<li> {{ playlist.user }}</li>

@@ -1,7 +1,7 @@
 import json
 
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, JsonResponse
+from django.http import HttpResponseBadRequest, HttpResponseNotAllowed, JsonResponse
 from django.shortcuts import render
 from music.models import Recording, Track
 
@@ -13,7 +13,7 @@ def serialize_queue(queue):
         {
             'index': song.queue_index,
             'title': song.recording.name,
-            'artist': ", ".join(artist.name for artist in song.recording.artist_credits.all()),
+            'artist': song.recording.get_artist_names(),
             'duration': str(song.recording.duration),
         }
         for song in queue
@@ -24,12 +24,13 @@ def serialize_queue(queue):
 def list_queue(request):
     """Render user's listening queue"""
     if not request.is_ajax():
-        return
+        return HttpResponseBadRequest("Please request with AJAX")
 
     if request.method != 'GET':
-        return HttpResponse(status=405)
+        return HttpResponseNotAllowed(['GET'])
 
-    queue = InQueue.objects.filter(user=request.user).order_by('queue_index')
+    # queue = InQueue.objects.filter(user=request.user).order_by('queue_index')
+    queue = request.user.inqueue_set.order_by('queue_index')
     current_index = UserQueue.objects.get(user=request.user).recording.queue_index
     data = {'current_index': current_index, 'queue': serialize_queue(queue)}
     return JsonResponse(data)
@@ -39,13 +40,13 @@ def list_queue(request):
 def add_song_to_queue(request):
     """Add new recording to queue"""
     if not request.is_ajax():
-        return
+        return HttpResponseBadRequest("Please request with AJAX")
 
     if request.method != 'POST':
-        return HttpResponse(status=405)
+        return HttpResponseNotAllowed(['POST'])
 
-    track_id = json.loads(request.body)['id']
-    recording = Track.objects.get(pk=track_id).recording
+    recording_id = json.loads(request.body)['id']
+    recording = Recording.objects.get(id=recording_id)
     queue = InQueue.objects.filter(user=request.user).order_by('queue_index')
     if queue:
         # The user has queued some songs

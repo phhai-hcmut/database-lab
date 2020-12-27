@@ -1,11 +1,10 @@
-from django.http import HttpResponse
-from django.shortcuts import render
+from django.core.exceptions import PermissionDenied
+from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
-from django.contrib.auth.decorators import login_required
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import (
     ModelForm,
     inlineformset_factory,
-    modelform_factory,
     HiddenInput,
 )
 from django import forms
@@ -16,38 +15,24 @@ from music.models import Recording
 from listening.models import InQueue
 
 
-@login_required
-def index(request):
-    """Render a list of user's playlists"""
-    playlist_list = Playlist.objects.filter(user=request.user).order_by('name').all()
-    in_queue = InQueue.objects.filter(user=request.user).order_by('queue_index')
-    return render(
-        request,
-        'playlist/user_playlist.html',
-        {'playlist_list': playlist_list, 'in_queue': in_queue},
-    )
+class PlaylistIndex(LoginRequiredMixin, ListView):
+    # template_name = 'playlist/user_playlist.html'
+    template_name = 'music/list_page/playlist_list.html'
+    context_object_name = 'playlist_list'
+
+    def get_queryset(self):
+        return self.request.user.playlist_set.order_by('name')
 
 
-def playlist_list(request):
-    playlist_list = Playlist.objects.order_by('name').all()
-    in_queue = InQueue.objects.filter(user=request.user).order_by('queue_index')
-    # TODO: link html file
-    return render(
-        request,
-        'music/list_page/playlist_list.html',
-        {'playlist_list': playlist_list, 'in_queue': in_queue},
-    )
+class PlaylistDetail(DetailView):
+    template_name = 'music/playlist_detail.html'
+    model = Playlist
 
-
-def detail(request, pk):
-    """Render a list of tracks in the playlist"""
-    # TODO: link to templates
-    playlist = Playlist.objects.get(pk=pk)
-    if not playlist.is_public and request.user != playlist.user:
-        resp = HttpResponse("Private playlist", status=401)
-    else:
-        resp = HttpResponse("A list of tracks in the playlist")
-    return render(request, 'music/playlist_detail.html', {'playlist': playlist})
+    def get(self, *args, **kwargs):
+        resp = super().get(*args, **kwargs)
+        if not self.object.is_public and self.request.user != self.object.user:
+            raise PermissionDenied("Sorry, this playlist is private.")
+        return resp
 
 
 class PlaylistForm(ModelForm):
@@ -57,7 +42,7 @@ class PlaylistForm(ModelForm):
         widgets = {'user': HiddenInput()}
 
 
-class PlaylistCreate(CreateView):
+class PlaylistCreate(LoginRequiredMixin, CreateView):
     model = Playlist
     template_name = 'edit/recording_form.html'
     form_class = PlaylistForm
@@ -82,7 +67,9 @@ class UserPlaylistsForm(forms.Form):
     def __init__(self, user, *args, **kwargs):
         super().__init__(*args, **kwargs)
         query = Playlist.objects.filter(user=user)
-        self.fields['playlists'] = forms.ModelMultipleChoiceField(query, widget=forms.CheckboxSelectMultiple)
+        self.fields['playlists'] = forms.ModelMultipleChoiceField(
+            query, widget=forms.CheckboxSelectMultiple
+        )
 
 
 class PlaylistAddRecording(FormView):
