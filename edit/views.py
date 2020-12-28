@@ -7,31 +7,33 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render
 from django.urls import reverse, reverse_lazy
 from django.views.generic.edit import CreateView, DeleteView, UpdateView
+from django.views import View
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 from music.models import Album, Artist, Credit, Recording, Track
 
 
 # Create your views here.
-class RecordingCreate(CreateView):
+class RecordingCreate(LoginRequiredMixin, CreateView):
     model = Recording
     fields = '__all__'
     template_name = 'edit/recording_form.html'
 
 
-class RecodingUpdate(UpdateView):
+class RecodingUpdate(LoginRequiredMixin, UpdateView):
     model = Recording
     fields = '__all__'
     template_name = 'edit/recording_form.html'
 
 
-class RecordingDelete(DeleteView):
+class RecordingDelete(LoginRequiredMixin, DeleteView):
     model = Recording
     success_url = reverse_lazy('music:index')
     fields = '__all__'
     template_name = 'edit/recording_form.html'
 
 
-class AlbumDelete(DeleteView):
+class AlbumDelete(LoginRequiredMixin, DeleteView):
     model = Album
     template_name = 'music/album_form.html'
     success_url = reverse_lazy('music:index')
@@ -54,8 +56,8 @@ TrackCreateFormSet = inlineformset_factory(
 )
 
 
-def album_create(request):
-    if request.method == 'POST':
+class AlbumCreate(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
         album_form = AlbumForm(request.POST)
         if album_form.is_valid():
             album = album_form.save()
@@ -72,18 +74,20 @@ def album_create(request):
             track_formset = TrackUpdateFormSet(request.POST)
             form = {'album_form': album_form, 'track_formset': track_formset}
             resp = render(request, 'edit/album_form.html', form)
-    else:
+        return resp
+
+    def get(self, request, *args, **kwargs):
         form = {
             'album_form': AlbumForm(),
             'track_formset': TrackCreateFormSet(initial=[{'track_number': 1}]),
         }
-        resp = render(request, 'edit/album_form.html', form)
-    return resp
+        return render(request, 'edit/album_form.html', form)
 
 
-def album_update(request, pk):
-    album = Album.objects.get(pk=pk)
-    if request.method == 'POST':
+class AlbumUpdate(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        pk = self.kwargs['pk']
+        album = Album.objects.get(pk=pk)
         album_form = AlbumForm(request.POST, instance=album)
         track_formset = TrackUpdateFormSet(request.POST, instance=album)
         if album_form.is_valid() and track_formset.is_valid():
@@ -95,10 +99,13 @@ def album_update(request, pk):
         else:
             form = {'album_form': album_form, 'track_formset': track_formset}
             resp = render(request, 'edit/album_form.html', form)
-    else:
+        return resp
+
+    def get(self, request, *args, **kwargs):
+        pk = self.kwargs['pk']
+        album = Album.objects.get(pk=pk)
         form = {
             'album_form': AlbumForm(instance=album),
             'track_formset': TrackUpdateFormSet(instance=album),
         }
-        resp = render(request, 'edit/album_form.html', form)
-    return resp
+        return render(request, 'edit/album_form.html', form)

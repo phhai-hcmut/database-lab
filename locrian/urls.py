@@ -40,7 +40,7 @@ urlpatterns = [
     path('playlist/', include('playlist.urls', namespace='playlist')),
     path('searching/', include(('searching.urls', 'searching'), namespace='searching')),
     # overwire admin logout link
-    path('admin/logout/', lambda request: redirect('account:logout', permanent=False)),
+    # path('admin/logout/', lambda request: redirect('account:logout', permanent=False)),
     path('admin/', admin.site.urls, name='admin'),
     path('queue/', include('listening.urls', namespace='queue')),
 ]
