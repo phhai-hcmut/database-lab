@@ -9,6 +9,10 @@
 			<h1>{{playlist.name}}</h1>
 			<p>Created at {{playlist.time_created}}</p>
 			<p>Playlist song count: {{ playlist.song_list|length }}</p>
+			{% if view.request.user.is_authenticated %}
+			<a href="{% url 'playlist:playlist-update' pk=playlist.pk %}"><i class="fas fa-pen"></i></a>
+			<a href="{% url 'playlist:playlist-delete' pk=playlist.pk %}"><i class="fas fa-trash"></i></a>
+			{% endif %}
 		</div>
 		<div id="track-list">
 			<h3>Song List</h3>

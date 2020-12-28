@@ -23,7 +23,7 @@ urlpatterns = [
     # Example: "http://127.0.0.1:8000/music/" to visit music
     path('account/', include('account.urls', namespace='account')),
     path('', include('music.urls', namespace='music')),
-    path('', include('edit.urls')),
+    path('', include('edit.urls', namespace='edit')),
     path('playlist/', include('playlist.urls', namespace='playlist')),
     path('searching/', include(('searching.urls', 'searching'), namespace='searching')),
     # overwire admin logout link

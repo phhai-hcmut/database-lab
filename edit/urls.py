@@ -2,6 +2,7 @@ from django.conf.urls import include
 from django.urls import path
 from . import views
 
+app_name = 'edit'
 urlpatterns = [
     path('album/add/', views.AlbumCreate.as_view(), name='album-add'),
     path('album/<int:pk>/edit/', views.AlbumUpdate.as_view(), name='album-update'),

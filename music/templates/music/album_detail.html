@@ -18,6 +18,11 @@
 					</a>
 					{%endfor%}
 				</ul>
+				<br/>
+				{% if view.request.user.is_authenticated %}
+				<a href="{% url 'edit:album-update' pk=album.pk %}"><i class="fas fa-pen"></i></a>
+				<a href="{% url 'edit:album-delete' pk=album.pk %}"><i class="fas fa-trash"></i></a>
+				{% endif %}
 			</div>
 			<div id="track-list">
 				<h3>Track list</h3>
