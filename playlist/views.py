@@ -1,6 +1,7 @@
 from django.core.exceptions import PermissionDenied
 from django.views.generic import DetailView, ListView
 from django.views.generic.edit import CreateView, DeleteView, UpdateView, FormView
+from django.views.generic.base import TemplateView
 from django.contrib.auth.mixins import LoginRequiredMixin
 from django.forms import (
     ModelForm,
@@ -15,17 +16,28 @@ from music.models import Recording
 from listening.models import InQueue
 
 
-class PlaylistIndex(LoginRequiredMixin, ListView):
-    # template_name = 'playlist/user_playlist.html'
-    template_name = 'music/list_page/playlist_list.html'
+class UserPlaylist(LoginRequiredMixin, ListView):
+    template_name = 'playlist/user_playlist.html'
+    # template_name = 'music/list_page/playlist_list.html'
     context_object_name = 'playlist_list'
 
     def get_queryset(self):
         return self.request.user.playlist_set.order_by('name')
 
 
+class PlaylistIndex(TemplateView):
+    template_name = 'playlist/index.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        if self.request.user.is_authenticated:
+            context['user_playlists'] = self.request.user.playlist_set.order_by('name')
+        context['public_playlists'] = Playlist.objects.filter(is_public=True)
+        return context
+
+
 class PlaylistDetail(DetailView):
-    template_name = 'music/playlist_detail.html'
+    template_name = 'playlist/detail.html'
     model = Playlist
 
     def get(self, *args, **kwargs):
