@@ -9,7 +9,11 @@ urlpatterns = [
         views.SearchPlaylistView.as_view(),
         name='search-playlist',
     ),
-    # path('search_result/track/<str:query>/',views.searchTrack, name='search-track'),
+    path(
+        'search_result/recording/<str:query>/',
+        views.SearchRecordingView.as_view(),
+        name='search-recording',
+    ),
     path(
         'search_result/artist/<str:query>/',
         views.SearchArtistView.as_view(),

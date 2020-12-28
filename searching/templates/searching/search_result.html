@@ -6,7 +6,7 @@
 {% block content %}
 	<div id="right">
 		<div id="album">
-			<h2>Latest album</h2>
+			<h2>Albums</h2>
 			<a class="more" href="{%url 'searching:search-album' query %} ">More >></a>
 			<div class="album-list">
 				{% if albums %}
@@ -37,27 +37,26 @@
 
 		<!-- Top 5 trending track -->
 		<div id="trend">
-			<h2>Trending</h2>
-			{#<a class="more" href="{%url 'searching:search-track' query %} ">More >></a>#}
+			<h2>Recordings</h2>
+			{% if recordings %}
+			<a class="more" href="{%url 'searching:search-recording' query %} ">More >></a>
 			<div class="album-list">
-				{% if tracks %}
-					<ul>
-						<li><strong>Track Number</strong></li>
-						<li><strong>Album</strong></li>
-						<li><strong>Track Name</strong></li>
-					</ul>
-					{% for track in tracks %}
-					<ul class="hover-this">
-						<li id="track-numb"> {{ track.track_number }}</li>
-						<a href="{% url 'music:album-detail' track.album.id %}"><li> {{track.album.name}}</li></a>
-						<a href="{% url 'music:track-detail' track.id %}"><li> {{ track.recording.name }}</li></a>
-						<li id="add-button" onclick="addSongToQueue({{ track.recording.id }})"><i class="fas fa-plus-circle"></i></li>
-					</ul>
-					{% endfor %}
-				{% else %}
-					<p>No tracks are available.</p>
-				{% endif %}
+				<ul>
+					<li><strong>Name</strong></li>
+					<li><strong>Artists</strong></li>
+					<li><strong>Duration</strong></li>
+				</ul>
+				{% for recording in recordings %}
+				<ul class="hover-this">
+					<a href="{{ recording.get_absolute_url }}">
+					<li>{{ recording.name }}</li>
+					<li>{{ recording.get_artist_names }}</li>
+					<li>{{ recording.duration }}</li>
+					<li id="add-button" onclick="addSongToQueue({{ track.recording.id }})"><i class="fas fa-plus-circle"></i></li>
+				</ul>
+				{% endfor %}
 			</div>
+			{% endif %}
 		</div>
 
 		<!-- Top 5 artist by name -->

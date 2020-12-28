@@ -1,0 +1,28 @@
+{% extends 'account/main.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/list_page/track_list_style.css' %}">
+{% endblock %}
+{% block content %}
+	<div id="right">
+		<h1>Search Recording List Result</h1>
+		<div class="latest-album-list">
+			{% if recording_list %}
+				<ul>
+					<li><strong>Name</strong></li>
+					<li><strong>Artists</strong></li>
+					<li><strong>Duration</strong></li>
+				</ul>
+				{% for recording in recording_list %}
+				<ul class="hover-this">
+					<a href="{{ recording.get_absolute_url }}">
+					<li>{{ recording.name }}</li>
+					<li>{{ recording.get_artist_names }}</li>
+					<li>{{ recording.duration }}</li>
+					<li id="add-button" onclick="addSongToQueue({{ track.recording.id }})"><i class="fas fa-plus-circle"></i></li>
+				</ul>
+				{% endfor %}
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}
