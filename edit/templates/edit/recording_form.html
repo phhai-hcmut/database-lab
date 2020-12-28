@@ -1,16 +1,14 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Recording Form</title>
-	{% load static %}
-</head>
-<body>
-    <form id="form-container" method="POST">
-        {% csrf_token %}
-		{{ form }}
-        <button type="submit">Submit</button>
-    </form>
-    </body>
-</html>
+{% extends 'account/main.html' %}
+{% load static %}
+{% block css %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/form_style.css' %}">
+{% endblock %}
+{% block content %}
+    <div id="right">
+        <form id="form-container" method="POST">
+            {% csrf_token %}
+            {{ form }}
+            <button type="submit">Submit</button>
+        </form>
+    </div>
+{% endblock %}
