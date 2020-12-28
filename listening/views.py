@@ -2,7 +2,7 @@ import json
 
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseBadRequest, HttpResponseNotAllowed, JsonResponse
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from music.models import Recording, Track
 
 from .models import InQueue, UserQueue
@@ -31,7 +31,7 @@ def list_queue(request):
 
     # queue = InQueue.objects.filter(user=request.user).order_by('queue_index')
     queue = request.user.inqueue_set.order_by('queue_index')
-    current_index = UserQueue.objects.get(user=request.user).recording.queue_index
+    current_index = get_object_or_404(UserQueue, user=request.user).recording.queue_index
     data = {'current_index': current_index, 'queue': serialize_queue(queue)}
     return JsonResponse(data)
 
@@ -46,7 +46,7 @@ def add_song_to_queue(request):
         return HttpResponseNotAllowed(['POST'])
 
     recording_id = json.loads(request.body)['id']
-    recording = Recording.objects.get(id=recording_id)
+    recording = get_object_or_404(Recording, id=recording_id)
     queue = InQueue.objects.filter(user=request.user).order_by('queue_index')
     if queue:
         # The user has queued some songs
