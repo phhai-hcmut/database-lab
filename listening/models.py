@@ -19,6 +19,7 @@ class UserQueue(models.Model):
         REPEAT_CURRENT = 1, 'Repeat Current Song'
         REPEAT_ALL = 2, 'Repeat All Playlist'
 
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     recording = models.ForeignKey(InQueue, on_delete=models.CASCADE)
     repeat_state = models.CharField(choices=RepeatState.choices, max_length=200)
     is_playing = models.BooleanField()

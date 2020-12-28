@@ -1,15 +1,39 @@
 from django.conf.urls import include
 from django.urls import path
-from . import views
+from django.views.generic.detail import DetailView
+from django.views.generic.list import ListView
+
+from .models import Album, Artist, Recording
+from .views import HomePageView
 
 app_name = 'music'
 urlpatterns = [
-    path('', views.index, name='index'),
-    path('album/<int:pk>/', views.album_detail, name='album-detail'),
-    path('artist/<int:pk>/', views.artist_detail, name='artist-detail'),
-    path('track/<int:pk>', views.track_detail, name='track-detail'),
-    path('album/', views.album_list, name='album_list'),
-    path('track/', views.track_list, name='track_list'),
-    path('artist/', views.artist_list, name='artist_list'),
-    path('add/', views.addMusic, name='add'),
+    path('', HomePageView.as_view(), name='index'),
+    path('album/<int:pk>/', DetailView.as_view(model=Album), name='album-detail'),
+    path('artist/<int:pk>/', DetailView.as_view(model=Artist), name='artist-detail'),
+    # path('track/<int:pk>', views.track_detail, name='track-detail'),
+    path(
+        'recording/<int:pk>/',
+        DetailView.as_view(model=Recording),
+        name='recording-detail',
+    ),
+    path(
+        'album/',
+        ListView.as_view(model=Album, template_name='music/list_page/album_list.html'),
+        name='album_list',
+    ),
+    path(
+        'artist/',
+        ListView.as_view(
+            model=Artist, template_name='music/list_page/artist_list.html'
+        ),
+        name='artist_list',
+    ),
+    path(
+        'recording/',
+        ListView.as_view(
+            model=Recording, template_name='music/list_page/recording_list.html'
+        ),
+        name='recording_list',
+    ),
 ]

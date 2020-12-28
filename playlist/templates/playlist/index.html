@@ -1,0 +1,42 @@
+{% extends 'account/main.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/user_playlist_style.css' %}">
+{% endblock %}
+{% block content %}
+	<div id="right">
+		<h1>Visible Playlists</h1>
+		{% if view.request.user.is_authenticated %}
+		<div class="playlist-list">
+			<h2>My Playlists</h2>
+			<ul>
+				<li><strong>Name</strong></li>
+				<li><strong># Songs</strong></li>
+				<li><strong>Time Created</strong></li>
+			</ul>
+			{% for playlist in user_playlists %}
+			<ul id="hover-this"><a href="{{ playlist.get_absolute_url }}">
+				<li>{{ playlist.name }}</li>
+				<li>{{ playlist.song_list|length }}</li>
+				<li>{{ playlist.time_created }}</li>
+			</a></ul>
+			{% endfor %}
+		</div>
+		{% endif %}
+		<div class="playlist-list">
+			<h2>Public Playlists</h2>
+			<ul>
+				<li><strong>Name</strong></li>
+				<li><strong>User</strong></li>
+				<li><strong>Time Created</strong></li>
+			</ul>
+			{% for playlist in public_playlists %}
+			<ul id="hover-this"><a href="{{ playlist.get_absolute_url }}">
+				<li>{{ playlist.name }}</li>
+				<li>{{ playlist.user }}</li>
+				<li>{{ playlist.time_created }}</li>
+			</a></ul>
+			{% endfor %}
+		</div>
+	</div>
+{% endblock %}

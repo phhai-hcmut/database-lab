@@ -12,6 +12,20 @@ class Artist(models.Model):
     def __str__(self) -> str:
         return self.name
 
+    def get_absolute_url(self):
+        return reverse('music:artist-detail', kwargs={'pk': self.pk})
+
+    @property
+    def owned_albums(self):
+        return self.album.order_by('-release_date')
+
+    @property
+    def credits(self):
+        return self.credit_set.all()
+
+    class Meta:
+        ordering = ('name',)
+
 
 class Recording(models.Model):
     name = models.CharField(max_length=200)
@@ -21,7 +35,14 @@ class Recording(models.Model):
     )
 
     def get_absolute_url(self):
-        return reverse('track-detail', kwargs={'pk': self.pk})
+        return reverse('music:recording-detail', kwargs={'pk': self.pk})
+
+    def get_artist_names(self, sep=","):
+        return sep.join(artist.name for artist in self.artist_credits.all())
+
+    @property
+    def artist_names(self):
+        return self.get_artist_names()
 
 
 class Album(models.Model):
@@ -38,10 +59,23 @@ class Album(models.Model):
 
     def __str__(self) -> str:
         artists = [str(a) for a in self.owner.all()]
-        return f"{self.name}, {self.release_date}, {self.album_type}, Artists: {artists}"
-    
+        return (
+            f"{self.name}, {self.release_date}, {self.album_type}, Artists: {artists}"
+        )
+
     def get_absolute_url(self):
         return reverse('album-detail', kwargs={'pk': self.pk})
+
+    @property
+    def track_list(self):
+        return self.track.order_by('track_number')
+
+    @property
+    def owner_list(self):
+        return self.owner.distinct()
+
+    class Meta:
+        ordering = ('-release_date',)
 
 
 class Track(models.Model):
@@ -69,6 +103,7 @@ class Credit(models.Model):
     recording = models.ForeignKey(Recording, on_delete=models.CASCADE)
     artist = models.ForeignKey(Artist, on_delete=models.CASCADE)
     role = models.CharField(choices=CreditRole.choices, max_length=200)
+
     class Meta:
         unique_together = ['recording', 'artist', 'role']
 

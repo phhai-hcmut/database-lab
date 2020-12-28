@@ -1,0 +1,33 @@
+{% extends 'account/main.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/track_detail_style.css' %}">
+{% endblock %}
+{% block content %}
+	<div id="right">
+		<div id="artist-info">
+			<h1> {{ recording.name }}</h1>
+			<h3>Duration: {{ recording.duration }}</h3>
+			{% if view.request.user.is_authenticated %}
+			<a href="{% url 'edit:recording-update' pk=recording.pk %}"><i class="fas fa-pen"></i></a>
+			<a href="{% url 'edit:recording-delete' pk=recording.pk %}"><i class="fas fa-trash"></i></a>
+			{% endif %}
+		</div>
+
+		<div id="credit-album">
+			<div class="list">
+				<h3>Artists Credits</h3>
+				<ul id="header">
+					<li><strong>Name</strong></li>
+					<li><strong>Role</strong></li>
+				</ul>
+				{% for credit in recording.credit_set.all %}
+				<ul class="hover-this"><a style="text-decoration:none" href="{{ credit.artist.get_absolute_url }}">
+					<li>{{ credit.artist.name }}</li>
+					<li>{{ credit.get_role_display }}</li>
+				</a></ul>
+				{% endfor%}
+			</div>
+		</div>
+	</div>
+{% endblock %}
