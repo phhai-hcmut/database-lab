@@ -3,7 +3,7 @@ from django.urls import path
 from django.views.generic.detail import DetailView
 from django.views.generic.list import ListView
 
-from .models import Album, Artist, Credit, Recording, Track
+from .models import Album, Artist, Recording
 from .views import HomePageView
 
 app_name = 'music'
@@ -28,5 +28,12 @@ urlpatterns = [
             model=Artist, template_name='music/list_page/artist_list.html'
         ),
         name='artist_list',
+    ),
+    path(
+        'recording/',
+        ListView.as_view(
+            model=Recording, template_name='music/list_page/recording_list.html'
+        ),
+        name='recording_list',
     ),
 ]
