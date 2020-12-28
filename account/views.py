@@ -26,7 +26,7 @@ def loginPage(request):
 
         if user is not None:
             login(request, user)
-            return redirect('account:home')
+            return redirect('music:index')
         else:
             messages.info(request, 'Username OR password is incorrect')
 
