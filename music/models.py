@@ -1,7 +1,8 @@
 from datetime import timedelta
 
-from django.core.validators import MinValueValidator
 from django.db import models
+from django.core.validators import MinValueValidator
+from django.contrib.auth.models import AbstractUser, Group
 from django.urls import reverse
 
 
@@ -32,9 +33,6 @@ class Recording(models.Model):
     artist_credits = models.ManyToManyField(
         Artist, through='Credit', related_name='artist_credit'
     )
-    genres = models.ManyToManyField(
-        'Genre', related_name='recordings', db_table='recording_genre'
-    )
 
     def get_absolute_url(self):
         return reverse('music:recording-detail', kwargs={'pk': self.pk})
@@ -58,9 +56,6 @@ class Album(models.Model):
     # NOTE: this does auto cascade so it does not have on_delete attribute.
     owner = models.ManyToManyField(Artist, related_name='album')
     album_type = models.CharField(choices=AlbumType.choices, max_length=200)
-    genres = models.ManyToManyField(
-        'Genre', related_name='albums', db_table='album_genre'
-    )
 
     def __str__(self) -> str:
         artists = [str(a) for a in self.owner.all()]
@@ -114,10 +109,3 @@ class Credit(models.Model):
 
     def __str__(self) -> str:
         return f"{self.recording}, {self.artist}, {self.role}"
-
-
-class Genre(models.Model):
-    name = models.TextField()
-
-    class Meta:
-        db_table = 'genre'
