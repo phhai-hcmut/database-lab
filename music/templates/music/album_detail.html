@@ -26,33 +26,38 @@
 			</div>
 			<div id="track-list">
 				<h3>Track list</h3>
-				<ul id="header">
-					<li><strong>Track Number</strong></li>
-					<li><strong>Name</strong></li>
-					<li><strong>Duration</strong></li>
-					<li><strong>Artists</strong></li>
-				</ul>
-
-				{% for track in album.track_list %}
-				<ul class="hover-this">
-					<li id="track-numb"> {{ track.track_number }}</li>
-					<a href="{{ track.recording.get_absolute_url }}">
-						<li>{{ track.recording.name }}</li>
-					</a>
-					<li> {{ track.recording.duration }}</li> 
-					<li id = "artist_item"> <ul>
-						{% for artist in track.recording.artist_credits.all.distinct %}
-						<a href = "{{ artist.get_absolute_url }}">
-							<li>{{ artist.name }}</li>
-						</a>
-						{% endfor %}
-					</ul></li>
-					<li id="add-button" onclick="addSongToQueue({{ track.recording.id }})"><i class="fas fa-plus-circle"></i></li>
-				</ul>
-				{% endfor %}
+				<table>
+					<tr>
+						<th>Track Number</th>
+						<th>Name</th>
+						<th>Duration</th>
+						<th>Artists</th>
+					</tr>
+					{% for track in album.track_list %}
+					<tr class="hover-this">
+						<td> {{ track.track_number }}</td>
+						<td>
+							<a class="text" href="{{ track.recording.get_absolute_url }}">
+								{{ track.recording.name }}
+							</a>
+						</td>
+						
+						<td> {{ track.recording.duration }}</td> 
+						<td> 
+							{% for artist in track.recording.artist_credits.all.distinct %}
+								<a class="text" href = "{{ artist.get_absolute_url }}">
+									{{ artist.name }}
+								</a>
+								<br />
+							{% endfor %}
+						</td>
+						<td id="add-button" onclick="addSongToQueue({{ track.recording.id }})"><i class="fas fa-plus-circle"></i></td>
+					</tr>
+					{% endfor %}
+				</table>
 			</div>
 		{% else %}
-			<p>No Album of this id available.</p>
+			<p class="text">No Album of this id available.</p>
 		{% endif %}
 	</div>
 {% endblock %}

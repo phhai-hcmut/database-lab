@@ -40,7 +40,8 @@ class Recording(models.Model):
         return reverse('music:recording-detail', kwargs={'pk': self.pk})
 
     def get_artist_names(self, sep=","):
-        return sep.join(artist.name for artist in self.artist_credits.all())
+        artist_names = list(set(artist.name for artist in self.artist_credits.all()))
+        return sep.join(artist_names)
 
     @property
     def artist_names(self):
@@ -118,6 +119,14 @@ class Credit(models.Model):
 
 class Genre(models.Model):
     name = models.TextField()
+
+    @property
+    def album_list(self):
+        return Album.objects.filter(genres=self)
+
+    @property
+    def recording_list(self):
+        return Recording.objects.filter(genres=self)
 
     class Meta:
         db_table = 'genre'

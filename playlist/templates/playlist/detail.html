@@ -16,19 +16,24 @@
 		</div>
 		<div id="track-list">
 			<h3>Song List</h3>
-			<ul>
-				<li><strong>Name</strong></li>
-				<li><strong>Duration</strong></li>
-				<li><strong>Artists</strong></li>
-			</ul>
-
-			{% for recording in playlist.song_list %}
-			<ul><a href="{{ recording.get_absolute_url }}">
-				<li>{{ recording.name }}</li>
-				<li>{{ recording.duration }}</li>
-				<li>{{ recording.get_artist_names }}</li>
-			</a></ul>
-			{% endfor %}
+			<table>
+				<tr>
+					<th>Name</th>
+					<th>Duration</th>
+					<th>Artists</th>
+				</tr>
+				{% for recording in playlist.song_list %}
+				<tr class="hover-this">
+					<td>
+						<a class="text" href="{{ recording.get_absolute_url }}">
+							{{ recording.name }}
+						</a>
+					</td>
+					<td>{{ recording.duration }}</td>
+					<td>{{ recording.get_artist_names }}</td>
+				</tr>
+				{% endfor%}
+			</table>
 		</div>
 	</div>
 {% endblock %}

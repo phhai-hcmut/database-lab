@@ -1,240 +1,141 @@
-body{
-	font-family: Arial;
-	background: black;
-	margin: 0px auto;
+body {
+  font-family: Arial;
+  background: black;
+  margin: 0px auto;
 }
 
 #main #left {
-	background: black;
-	width: 15%;
-	float: left;
+  background: black;
+  width: 15%;
+  float: left;
 }
 
 #main #left ul {
-	list-style-type: none;
-	padding-left: 0px;
+  list-style-type: none;
+  padding-left: 0px;
 }
 
 #main #left ul a {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 #main #left ul li {
-	font-size: 15pt;
-	padding: 15px 5px 15px 15px;
-	margin-left: 10px;
-	margin-right: 10px;
-	cursor: pointer;
-	color: grey;
+  font-size: 15pt;
+  padding: 15px 5px 15px 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  color: grey;
 }
 
 #main #left ul li:hover {
-	color: white;
-	border-radius: 3px;
-	background: #212121;
+  color: white;
+  border-radius: 3px;
+  background: #212121;
 }
 
 #main #right {
-	background: #212121;
-	width: 85%;
-	float: right;
-	height: 0;
-	padding-bottom: 105%;
+  background: #212121;
+  width: 85%;
+  float: right;
+  height: 0;
+  padding-bottom: 105%;
 }
 
-#main #right .hover-this:hover {
-    background:grey;
-}
-
-#main #right .hover-this li:hover {
-    cursor: pointer;
+.hover-this:hover {
+  background: grey;
+  cursor: pointer;
 }
 
 #main #right h2 {
-	color: white;
-	margin-left: 5%;
-	cursor: pointer;
-	float: left;
+  color: white;
+  margin-left: 5%;
+  cursor: pointer;
+  float: left;
 }
 
 #main #right h2:hover {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 
-#main #right a.more {
-    float: right;
-    margin: 35px 130px 0px 0px;
-    color: white;
+.more {
+  float: right;
+  margin: 35px 130px 0px 0px;
+  color: white;
 }
 
-#main #right #album .album-list{
-	background: #212121;
-	width: 85%;
-	margin-left: 8%;
-	clear: both;
+
+.genre-list {
+  background: #212121;
+  width: 85%;
+  margin-left: 8%;
+  clear: both;
 }
 
-#main #right #album ul {
-	column-count: 5;
-	column-gap: 80px;
-	list-style-type: none;
-	padding: 12px 0px 12px 0px;
-	border-bottom: 1px solid white;
-	margin: 0;
-}
-
-#main #right #album ul a{
-	text-decoration: none;
-	color: white;
-	padding: 0px;
-}
-
-#main #right #album ul a:hover{
-	text-decoration: none;
-}
-
-#main #right #album ul li{
-	color: white;
-	padding: 0px;
-	margin-left: 25px;
+.album-list {
+  background: #212121;
+  width: 85%;
+  margin-left: 8%;
+  clear: both;
 }
 
 #main #right #trend {
-	margin-top: 5%;
+  margin-top: 5%;
 }
 
-#main #right #trend .album-list{
-	background: #212121;
-	width: 85%;
-	margin-left: 8%;
-	clear: both;
-}
 
-#main #right #trend ul {
-	column-count: 4;
-	column-gap: 30px;
-	list-style-type: none;
-	padding: 12px 0px 12px 0px;
-	border-bottom: 1px solid white;
-	margin: 0;
-	text-indent: 10px;
-}
-
-#main #right #trend #add-button i:hover {
-    cursor: pointer;
-    transform: scale(1.12);
-	transition: all .4s ease;
-}
-
-#main #right #trend ul li {
-	color: white;
-	padding: 0px;
-	margin-left: 25px;
-}
-
-#main #right #trend ul a{
-	text-decoration: none;
-	color: white;
-	padding: 0px;
-}
-
-#main #right #trend ul a:hover{
-	text-decoration: underline;
+i:hover {
+  cursor: pointer;
+  transform: scale(1.12);
+  transition: all 0.4s ease;
 }
 
 #main #right #artist {
-	margin-top: 5%;
+  margin-top: 5%;
 }
 
-#main #right #artist .artist-list{
+.artist-list{
 	background: #212121;
 	width: 85%;
 	margin-left: 8%;
 	clear: both;
-}
-
-#main #right #artist ul {
-	column-count: 1;
-	column-gap: 80px;
-	list-style-type: none;
-	padding: 12px 0px 12px 0px;
-	border-bottom: 1px solid white;
-	margin: 0;
-}
-
-#main #right #artist ul li {
-	color: white;
-	padding: 0px;
-	margin-left: 25px;
-}
-
-#main #right #artist ul a{
-	text-decoration: none;
-	color: white;
-	padding: 0px;
-}
-
-#main #right #artist ul a:hover{
-	text-decoration: underline;
 }
 
 #main #right #playlist {
-	margin-top: 5%;
+  margin-top: 5%;
 }
 
-#main #right #playlist .playlist-list{
-	background: #212121;
-	width: 85%;
-	margin-left: 8%;
-	clear: both;
+.playlist-list {
+  background: #212121;
+  width: 85%;
+  margin-left: 8%;
+  clear: both;
 }
 
-#main #right #playlist ul {
-	column-count: 3;
-	column-gap: 30px;
-	list-style-type: none;
-	padding: 12px 0px 12px 0px;
-	border-bottom: 1px solid white;
-	margin: 0;
+#main #right #track-numb {
+  text-indent: 50px;
 }
 
-#main #right #playlist ul li {
-	color: white;
-	padding: 0px;
-	margin-left: 25px;
+table {
+  border-collapse: collapse;
+  width: 100%;
 }
 
-#main #right #playlist ul a{
-	text-decoration: none;
-	color: white;
-	padding: 0px;
+tr {
+  border-bottom: 1px solid white;
 }
 
-#main #right #playlist ul a:hover{
-	text-decoration: underline;
+th,
+td {
+  color: white;
+  padding: 10px;
 }
 
-#main #right #track-numb{
-    text-indent: 50px;
+th {
+  text-align: left;
 }
 
-#main #right #artist_item ul {
-	all: initial;
-	display: inline;
-	list-style: none;
-	border-bottom: none;
-	margin-left: 5px;
+.text {
+  color: white;
+  text-decoration: none;
 }
-
-#main #right #artist_item li:hover {
-    cursor: pointer;
-}
-
-#main #right #artist_item ul li{
-	all: initial;
-	color: white;
-	padding: 0px;
-	font-family: Arial;
-	font-size: 15;
-}
-

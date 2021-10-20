@@ -1,0 +1,69 @@
+{% extends 'account/main.html' %} {% load static %} {% block css %}
+<link
+  rel="stylesheet"
+  type="text/css"
+  href="{% static 'css/genre_detail_style.css' %}"
+/>
+{% endblock %} {% block content %}
+<div id="right">
+  {% if genre %}
+  <div id="genre-info">
+    <h1>{{ genre.name }}</h1>
+    <br />
+  </div>
+  <div id="track-list">
+    <h3>Album list</h3>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Release Date</th>
+        <th>Owner</th>
+        <th>Type</th>
+      </tr>
+      {% for album in genre.album_list %}
+      <tr class="hover-this">
+        <td>
+          <a class="text" href="{% url 'music:album-detail' album.id %}">
+            {{ album.name }}
+          </a>
+        </td>
+
+        <td>{{ album.release_date }}</td>
+        <td>
+          {%for artist in album.owner.distinct %}
+          <a class="text" href="{%url 'music:artist-detail' artist.id%}">{{artist.name}}</a>
+          <br />
+          {%endfor%}
+        </td>
+        <td>{{ album.get_album_type_display }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+
+  <div id="track-list">
+    <h3>Recording list</h3>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Artists</th>
+        <th>Duration</th>
+      </tr>
+      {% for recording in genre.recording_list %}
+      <tr class="hover-this">
+        <td>
+          <a class="text" href="{{ recording.get_absolute_url }}">
+            {{ recording.name }}
+          </a>
+        </td>
+        <td>{{ recording.artist_names }}</td>
+        <td>{{ recording.duration }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+  </div>
+  {% else %}
+  <p>No Album of this id available.</p>
+  {% endif %}
+</div>
+{% endblock %}

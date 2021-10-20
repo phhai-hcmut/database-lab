@@ -1,0 +1,30 @@
+{% extends 'account/main.html' %}
+{% load static %}
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'css/list_page/genre_list_style.css' %}">
+{% endblock %}
+{% block content %}
+	<div id="right">
+		<h1>Genres</h1>
+		<div class="latest-genre-list">
+			{% if genre_list %}
+				<table>
+					<tr>
+						<th>Name</th>
+					</tr>
+					{% for genre in genre_list %}
+					<tr id="hover-this">
+						<td>
+							<a class="text" href="{% url 'music:genre-detail' genre.id %}">
+								 {{ genre.name }}
+							</a>
+						</td>
+					</tr>
+					{% endfor %}
+				</table>
+			{% else %}
+				<p class="text">No genres are available.</p>
+			{% endif %}
+		</div>
+	</div>
+{% endblock %}

@@ -7,18 +7,24 @@
     <div id="right">
         <h1>My Playlists</h1>
         <div class="playlist-list">
-			<ul>
-				<li><strong>Name</strong></li>
-				<li><strong># Songs</strong></li>
-				<li><strong>Time Created</strong></li>
-			</ul>
-			{% for playlist in playlist_list %}
-			<ul id="hover-this"><a href="{{ playlist.get_absolute_url }}">
-				<li>{{ playlist.name }}</li>
-				<li>{{ playlist.song_list|length }}</li>
-				<li>{{ playlist.time_created }}</li>
-			</a></ul>
-			{% endfor %}
+			<table>
+				<tr>
+					<th>Name</th>
+					<th># Songs</th>
+					<th>Time Created</th>
+				</tr>
+				{% for playlist in playlist_list %}
+				<tr class="hover-this">
+					<td>
+						<a class="text" href="{{ playlist.get_absolute_url }}">
+							{{ playlist.name }}
+						</a>
+					</td>
+					<td>{{ playlist.song_list|length }}</td>
+					<td>{{ playlist.time_created }}</td>
+				</tr>
+				{% endfor%}
+			</table>
         </div>
     </div>
 {% endblock %}

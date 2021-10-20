@@ -17,16 +17,22 @@
 		<div id="credit-album">
 			<div class="list">
 				<h3>Artists Credits</h3>
-				<ul id="header">
-					<li><strong>Name</strong></li>
-					<li><strong>Role</strong></li>
-				</ul>
-				{% for credit in recording.credit_set.all %}
-				<ul class="hover-this"><a style="text-decoration:none" href="{{ credit.artist.get_absolute_url }}">
-					<li>{{ credit.artist.name }}</li>
-					<li>{{ credit.get_role_display }}</li>
-				</a></ul>
-				{% endfor%}
+				<table>
+					<tr>
+						<th>Name</th>
+						<th>Role</th>
+					</tr>
+					{% for credit in recording.credit_set.all %}
+					<tr class="hover-this">
+						<td>
+							<a class="text" href="{{ credit.artist.get_absolute_url }}">
+							{{ credit.artist.name }}
+							</a>
+						</td>
+						<td>{{ credit.get_role_display }}</td>
+					</tr>
+					{% endfor%}
+				</table>
 			</div>
 		</div>
 	</div>

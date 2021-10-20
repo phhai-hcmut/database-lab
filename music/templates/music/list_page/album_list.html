@@ -8,25 +8,33 @@
 		<h1>Latest Album</h1>
 		<div class="latest-album-list">
 			{% if album_list %}
-				<ul>
-					<li><strong>Name</strong></li>
-					<li><strong>Release Date</strong></li>
-					<li><strong>Owner</strong></li>
-					<li><strong>Type</strong></li>
-					<li> </li>
-				</ul>
-				{% for album in album_list %}
-				<ul  id="hover-this">
-					<a href="{% url 'music:album-detail' album.id %}"><li> {{ album.name }}</li></a>
-					<li> {{ album.release_date }}</li>
-					<li id = "artist_item"> <ul id="artist_list">
-						{%for artist in album.owner.distinct %}
-						<a href = "{%url 'music:artist-detail' artist.id%}"><li>{{artist.name}}</li></a>
-						{%endfor%}
-					</ul></li>
-					<li> {{ album.get_album_type_display }}</li>
-				</ul>
-				{% endfor %}
+				<table>
+					<tr>
+						<th>Name</th>
+						<th>Release Date</th>
+						<th>Owner</th>
+						<th>Type</th>
+					</tr>
+					{% for album in album_list %}
+					<tr class="hover-this">
+						<td>
+							<a class="text" href="{% url 'music:album-detail' album.id %}">
+								{{ album.name }}
+							</a>
+						</td>
+						<td> {{ album.release_date }}</td>
+						<td> 
+							{%for artist in album.owner.distinct %}
+								<a class="text" href = "{%url 'music:artist-detail' artist.id%}">
+									{{artist.name}}
+								</a>
+								<br />
+							{%endfor%}
+						</td>
+						<td> {{ album.get_album_type_display }}</td>
+					</tr>
+					{% endfor%}
+				</table>
 			{% else %}
 				<p>No albums are available.</p>
 			{% endif %}

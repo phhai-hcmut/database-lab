@@ -8,20 +8,27 @@
 		<h1>Top Trending Recordings</h1>
 		<div class="latest-album-list">
 			{% if recording_list %}
-				<ul>
-					<li><strong>Name</strong></li>
-					<li><strong>Artists</strong></li>
-					<li><strong>Duration</strong></li>
-				</ul>
-				{% for recording in recording_list %}
-				<ul class="hover-this">
-					<a href="{{ recording.get_absolute_url }}">
-					<li>{{ recording.name }}</li>
-					<li>{{ recording.get_artist_names }}</li>
-					<li>{{ recording.duration }}</li>
-					<li id="add-button" onclick="addSongToQueue({{ track.recording.id }})"><i class="fas fa-plus-circle"></i></li>
-				</ul>
-				{% endfor %}
+				<table>
+					<tr>
+						<th>Name</th>
+						<th>Artists</th>
+						<th>Duration</th>
+					</tr>
+					{% for recording in recording_list %}
+					<tr class="hover-this">
+						<td>
+							<a class="text" href="{{ recording.get_absolute_url }}">
+								{{ recording.name }}
+							</a>
+						</td>
+						<td>{{ recording.get_artist_names }}</td>
+						<td>{{ recording.duration }}</td>
+						<td onclick="addSongToQueue({{ recording.id }})"><i class="fas fa-plus-circle"></i></td>
+					</tr>
+					{% endfor%}
+				</table>
+			{% else %}
+				<p class="text">No recordings are available.</p>
 			{% endif %}
 		</div>
 	</div>
