@@ -1,0 +1,11 @@
+﻿id,password,username,role,is_active,date_joined
+1,pbkdf2_sha256$260000$J13xbucaukCt5WJLHWWPPy$8Wi6nn1MmPJGvgU+QYwlNsW25eP5JtYdeTXd3QDZWLY=,weirdkid,0,1,2021-10-09
+2,pbkdf2_sha256$260000$8Pbistw0RlHFJiFY3T199H$OAuadTlz1OKNh9P/hh0P7ZBQtAy6q53CF1mPnmRjkR0=,bigtimegangsta,0,1,2021-10-09
+3,pbkdf2_sha256$260000$Km98wSaj53WttNCZhSTMgq$78LdJZEfcPBzs8H+ELFKbHajGLQYuarAyxeWEc0F4yQ=,pphai,0,1,2021-10-09
+4,pbkdf2_sha256$260000$uXJ2hGdoXTf5j6tx7DMMcp$K/+17V4SzbKJ6zF3ZpVf9lJsrSa9gBy2smKkVaflNK4=,someone,0,1,2021-10-09
+5,pbkdf2_sha256$260000$ezEdtoBPbFVWEOpKBfa1ib$y80HF6/0W/oh9Se6327yFOBT0QVgokp+M1vkcDOB6Bs=,daddypung,0,1,2021-10-09
+6,pbkdf2_sha256$260000$2PrRiQ4mkSYeIcqlwF6O5W$AtUJ1Uz5SGYkqycjb4bwHBqQ6wQEX/8/ErCfPEJYmcI=,whatthehell,0,1,2021-10-09
+7,pbkdf2_sha256$260000$4uxPEm1KOerDs9RUrkYuGD$CqbevrqLTexWP47MYwzcSk/Q5xM0IkE8js3NaZlYSgs=,kid_vippro,0,1,2021-10-09
+8,pbkdf2_sha256$260000$PgBtgqdAZV6ErsXoXs4haO$hFAB/2Tr9Q/4s80UMFAhZ6NR/GEHrFcC+iW2GxBqrII=,pplfuckme,0,1,2021-10-09
+9,pbkdf2_sha256$260000$ApUiqdp4W071NNOVBkyLuH$4OtOQ0DYq6DFmIBR3qlW8WEk+sMTZDn5fq8EalCQL9U=,sotired,0,1,2021-10-09
+10,pbkdf2_sha256$260000$Na31E5GA6jFdXeGMmXPigW$cWZgQl1CzQhssB161cEhR4DVnt/RgNyvx0uiGhN0VfM=,something,0,1,2021-10-09
