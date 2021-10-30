@@ -8,21 +8,36 @@
 		<h1>Top Trending Track</h1>
 		<div class="latest-album-list">
 			{% if track_list %}
-				<ul>
-					<li><strong>Track Number</strong></li>
-					<li><strong>Album</strong></li>
-					<li><strong>Track Name</strong></li>
-				</ul>
-				{% for track in track_list %}
-				<ul id="hover-this">
-					<li id="track-numb"> {{ track.track_number }}</li>
-					<a href="{% url 'music:album-detail' track.album.id %}"><li> {{track.album.name}}</li></a>
-					<a href="{% url 'music:track-detail' track.id %}"><li> {{ track.recording.name }}</li></a>
-					<li id="add-button" onclick="addSongToQueue({{ track.recording.id }})"><i class="fas fa-plus-circle"></i></li>
-				</ul>
+				<table>
+					<tr>
+						<th>Track Number</th>
+						<th>Album</th>
+						<th>Track Name</th>
+					</tr>
+					{% for track in track_list %}
+					<tr class="hover-this">
+						<td>
+							{{ track.track_number }}
+						</td>
+						<td>
+							<a class="text" href="{% url 'music:album-detail' track.album.id %}">
+								{{ track.album.name }}
+							</a>
+						</td>
+						<td>
+							<a class="text" href="{% url 'music:track-detail' track.id %}">
+								{{ track.recording.name }}
+							</a>
+						</td>
+						<td onclick="addSongToQueue({{ track.recording.id }})">
+							<i class="fas fa-plus-circle"></i>
+						</td>
+					</tr>
+					{% endfor %}
+				</table>
 				{% endfor %}
 			{% else %}
-				<p>No tracks are available.</p>
+				<p class="text">No tracks are available.</p>
 			{% endif %}
 		</div>
 	</div>

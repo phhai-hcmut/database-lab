@@ -2,35 +2,65 @@
 {% load static %}
 {% block css %}
 <link rel="stylesheet" type="text/css" href="{% static 'css/home_style.css' %}">
+
 {% endblock %}
+
 {% block content %}
 	<div id="right">
+		<div id="genre">
+			<h2>Genre</h2>
+			<a class="more" href="{% url 'music:genre_list' %}">More >></a>
+			<div class="genre-list">
+				{% if all_genre_list %}
+					<table>
+						<tr>
+							<th>Name</th>
+						</tr>
+						{% for genre in all_genre_list %}
+						<tr class="hover-this">
+							<td>
+								<a class="text" href="{% url 'music:genre-detail' genre.id %}"> {{ genre.name }}</a>
+							</td>
+						</tr>
+						{% endfor %}
+					</table>
+					
+				{% else %}
+					<p class="text">No genres are available.</p>
+				{% endif %}
+			</div>
+		</div>
+
 		<div id="album">
 			<h2>Latest album</h2>
 			<a class="more" href="{% url 'music:album_list' %}">More >></a>
 			<div class="album-list">
 				{% if all_album_list %}
-					<ul>
-						<li><strong>Name</strong></li>
-						<li><strong>Release Date</strong></li>
-						<li><strong>Owner</strong></li>
-						<li><strong>Type</strong></li>
-						<li> </li>
-					</ul>
-					{% for album in all_album_list %}
-					<ul class="hover-this">
-						<a href="{% url 'music:album-detail' album.id %}"><li> {{ album.name }}</li></a>
-						<li> {{ album.release_date }}</li>
-						<li id = "artist_item"> <ul id="artist_list">
-							{%for artist in album.owner.distinct %}
-							<a href = "{%url 'music:artist-detail' artist.id%}"><li>{{artist.name}}</li></a>
-							{%endfor%}
-						</ul></li>
-						<li> {{ album.get_album_type_display }}</li>
-					</ul>
-					{% endfor %}
+					<table>
+						<tr>
+							<th>Name</th>
+							<th>Release Date</th>
+							<th>Owner</th>
+							<th>Type</th>
+						</tr>
+						{% for album in all_album_list %}
+						<tr class="hover-this">
+							<td>
+								<a class="text" href="{% url 'music:album-detail' album.id %}">{{ album.name }}</a>
+							</td>
+							<td> {{ album.release_date }}</td>
+							<td id = "artist_item"> 
+								{%for artist in album.owner.distinct %}
+								<a class="text" href = "{%url 'music:artist-detail' artist.id%}">{{artist.name}}</a> <br />
+								{%endfor%}
+							</td>
+							<td> {{ album.get_album_type_display }}</td>
+						</tr>
+						{% endfor %}
+					</table>
+					
 				{% else %}
-					<p>No albums are available.</p>
+					<p class="text-color">No albums are available.</p>
 				{% endif %}
 			</div>
 		</div>
@@ -41,20 +71,27 @@
 			{% if top_recording_list %}
 			<a class="more" href="{% url 'music:recording_list' %}">More >></a>
 			<div class="album-list">
-				<ul>
-					<li><strong>Name</strong></li>
-					<li><strong>Artists</strong></li>
-					<li><strong>Duration</strong></li>
-				</ul>
-				{% for recording in top_recording_list %}
-				<ul class="hover-this">
-					<a href="{{ recording.get_absolute_url }}">
-					<li>{{ recording.name }}</li>
-					<li>{{ recording.get_artist_names }}</li>
-					<li>{{ recording.duration }}</li>
-					<li id="add-button" onclick="addSongToQueue({{ track.recording.id }})"><i class="fas fa-plus-circle"></i></li>
-				</ul>
-				{% endfor %}
+				<table>
+					<tr>
+						<th>Name</th>
+						<th>Artists</th>
+						<th>Duration</th>
+						<th> </th>
+					</tr>
+					{% for recording in top_recording_list %}
+					<tr class="hover-this">
+						<td>
+							<a class="text" href="{{ recording.get_absolute_url }}">
+								{{ recording.name }}
+							</a>
+						</td>
+						<td>{{ recording.artist_names }}</td>
+						<td>{{ recording.duration }}</td>
+						<td id="add-button" onclick="addSongToQueue({{ recording.id }})"><i class="fas fa-plus-circle"></i></td>
+					</tr>
+					{% endfor %}
+				</table>
+				
 			</div>
 			{% endif %}
 		</div>
@@ -65,16 +102,23 @@
 			<a class="more" href="{% url 'music:artist_list' %}">More >></a>
 			<div class="artist-list">
 				{% if top_artist_list %}
-					<ul>
-						<li><strong>Name</strong></li>
-					</ul>
-					{% for artist in top_artist_list %}
-					<ul class="hover-this"><a href="{% url 'music:artist-detail' artist.id%}">
-						<li> {{ artist.name }}</li>
-					</a></ul>
-					{% endfor %}
+					<table>
+						<tr>
+							<th>Name</th>
+						</tr>
+						{% for artist in top_artist_list %}
+						<tr class="hover-this">
+							<td>
+								<a class="text" href="{% url 'music:artist-detail' artist.id%}">
+									{{ artist.name }}
+								</a>
+							</td>
+						</tr>
+						{% endfor %}
+					</table>
+					
 				{% else %}
-					<p>No artists are available.</p>
+					<p class="text-color">No artists are available.</p>
 				{% endif %}
 			</div>
 		</div>
@@ -85,20 +129,27 @@
 			<a class="more" href="{% url 'playlist:playlist-index' %}">More >></a>
 			<div class="playlist-list">
 				{% if top_playlist %}
-					<ul>
-						<li><strong>Name</strong></li>
-						<li><strong>User</strong></li>
-						<li><strong>Time Created</strong></li>
-					</ul>
-					{% for playlist in top_playlist %}
-					<ul class="hover-this"><a href="{%url 'playlist:playlist-detail' playlist.id%}">
-						<li> {{ playlist.name }}</li>
-						<li> {{ playlist.user }}</li>
-						<li> {{ playlist.time_created }}</li>
-					</a></ul>
-					{% endfor %}
+					<table>
+						<tr>
+							<th>Name</th>
+							<th>User</th>
+							<th>Time Created</th>
+						</tr>
+						{% for playlist in top_playlist %}
+						<tr class="hover-this">
+							<td>
+								<a class="text" href="{%url 'playlist:playlist-detail' playlist.id%}">
+									{{ playlist.name }}
+								</a> 
+							</td>
+							<td> {{ playlist.user }}</td>
+							<td> {{ playlist.time_created }}</td>
+						</tr>
+						{% endfor %}
+					</table>
+					
 				{% else %}
-					<p>No playlists are available.</p>
+					<p class="text-color">No playlists are available.</p>
 				{% endif %}
 			</div>
 		</div>

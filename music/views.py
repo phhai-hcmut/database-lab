@@ -1,7 +1,7 @@
 from django.views.generic.base import TemplateView
 from playlist.models import Playlist
 
-from .models import Album, Artist, Recording
+from .models import Album, Artist, Recording, Genre
 
 
 class HomePageView(TemplateView):
@@ -12,6 +12,7 @@ class HomePageView(TemplateView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
+        context['all_genre_list'] = Genre.objects.all()[: self.TOP_NUMBER]
         context['all_album_list'] = Album.objects.all()[: self.TOP_NUMBER]
         context['top_recording_list'] = Recording.objects.all()[: self.TOP_NUMBER]
         context['top_artist_list'] = Artist.objects.all()[: self.TOP_NUMBER]

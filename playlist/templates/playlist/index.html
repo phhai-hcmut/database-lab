@@ -9,34 +9,46 @@
 		{% if view.request.user.is_authenticated %}
 		<div class="playlist-list">
 			<h2>My Playlists</h2>
-			<ul>
-				<li><strong>Name</strong></li>
-				<li><strong># Songs</strong></li>
-				<li><strong>Time Created</strong></li>
-			</ul>
-			{% for playlist in user_playlists %}
-			<ul id="hover-this"><a href="{{ playlist.get_absolute_url }}">
-				<li>{{ playlist.name }}</li>
-				<li>{{ playlist.song_list|length }}</li>
-				<li>{{ playlist.time_created }}</li>
-			</a></ul>
-			{% endfor %}
+			<table>
+				<tr>
+					<th>Name</th>
+					<th># Songs</th>
+					<th>Time Created</th>
+				</tr>
+				{% for playlist in user_playlists %}
+				<tr class="hover-this">
+					<td>
+						<a class="text" href="{{ playlist.get_absolute_url }}">
+							{{ playlist.name }}
+						</a>
+					</td>
+					<td>{{ playlist.song_list|length }}</td>
+					<td>{{ playlist.time_created }}</td>
+				</tr>
+				{% endfor%}
+			</table>
 		</div>
 		{% endif %}
 		<div class="playlist-list">
 			<h2>Public Playlists</h2>
-			<ul>
-				<li><strong>Name</strong></li>
-				<li><strong>User</strong></li>
-				<li><strong>Time Created</strong></li>
-			</ul>
-			{% for playlist in public_playlists %}
-			<ul id="hover-this"><a href="{{ playlist.get_absolute_url }}">
-				<li>{{ playlist.name }}</li>
-				<li>{{ playlist.user }}</li>
-				<li>{{ playlist.time_created }}</li>
-			</a></ul>
-			{% endfor %}
+			<table>
+				<tr>
+					<th>Name</th>
+					<th># Songs</th>
+					<th>Time Created</th>
+				</tr>
+				{% for playlist in public_playlists %}
+				<tr class="hover-this">
+					<td>
+						<a class="text" href="{{ playlist.get_absolute_url }}">
+							{{ playlist.name }}
+						</a>
+					</td>
+					<td>{{ playlist.song_list|length }}</td>
+					<td>{{ playlist.time_created }}</td>
+				</tr>
+				{% endfor%}
+			</table>
 		</div>
 	</div>
 {% endblock %}

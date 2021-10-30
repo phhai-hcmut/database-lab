@@ -8,20 +8,26 @@
         <h1>My Playlists</h1>
         <div class="playlist-list">
             {% if playlist_list %}
-                <ul>
-                    <li><strong>Name</strong></li>
-                    <li><strong># Songs</strong></li>
-                    <li><strong>Time Created</strong></li>
-                </ul>
-                {% for playlist in playlist_list %}
-                <ul id="hover-this"><a href="{%url 'playlist:playlist-detail' playlist.id%}">
-                    <li>{{ playlist.name }}</li>
-                    <li>{{ playlist.total_songs }}</li>
-                    <li>{{ playlist.time_created }}</li>
-                </a></ul>
-                {% endfor %}
+                <table>
+					<tr>
+						<th>Name</th>
+						<th># Songs</th>
+                        <th>Time Created</th>
+					</tr>
+					{% for playlist in playlist_list %}
+					<tr class="hover-this">
+						<td>
+							<a class="text" href="{%url 'playlist:playlist-detail' playlist.id%}">
+                                {{ playlist.name }}
+							</a>
+						</td>
+						<td>{{ playlist.total_songs }}</td>
+                        <td>{{ playlist.time_created }}</td>
+					</tr>
+					{% endfor%}
+				</table>
             {% else %}
-                <p>No playlists are available.</p>
+                <p class="text">No playlists are available.</p>
             {% endif %}
         </div>
     </div>

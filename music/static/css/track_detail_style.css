@@ -1,147 +1,132 @@
-body{
-	font-family: Arial;
-	background: black;
-	margin: 0px auto;
+body {
+  font-family: Arial;
+  background: black;
+  margin: 0px auto;
 }
 
 #main #left {
-	background: black;
-	width: 15%;
-	float: left;
+  background: black;
+  width: 15%;
+  float: left;
 }
 
 #main #left ul {
-	list-style-type: none;
-	padding-left: 0px;
+  list-style-type: none;
+  padding-left: 0px;
 }
 
 #main #left ul a {
-	text-decoration: none;
+  text-decoration: none;
 }
 
 #main #left ul li {
-	font-size: 15pt;
-	color: grey;
-	padding: 15px 5px 15px 15px;
-	margin-left: 10px;
-	margin-right: 10px;
-	cursor: pointer;
+  font-size: 15pt;
+  color: grey;
+  padding: 15px 5px 15px 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  cursor: pointer;
 }
 
 #main #left ul li:hover {
-	color: white;
-	border-radius: 3px;
-	background: #212121;
+  color: white;
+  border-radius: 3px;
+  background: #212121;
 }
 
 #main #right {
-	width: 85%;
-	float: right;
-	height: 0;
-	padding-bottom: 60%;
+  width: 85%;
+  float: right;
+  height: 0;
+  padding-bottom: 60%;
 }
 
-#main #right .hover-this:hover {
-    background:grey;
+.hover-this:hover {
+  background: grey;
 }
 
-#main #right .hover-this li:hover {
-    cursor: pointer;
-}
-
-#main #right #track-numb{
-    text-indent: 75px;
+#main #right #track-numb {
+  text-indent: 75px;
 }
 
 #main #right #header {
-	border-bottom: 2px solid white;
+  border-bottom: 2px solid white;
 }
 
 #main #right #artist-info {
-	background: #637b67;
-    height: 250px;
-    color: white;
-    text-align: center;
+  background: #637b67;
+  height: 250px;
+  color: white;
+  text-align: center;
 }
 
 #main #right #artist-info h1 {
-	font-size: 70pt;
-	margin: 0;
-	padding-top: 35px;
+  font-size: 70pt;
+  margin: 0;
+  padding-top: 35px;
 }
 
 #main #right #artist-info p {
-	font-size: 15pt;
-	margin: 0;
-}
-
-#main #right #artist-info a {
-	text-decoration: none;
-	color: white;
+  font-size: 15pt;
+  margin: 0;
 }
 
 #main #right #credit-album {
-    height: 500px;
-	background: rgb(2,0,36);
-    background: linear-gradient(0deg, #000 30%, #77957c 130%);
-    color: white;
-    text-indent: 30px;
+  height: 500px;
+  background: rgb(2, 0, 36);
+  background: linear-gradient(0deg, #000 30%, #77957c 130%);
+  color: white;
+  text-indent: 30px;
 }
 
 #main #right #credit-album h3 {
-    margin: 0;
-    font-size: 30pt;
-    padding-top: 40px;
-    padding-bottom: 20px;
-}
-
-#main #right #credit-album ul {
-	column-count: 2;
-	column-gap: 30px;
-	list-style-type: none;
-	padding: 12px 0px 12px 15px;
-	margin: 0;
-}
-
-#main #right #credit-album ul a {
-	text-decoration: none;	
-}
-
-#main #right #credit-album ul li{
-	color: white;
-	padding: 0px;
-	margin-left: 25px;
+  margin: 0;
+  font-size: 30pt;
+  padding-top: 40px;
+  padding-bottom: 20px;
 }
 
 #main #right #credit-album #add-button i:hover {
-    cursor: pointer;
-    transform: scale(1.12);
-	transition: all .4s ease;
+  cursor: pointer;
+  transform: scale(1.12);
+  transition: all 0.4s ease;
 }
 
-#main #right #artist_item ul {
-	all: initial;
-	display: inline;
-	list-style: none;
-	margin-left: -20px;	
-}
-#artist_item ul li {
-	all: initial;
-	font-family: Arial;
-	font-size: medium;
-}
 #list-owner {
-	all: initial;
-	font-size: 15pt;
-	list-style: none;
-	color: white;
+  all: initial;
+  font-size: 15pt;
+  list-style: none;
+  color: white;
 }
 #list-owner a {
-	text-decoration: none;
+  text-decoration: none;
 }
-#list-owner li{
-	color: white;
-	font-size: 15pt;
-	display: inline;
-	
+#list-owner li {
+  color: white;
+  font-size: 15pt;
+  display: inline;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+tr {
+  border-bottom: 1px solid white;
+}
+
+th,
+td {
+  color: white;
+  padding: 10px;
+}
+
+th {
+  text-align: left;
+}
+
+.text {
+  color: white;
+  text-decoration: none;
 }
