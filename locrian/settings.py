@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'listening',
     'searching',
     'edit',
+    'locrian',
 ]
 
 MIDDLEWARE = [
