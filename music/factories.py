@@ -1,4 +1,5 @@
 from random import randint
+from datetime import timedelta
 
 import factory
 from factory.django import DjangoModelFactory
@@ -24,7 +25,7 @@ class AlbumFactory(DjangoModelFactory):
 
 class RecordingFactory(DjangoModelFactory):
     name = factory.Faker('text', max_nb_chars=20)
-    duration = factory.Faker('time_delta')
+    duration = factory.Faker('time_delta', end_datetime=timedelta(minutes=5))
 
     class Meta:
         model = models.Recording
