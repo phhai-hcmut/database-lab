@@ -40,8 +40,7 @@ class Recording(models.Model):
         return reverse('music:recording-detail', kwargs={'pk': self.pk})
 
     def get_artist_names(self, sep=","):
-        artist_names = list(set(artist.name for artist in self.artist_credits.all()))
-        return sep.join(artist_names)
+        return sep.join(artist.name for artist in self.artist_credits.distinct())
 
     @property
     def artist_names(self):
