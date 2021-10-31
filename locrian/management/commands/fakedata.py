@@ -39,6 +39,12 @@ class Command(BaseCommand):
         recordings = []
         albums = []
         users = []
+        genres = [
+            music.models.Genre.objects.create(name='Pop'),
+            music.models.Genre.objects.create(name='Rock'),
+            music.models.Genre.objects.create(name='Country'),
+            music.models.Genre.objects.create(name='Blue'),
+        ]
 
         for _ in range(NUM_ARTISTS):
             artists.append(ArtistFactory())
@@ -55,6 +61,7 @@ class Command(BaseCommand):
 
         for _ in range(NUM_ALBUMS):
             album = AlbumFactory()
+            album.genres.add(*fake.random_sample(genres))
             album_artists = fake.random_sample(artists, length=randint(1, 3))
             album.owner.add(*album_artists)
             album_tracks = fake.random_sample(
