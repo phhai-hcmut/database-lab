@@ -55,13 +55,16 @@ class Command(BaseCommand):
 
         for _ in range(NUM_ALBUMS):
             album = AlbumFactory()
-            for _ in range(3):
-                album.owner.add(choice(artists))
-            for track_number in range(1, randint(1, MAX_TRACKS_PER_ALBUM) + 1):
+            album_artists = fake.random_sample(artists, length=randint(1, 3))
+            album.owner.add(*album_artists)
+            album_tracks = fake.random_sample(
+                recordings, length=randint(1, MAX_TRACKS_PER_ALBUM)
+            )
+            for i, recording in enumerate(album_tracks):
                 music.models.Track.objects.create(
                     album=album,
-                    track_number=track_number,
-                    recording=choice(recordings),
+                    track_number=i + 1,
+                    recording=recording,
                 )
 
         for _ in range(NUM_USERS):
@@ -69,21 +72,29 @@ class Command(BaseCommand):
 
         for _ in range(NUM_PLAYLISTS):
             playlist_obj = PlaylistFactory(user=choice(users))
-            for _ in range(MAX_RECORDINGS_PER_PLAYLIST):
+            playlist_recordings = fake.random_sample(
+                recordings, length=randint(1, MAX_RECORDINGS_PER_PLAYLIST)
+            )
+            for recording in playlist_recordings:
                 playlist.models.PlaylistContent.objects.create(
                     playlist=playlist_obj,
-                    recording=choice(recordings),
+                    recording=recording,
+                    time_added=fake.past_datetime(
+                        start_date=playlist_obj.time_created,
+                    ),
                 )
 
         for user in users:
-            queue_length = randint(1, MAX_RECORDINGS_PER_QUEUE)
+            queue_songs = fake.random_sample(
+                recordings, length=randint(1, MAX_RECORDINGS_PER_QUEUE)
+            )
             user_queue = [
                 listening.models.InQueue.objects.create(
                     user=user,
-                    recording=choice(recordings),
+                    recording=recording,
                     queue_index=i,
                 )
-                for i in range(queue_length)
+                for i, recording in enumerate(queue_songs)
             ]
             listening_song = choice(user_queue)
             listening.models.UserQueue.objects.create(

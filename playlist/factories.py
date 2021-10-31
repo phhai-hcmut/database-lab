@@ -11,6 +11,7 @@ class PlaylistFactory(DjangoModelFactory):
     name = factory.Faker('text', max_nb_chars=20)
     description = factory.Faker('text', max_nb_chars=100)
     is_public = factory.Faker('random_element', elements=[True, False])
+    time_created = factory.Faker('past_datetime')
 
     class Meta:
         model = models.Playlist
