@@ -11,13 +11,13 @@ from locrian.factories import UserFactory
 from music.factories import AlbumFactory, ArtistFactory, RecordingFactory
 from playlist.factories import PlaylistFactory
 
-NUM_ARTISTS = 100
-NUM_RECORDINGS = 1_000
-NUM_ALBUMS = 500
+NUM_ARTISTS = 100_000
+NUM_RECORDINGS = 1_000_000
+NUM_ALBUMS = 500_000
 MAX_TRACKS_PER_ALBUM = 5
-NUM_USERS = 100
-NUM_PLAYLISTS = 500
-MAX_RECORDINGS_PER_PLAYLIST = 10
+NUM_USERS = 100_000
+NUM_PLAYLISTS = 500_000
+MAX_RECORDINGS_PER_PLAYLIST = 100
 MAX_RECORDINGS_PER_QUEUE = 10
 
 credit_roles = [x[0] for x in music.models.Credit.CreditRole.choices]
