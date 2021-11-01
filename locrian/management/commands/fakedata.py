@@ -1,8 +1,10 @@
+from itertools import product
 from random import choice, randint, randrange
 
 from django.core.management.base import BaseCommand
 from django.db import transaction
 from faker import Faker
+from faker.providers.person.en import Provider
 
 import listening
 import music
@@ -74,8 +76,13 @@ class Command(BaseCommand):
                     recording=recording,
                 )
 
-        for _ in range(NUM_USERS):
-            users.append(UserFactory())
+        unique_names = list(
+            map(' '.join, product(Provider.first_names, Provider.last_names))
+        )
+        for username in fake.random_sample(
+            unique_names, length=min(len(unique_names, NUM_USERS))
+        ):
+            users.append(UserFactory(username=username))
 
         for _ in range(NUM_PLAYLISTS):
             playlist_obj = PlaylistFactory(user=choice(users))
