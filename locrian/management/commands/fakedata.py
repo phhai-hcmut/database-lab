@@ -76,12 +76,13 @@ class Command(BaseCommand):
                     recording=recording,
                 )
 
-        unique_names = list(
+        unique_names = set(
             map(' '.join, product(Provider.first_names, Provider.last_names))
         )
-        for username in fake.random_sample(
+        random_names = fake.random_sample(
             unique_names, length=min(len(unique_names), NUM_USERS)
-        ):
+        )
+        for username in random_names:
             users.append(UserFactory(username=username))
 
         for _ in range(NUM_PLAYLISTS):
