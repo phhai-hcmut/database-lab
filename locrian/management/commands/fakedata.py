@@ -80,7 +80,7 @@ class Command(BaseCommand):
             map(' '.join, product(Provider.first_names, Provider.last_names))
         )
         for username in fake.random_sample(
-            unique_names, length=min(len(unique_names, NUM_USERS))
+            unique_names, length=min(len(unique_names), NUM_USERS)
         ):
             users.append(UserFactory(username=username))
 
