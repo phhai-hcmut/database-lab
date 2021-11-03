@@ -85,8 +85,9 @@ class Command(BaseCommand):
         for username in random_names:
             users.append(UserFactory(username=username))
 
-        for _ in range(NUM_PLAYLISTS):
-            playlist_obj = PlaylistFactory(user=choice(users))
+        playlist_names = set(fake.texts(nb_texts=NUM_PLAYLISTS, max_nb_chars=20))
+        for playlist_name in playlist_names:
+            playlist_obj = PlaylistFactory(name=playlist_name, user=choice(users))
             playlist_recordings = fake.random_sample(
                 recordings, length=randint(1, MAX_RECORDINGS_PER_PLAYLIST)
             )
