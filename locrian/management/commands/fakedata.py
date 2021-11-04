@@ -53,6 +53,7 @@ class Command(BaseCommand):
 
         for _ in range(NUM_RECORDINGS):
             recording = RecordingFactory()
+            recording.genres.add(*fake.random_sample(genres))
             recordings.append(recording)
             for role in range(1, 5):
                 music.models.Credit.objects.create(
