@@ -1,3 +1,6 @@
+// NOTE: You can download the .csv import files from the following Google Drive link:
+// https://drive.google.com/file/d/1VjgXS1XqrizgX6qJFewVrwyqD4ebsaOK/view?usp=sharing
+
 // NOTE: You have to delete all data before running. Neo4j has no specific way to
 // flush the database, so you have to manually delete its directory system.
 
