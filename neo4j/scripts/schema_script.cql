@@ -1,16 +1,15 @@
-// Delete all data before running
-MATCH (n)
-DETACH DELETE n;
+// NOTE: You have to delete all data before running. Neo4j has no specific way to
+// flush the database, so you have to manually delete its directory system.
 
 
 // Create indices for everything
-CREATE INDEX User_idx FOR (user: User) ON (user.id);
-CREATE INDEX Album_idx FOR (album: Album) ON (album.id);
-CREATE INDEX Artist_idx FOR (artist: Artist) ON (artist.id);
-CREATE INDEX Recording_idx FOR (recording: Recording) ON (recording.id);
-CREATE INDEX Track_idx FOR (track: Track) ON (track.id);
-CREATE INDEX Playlist_idx FOR (playlist: Playlist) ON (playlist.id);
-CREATE INDEX Genre_idx FOR (genre: Genre) ON (genre.id);
+CREATE INDEX User_idx IF NOT EXISTS FOR (user: User) ON (user.id);
+CREATE INDEX Album_idx IF NOT EXISTS FOR (album: Album) ON (album.id);
+CREATE INDEX Artist_idx IF NOT EXISTS FOR (artist: Artist) ON (artist.id);
+CREATE INDEX Recording_idx IF NOT EXISTS FOR (recording: Recording) ON (recording.id);
+CREATE INDEX Track_idx IF NOT EXISTS FOR (track: Track) ON (track.id);
+CREATE INDEX Playlist_idx IF NOT EXISTS FOR (playlist: Playlist) ON (playlist.id);
+CREATE INDEX Genre_idx IF NOT EXISTS FOR (genre: Genre) ON (genre.id);
 
 
 // Create Nodes
@@ -145,6 +144,7 @@ LOAD CSV WITH HEADERS FROM 'file:///playlist_playlistcontent.csv' AS line WITH l
 MATCH (recording: Recording {id: toInteger(line.recording_id)})
 MATCH (playlist: Playlist {id: toInteger(line.playlist_id)})
 CREATE (recording)-[: IS_ADDED_TO {
+    id: toInteger(line.id),
     time_added: datetime({
         epochmillis: apoc.date.parse(line.time_added, "ms", "YYYY-MM-DD HH:MM:SS")
     })
