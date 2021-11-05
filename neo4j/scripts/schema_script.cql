@@ -1,4 +1,3 @@
-Recording APPEARS ON directly to Album
 // NOTE 1: You can download the .csv import files from the following Google Drive link:
 // https://drive.google.com/file/d/1VjgXS1XqrizgX6qJFewVrwyqD4ebsaOK/view?usp=sharing
 //
