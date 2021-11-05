@@ -1,11 +1,15 @@
-// NOTE: You can download the .csv import files from the following Google Drive link:
+// NOTE 1: You can download the .csv import files from the following Google Drive link:
 // https://drive.google.com/file/d/1VjgXS1XqrizgX6qJFewVrwyqD4ebsaOK/view?usp=sharing
+//
+// Or you can also directly download the database dump file from this link:
+// https://drive.google.com/file/d/1YwvAR69Kt8E16-LpB0K5m68jTUT-_Uim/view?usp=sharing
 
-// NOTE: You have to delete all data before running. Neo4j has no specific way to
+
+// NOTE 2: You have to delete all data before running. Neo4j has no specific way to
 // flush the database, so you have to manually delete its directory system.
 
 
-// Create indices for everything
+// Create indices for every Node (there are no indices for Relationships yet)
 CREATE INDEX User_idx IF NOT EXISTS FOR (user: User) ON (user.id);
 CREATE INDEX Album_idx IF NOT EXISTS FOR (album: Album) ON (album.id);
 CREATE INDEX Artist_idx IF NOT EXISTS FOR (artist: Artist) ON (artist.id);
