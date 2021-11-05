@@ -1,3 +1,4 @@
+Recording APPEARS ON directly to Album
 // NOTE 1: You can download the .csv import files from the following Google Drive link:
 // https://drive.google.com/file/d/1VjgXS1XqrizgX6qJFewVrwyqD4ebsaOK/view?usp=sharing
 //
@@ -14,7 +15,6 @@ CREATE INDEX User_idx IF NOT EXISTS FOR (user: User) ON (user.id);
 CREATE INDEX Album_idx IF NOT EXISTS FOR (album: Album) ON (album.id);
 CREATE INDEX Artist_idx IF NOT EXISTS FOR (artist: Artist) ON (artist.id);
 CREATE INDEX Recording_idx IF NOT EXISTS FOR (recording: Recording) ON (recording.id);
-CREATE INDEX Track_idx IF NOT EXISTS FOR (track: Track) ON (track.id);
 CREATE INDEX Playlist_idx IF NOT EXISTS FOR (playlist: Playlist) ON (playlist.id);
 CREATE INDEX Genre_idx IF NOT EXISTS FOR (genre: Genre) ON (genre.id);
 
@@ -56,11 +56,6 @@ CREATE (: Recording {
     name: line.name,
     duration: duration({microseconds: toInteger(line.duration)})
 });
-
-// Track
-USING PERIODIC COMMIT 10000
-LOAD CSV WITH HEADERS FROM 'file:///music_track.csv' AS line WITH line WHERE line.id IS NOT NULL
-CREATE (: Track {id: toInteger(line.id), track_number: line.track_number});
 
 // Playlist
 USING PERIODIC COMMIT 10000
@@ -124,19 +119,15 @@ CREATE (recording)-[: CREDITS {
     role: toInteger(line.role)
 }]->(artist);
 
-// Album-HAS->Track
-USING PERIODIC COMMIT 10000
-LOAD CSV WITH HEADERS FROM 'file:///music_track.csv' AS line WITH line WHERE line.id IS NOT NULL
-MATCH (album: Album {id: toInteger(line.album_id)})
-MATCH (track: Track {id: toInteger(line.id)})
-CREATE (album)-[: HAS {id: toInteger(line.id)}]->(track);
-
-// Recording-APPEARS_ON->Track
+// Recording-APPEARS_ON->Album
 USING PERIODIC COMMIT 10000
 LOAD CSV WITH HEADERS FROM 'file:///music_track.csv' AS line WITH line WHERE line.id IS NOT NULL
 MATCH (recording: Recording {id: toInteger(line.recording_id)})
-MATCH (track: Track {id: toInteger(line.id)})
-CREATE (recording)-[: APPEARS_ON {id: toInteger(line.id)}]->(track);
+MATCH (album: Album {id: toInteger(line.album_id)})
+CREATE (recording)-[: APPEARS_ON {
+    id: toInteger(line.id),
+    track_number: toInteger(line.track_number)
+}]->(album);
 
 // User-CREATES->Playlist
 USING PERIODIC COMMIT 10000
